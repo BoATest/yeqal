@@ -1,0 +1,79 @@
+You have built the initial Yeqal app. Now fix and complete the core user loop so it works end-to-end without any broken steps. Here is exactly what to fix and complete:
+
+1. SEARCH COMPLETENESS
+- Search must work in all 3 languages: Amharic (Ge'ez script ዓ ቤ ሀ), Afaan Oromo (Latin), and English
+- Search must be instant — results from IndexedDB cache in under 200ms when cached
+- If a word is not found: show "Word not found — suggest it?" with a feedback form
+- Each result card must show: word in all 3 languages, part of speech badge, grade level badge, audio button
+
+2. AUDIO — FIX THIS FIRST
+- Every word detail page must have 3 working audio buttons (Amharic, Oromo, English)
+- If audio file does not exist in Supabase Storage, fall back to browser SpeechSynthesis API (lang="am" for Amharic)
+- Audio buttons must have a playing state (animated waveform or pulsing ring while audio plays)
+- Volume must be normalised — no jarring loud/quiet jumps between words
+
+3. HOMEWORK HELPER — COMPLETE THE FLOW
+- Text input must accept Amharic Ge'ez script, Latin Oromo, and English in the same box
+- After the user submits text: show a loading state ("ያቃላል... Explaining...")
+- Result must show: (a) word-by-word translation table, (b) suggested practice words as tappable chips, (c) "Practice all these words" button that starts a flashcard session with those exact words
+- Save every homework session to Supabase sessions table with user_id and word_ids
+
+4. SPEAKING PRACTICE — COMPLETE HASAB AI INTEGRATION
+- Record button: must request microphone permission if not granted, show clear permission denied state
+- While recording: show countdown timer (3 seconds) and audio waveform animation
+- After recording: show loading state ("Scoring...")
+- Score display: large number (0-100), color coded (red <50, amber 50-70, green 70+), short feedback text
+- "Try again" button resets immediately. "Next word" advances to the next word in the session
+- If Hasab AI API fails: show friendly error "Pronunciation service unavailable. Try again in a moment." — do NOT show a blank screen or raw error
+
+5. PARENT DASHBOARD — MAKE IT LIVE
+- Add child profile: name, grade level, avatar emoji picker
+- Dashboard must update in real time when child completes practice (use Supabase realtime subscription)
+- WhatsApp share button must generate this exact format:
+  "📊 *[child name]'s Yeqal Progress*
+  🔥 Streak: [X] days | ⭐ XP: [X]
+  🎤 Speaking: [X]% | ✍️ Writing: [X]% | 👂 Listening: [X]%
+  📚 Words this week: [X]
+  _Powered by Yeqal ያቃል_"
+- Open WhatsApp: window.open("https://wa.me/?text=" + encodeURIComponent(message))
+
+6. SCHOOL CLASS CODE SYSTEM
+- Teacher creates class: generates a 6-character uppercase code (e.g. YEQA24)
+- Student/parent enters code: joins class, class name and teacher name shown on confirmation
+- Teacher sees: class roster, completion % per student, red badge on students under 50%
+- Teacher assign words: select words from dictionary search, set due date, one tap to assign
+
+7. OFFLINE CACHE
+- On first app load: fetch top 500 words from Supabase and store in IndexedDB
+- Service worker must cache: app shell (HTML/CSS/JS), top 500 word objects, their audio files
+- Add "Offline" banner at top of screen when device is offline — do not crash, do not show blank page
+- When back online: sync any new sessions stored locally
+
+8. DATA — SEED AT LEAST 500 WORDS
+Add these categories to the Supabase words table:
+- Family: mother, father, sister, brother, grandmother, grandfather, baby, family, home
+- School: book, pen, pencil, teacher, student, homework, test, lesson, read, write, learn
+- Food: water, bread, milk, coffee, injera, teff, honey, salt, meat, vegetable
+- Nature: sun, moon, rain, river, tree, mountain, flower, grass, animal, bird
+- Numbers: one through twenty in all 3 languages
+- Greetings: hello, goodbye, thank you, please, yes, no, sorry, how are you, I am fine
+- Body: head, hand, foot, eye, ear, nose, mouth, heart
+- Time: day, week, month, year, morning, afternoon, night, today, tomorrow, yesterday
+
+Each word MUST have: word_amharic, word_oromo, word_english, grade_level (1-4 for basic words), is_verified = true
+
+9. ERROR HANDLING — NO BLANK SCREENS
+Every screen must have a graceful fallback:
+- API timeout: show retry button, not a blank screen
+- No internet: show cached content + "offline mode" indicator
+- Empty state (no words, no sessions): show helpful prompt ("Search for your first word above")
+- Auth error: redirect to login, do not crash
+
+10. PERFORMANCE TARGETS
+- Lighthouse Performance score: 85+
+- First Contentful Paint: under 2 seconds on fast 3G
+- App install prompt must appear (PWA manifest complete)
+- All images must be WebP format, max 100KB
+- Fonts must include Noto Sans Ethiopic from Google Fonts (critical for Ge'ez script rendering)
+
+Test the complete flow: open app → search ቤት → hear audio → go to homework helper → type ቤት ምንድን ነው → get explanation → tap practice → record speaking → see score. This entire flow must work without any error or blank screen.

@@ -8,6 +8,8 @@ export type Subject =
   | "animals"
   | "greetings"
   | "numbers"
+  | "body"
+  | "time"
   | "verbs";
 export type AppLanguage = "amharic" | "oromo" | "english";
 export type UserRole = "parent" | "student" | "teacher" | "diaspora";
@@ -35,9 +37,17 @@ export interface Child {
   name: string;
   gradeLevel: number;
   initials: string;
+  avatar: string;
   streak: number;
   xp: number;
   skills: Record<SkillKey, number>;
+}
+
+export interface HomeworkSession {
+  id: string;
+  timestamp: string;
+  inputText: string;
+  wordIds: string[];
 }
 
 export interface UserProfile {

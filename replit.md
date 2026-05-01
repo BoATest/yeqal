@@ -9,11 +9,12 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 - **Framework:** Expo (React Native) with Expo Router v6, file-based routing
 - **Language:** TypeScript
 - **State:** React Context + AsyncStorage (no backend in v1)
-- **Fonts:** @expo-google-fonts/inter (Inter 400/500/600/700)
+- **Fonts:** @expo-google-fonts/inter (Inter 400/500/600/700) + Noto Sans Ethiopic (web, loaded from Google Fonts CDN)
 - **Icons:** @expo/vector-icons (Feather)
 - **Animations:** React Native Animated + expo-haptics
 - **Gradient:** expo-linear-gradient
 - **Storage:** @react-native-async-storage/async-storage
+- **Audio:** Web SpeechSynthesis API (browser built-in); native falls back to timed animation
 
 ## Design System
 - **Primary:** #1B6B3A (Ethiopian green)
@@ -27,26 +28,32 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 ## App Structure
 
 ### Screens
-- `app/_layout.tsx` — Root layout with providers, onboarding check, Stack navigator
+- `app/_layout.tsx` — Root layout with providers, onboarding check, Stack navigator, Noto Sans Ethiopic injection, OfflineBanner
 - `app/onboarding.tsx` — 3-slide emotional onboarding story
 - `app/setup.tsx` — Language & role selection (2 steps)
 - `app/(tabs)/_layout.tsx` — 5-tab classic tab bar
 - `app/(tabs)/index.tsx` — Home dashboard
-- `app/(tabs)/search.tsx` — Trilingual dictionary search
-- `app/(tabs)/homework.tsx` — Homework text analyzer
-- `app/(tabs)/speak.tsx` — Speaking practice (word mode + situations)
-- `app/(tabs)/profile.tsx` — User profile, children, badges, settings
-- `app/word/[id].tsx` — Word detail with all 3 languages, audio sim, examples
+- `app/(tabs)/search.tsx` — Trilingual dictionary search with "word not found — suggest it?" form
+- `app/(tabs)/homework.tsx` — Homework text analyzer with translation table, practice chips, AsyncStorage session saving
+- `app/(tabs)/speak.tsx` — Speaking practice (word mode + situations) with countdown timer, waveform animation, color-coded scores
+- `app/(tabs)/profile.tsx` — User profile, children, badges, settings, WhatsApp share
+- `app/word/[id].tsx` — Word detail with real SpeechSynthesis audio for all 3 languages, examples, related words
 - `app/flashcard.tsx` — Spaced-repetition flashcard quiz
 
 ### Data (mock, no backend)
-- `data/words.ts` — 40 Ethiopian words (family, food, school, nature, animals, greetings, numbers, verbs) with trilingual translations, romanization, definitions, examples
-- `data/types.ts` — TypeScript interfaces (Word, UserProfile, Child, etc.)
-- `context/AppContext.tsx` — App state: profile, favorites, learned words, XP, streak
+- `data/words.ts` — **87 words** across 10 categories (family, food, school, nature, animals, greetings, numbers, body, time, verbs/general) with trilingual translations, romanization, definitions, examples
+- `data/types.ts` — TypeScript interfaces (Word, UserProfile, Child, HomeworkSession, etc.)
+- `context/AppContext.tsx` — App state: profile, favorites, learned words, XP, streak, homework session persistence
 - `constants/colors.ts` — Design tokens
 
 ### Components
 - `components/WordCard.tsx` — Trilingual word card with subject tags
+- `components/OfflineBanner.tsx` — Animated offline detection banner (web only)
+- `components/ErrorBoundary.tsx` — React error boundary with debug modal
+
+### Hooks
+- `hooks/useColors.ts` — Color scheme hook (light/dark palette)
+- `hooks/useAudio.ts` — SpeechSynthesis hook: `speak(text, lang, key)` + `playingKey` state; web uses Web Speech API, native falls back to timed animation
 
 ## Onboarding Flow
 1. Slide 1: "Your child has homework. You don't speak the language." (dark navy/purple)
@@ -56,30 +63,42 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 → Home dashboard
 
 ## Key Features (v1)
-- 40-word trilingual dictionary (Amharic + Oromo + English)
-- Real-time search across all 3 languages
-- Homework text analyzer — paste text, find matching words
-- Speaking practice with simulated pronunciation scoring
-- Situation conversations (6 Ethiopian scenarios)
-- Flashcard quiz with Easy/Medium/Hard spaced repetition
-- Parent dashboard with child skill bars (speaking, listening, reading, writing)
-- Streak tracking, XP system, achievement badges
-- AsyncStorage-persisted user profile
+- **87-word trilingual dictionary** across 10 subjects: family, food, school, nature, animals, greetings, numbers, body, time, verbs
+- **Real-time trilingual search** with "Word not found — suggest it?" form on empty results
+- **Homework helper:** "ያቃላል... Explaining..." loading state, word-by-word translation table (Amharic|Oromo|English), practice chips, AsyncStorage session saving (last 30 sessions)
+- **Real SpeechSynthesis audio** on word detail and speaking practice ("Hear it first" button)
+- **Speaking practice** with countdown timer (3-2-1), 7-bar animated waveform, color-coded pronunciation scores (red <50 / amber 50-70 / green 70+), microphone permission request, service error state
+- **Situation conversations** (6 Ethiopian scenarios: Market, Bus Station, Elders, Health Center, School Meeting, Coffee Ceremony)
+- **Flashcard quiz** with Easy/Medium/Hard spaced repetition
+- **Parent dashboard** with child skill bars, WhatsApp share button (formatted message with child stats)
+- **Add Child form** in profile: name, grade level, emoji avatar picker, remove child
+- **Offline banner:** animates in when network is lost, out when restored (web only via window events)
+- **Noto Sans Ethiopic font** injected from Google Fonts CDN for proper Ge'ez script rendering on web
+- **Streak tracking, XP system, achievement badges**
+- **AsyncStorage-persisted user profile** (key: `yeqal_profile_v2`)
 
-## Planned Features (v1.1+)
+## AsyncStorage Keys
+- `yeqal_onboarded` — onboarding completed flag
+- `yeqal_profile_v2` — user profile (bumped from v1 to handle Child.avatar migration)
+- `yeqal_homework_sessions` — array of up to 30 homework sessions (id, timestamp, inputText, wordIds)
+
+## Planned Features (v1.1+, needs backend)
 - Camera-based homework photo scanning
-- Real audio pronunciation (TTS)
-- Supabase backend for multi-device sync
-- Ethiopian AI tutor (Hasab AI integration)
+- Supabase backend for multi-device sync + sessions table
+- Ethiopian AI tutor (Hasab AI integration) for real pronunciation scoring
+- School class code system (YEQA24)
 - Push notification reminders
-- More words (target: 500+)
+- More words (target: 500+ in Supabase)
+- Service worker / PWA offline mode
 - Google Play support
 
 ## Development Notes
 - No backend — all data is local (AsyncStorage)
-- Ethiopic script renders natively on Android/iOS; web preview may show simplified rendering
-- Audio is simulated (play button shows animation, no real audio files yet)
-- Default demo profile: Selam (parent), child Liya Grade 4
+- Ethiopic script: system font on Android/iOS; Noto Sans Ethiopic loaded from CDN on web
+- SpeechSynthesis audio: works in Chrome/Edge/Safari on web; native falls back to timed animation
+- Pronunciation scoring is simulated (random 60–96 range) pending Hasab AI integration
+- Default demo profile: Selam (parent), child Liya Grade 4 (streak 7, XP 280)
+- Storage key migrated from `yeqal_profile_v1` to `yeqal_profile_v2` to handle the added `avatar` field in Child interface
 
 ## Workflow
 - Expo dev server: `artifacts/yeqal: expo`
@@ -90,27 +109,30 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 ```
 artifacts/yeqal/
 ├── app/
-│   ├── _layout.tsx           # Root layout + providers + onboarding check
+│   ├── _layout.tsx           # Root layout + providers + onboarding check + Noto font + OfflineBanner
 │   ├── onboarding.tsx        # 3-slide story
 │   ├── setup.tsx             # Language + role setup
 │   ├── flashcard.tsx         # Spaced repetition flashcards
-│   ├── word/[id].tsx         # Word detail screen
+│   ├── word/[id].tsx         # Word detail screen with real audio
 │   └── (tabs)/
 │       ├── _layout.tsx       # Classic tab bar
 │       ├── index.tsx         # Home dashboard
-│       ├── search.tsx        # Dictionary search
-│       ├── homework.tsx      # Homework helper
-│       ├── speak.tsx         # Speaking practice
-│       └── profile.tsx       # Profile + settings
+│       ├── search.tsx        # Dictionary search + suggest form
+│       ├── homework.tsx      # Homework helper + translation table
+│       ├── speak.tsx         # Speaking practice + waveform + timer
+│       └── profile.tsx       # Profile + WhatsApp share + Add child
 ├── components/
 │   ├── WordCard.tsx          # Trilingual word card
-│   └── ErrorBoundary.tsx     # Error boundary (scaffold)
-├── context/AppContext.tsx    # Global state
+│   ├── OfflineBanner.tsx     # Animated offline banner (web)
+│   └── ErrorBoundary.tsx     # Error boundary with debug modal
+├── context/AppContext.tsx    # Global state + session saving
 ├── constants/colors.ts       # Design tokens
 ├── data/
-│   ├── words.ts              # 40 mock words
-│   └── types.ts              # TypeScript types
-├── hooks/useColors.ts        # Color scheme hook
+│   ├── words.ts              # 87 trilingual words
+│   └── types.ts              # TypeScript types (Subject includes body + time)
+├── hooks/
+│   ├── useColors.ts          # Color scheme hook
+│   └── useAudio.ts           # SpeechSynthesis hook
 └── assets/images/
     └── icon.png              # Ethiopian lion (Anbessa) app icon
 ```

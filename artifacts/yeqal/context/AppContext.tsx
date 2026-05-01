@@ -1,15 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-import { AppLanguage, Child, UserProfile, UserRole } from "@/data/types";
+import { AppLanguage, Child, HomeworkSession, UserProfile, UserRole } from "@/data/types";
 
-const STORAGE_KEY = "yeqal_profile_v1";
+const STORAGE_KEY = "yeqal_profile_v2";
+const SESSIONS_KEY = "yeqal_homework_sessions";
 
 const DEFAULT_CHILD: Child = {
   id: "c1",
   name: "Liya",
   gradeLevel: 4,
   initials: "LI",
+  avatar: "👧",
   streak: 7,
   xp: 280,
   skills: { speaking: 62, listening: 75, reading: 58, writing: 44 },
@@ -39,11 +41,13 @@ interface AppContextType {
   toggleFavorite: (wordId: string) => void;
   markLearned: (wordId: string) => void;
   addChild: (child: Child) => void;
+  removeChild: (childId: string) => void;
   isFavorite: (wordId: string) => boolean;
   isLearned: (wordId: string) => boolean;
   addXP: (amount: number) => void;
   searchLanguage: AppLanguage;
   setSearchLanguage: (lang: AppLanguage) => void;
+  saveHomeworkSession: (session: HomeworkSession) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -57,7 +61,15 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
     AsyncStorage.getItem(STORAGE_KEY).then((stored) => {
       if (stored) {
         try {
-          setProfileState(JSON.parse(stored));
+          const parsed = JSON.parse(stored);
+          // Migrate old profiles that lack child.avatar
+          if (parsed.children) {
+            parsed.children = parsed.children.map((c: Child) => ({
+              ...c,
+              avatar: c.avatar ?? "👦",
+            }));
+          }
+          setProfileState(parsed);
         } catch {
           setProfileState(DEFAULT_PROFILE);
         }
@@ -104,9 +116,28 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
     save({ ...profile, children: [...profile.children, child] });
   };
 
+  const removeChild = (childId: string) => {
+    if (!profile) return;
+    save({ ...profile, children: profile.children.filter((c) => c.id !== childId) });
+  };
+
   const addXP = (amount: number) => {
     if (!profile) return;
     save({ ...profile, xp: profile.xp + amount });
+  };
+
+  const saveHomeworkSession = async (session: HomeworkSession) => {
+    try {
+      const stored = await AsyncStorage.getItem(SESSIONS_KEY);
+      const sessions: HomeworkSession[] = stored ? JSON.parse(stored) : [];
+      sessions.unshift(session);
+      await AsyncStorage.setItem(
+        SESSIONS_KEY,
+        JSON.stringify(sessions.slice(0, 30))
+      );
+    } catch {
+      // silent fail - session saving is non-critical
+    }
   };
 
   const isFavorite = (wordId: string) =>
@@ -127,11 +158,13 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
         toggleFavorite,
         markLearned,
         addChild,
+        removeChild,
         isFavorite,
         isLearned,
         addXP,
         searchLanguage,
         setSearchLanguage,
+        saveHomeworkSession,
       }}
     >
       {node}

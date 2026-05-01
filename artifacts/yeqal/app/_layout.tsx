@@ -10,11 +10,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
+import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { AppProvider } from "@/context/AppContext";
 
 SplashScreen.preventAutoHideAsync();
@@ -63,6 +65,27 @@ export default function RootLayout() {
     });
   }, []);
 
+  // Inject Noto Sans Ethiopic for web — critical for Ge'ez script rendering
+  useEffect(() => {
+    if (Platform.OS !== "web" || typeof document === "undefined") return;
+    if (document.getElementById("yeqal-ethiopic-font")) return;
+    const link = document.createElement("link");
+    link.id = "yeqal-ethiopic-font";
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap";
+    document.head.appendChild(link);
+    // Apply Ethiopic range to all text elements via a style tag
+    const style = document.createElement("style");
+    style.id = "yeqal-ethiopic-style";
+    style.textContent = `
+      @supports (unicode-range: U+1200-137F) {
+        * { font-family: Inter, 'Noto Sans Ethiopic', system-ui !important; }
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+
   const isReady = (fontsLoaded || !!fontError) && onboarded !== null;
 
   useEffect(() => {
@@ -77,6 +100,7 @@ export default function RootLayout() {
         <ErrorBoundary>
           <QueryClientProvider client={queryClient}>
             <GestureHandlerRootView style={{ flex: 1 }}>
+              <OfflineBanner />
               <KeyboardProvider>
                 <RootLayoutNav onboarded={onboarded ?? false} />
               </KeyboardProvider>

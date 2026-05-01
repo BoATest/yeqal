@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useColors } from "@/hooks/useColors";
+import { useAudio } from "@/hooks/useAudio";
 import { useApp } from "@/context/AppContext";
 import { getWordById, WORDS } from "@/data/words";
 
@@ -21,29 +22,38 @@ const WEB_TOP = Platform.OS === "web" ? 67 : 0;
 
 type DefTab = "amharic" | "oromo" | "english";
 
+const AUDIO_CONFIGS: { lang: "am" | "om" | "en"; label: string; flagEmoji: string }[] = [
+  { lang: "am", label: "አማርኛ", flagEmoji: "🇪🇹" },
+  { lang: "om", label: "Oromo", flagEmoji: "🇪🇹" },
+  { lang: "en", label: "English", flagEmoji: "🌍" },
+];
+
 export default function WordDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const colors = useColors();
   const { toggleFavorite, isFavorite, markLearned, addXP } = useApp();
+  const { speak, playingKey } = useAudio();
   const insets = useSafeAreaInsets();
 
   const [defTab, setDefTab] = useState<DefTab>("english");
-  const [playingLang, setPlayingLang] = useState<string | null>(null);
 
   const word = getWordById(id ?? "");
 
   if (!word) {
     return (
-      <View
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
         <Pressable onPress={() => router.back()} style={styles.backBtn}>
           <Feather name="arrow-left" size={22} color={colors.text} />
         </Pressable>
         <View style={styles.notFound}>
-          <Text style={[styles.notFoundText, { color: colors.text }]}>
-            Word not found
-          </Text>
+          <Feather name="alert-circle" size={40} color={colors.mutedForeground} />
+          <Text style={[styles.notFoundText, { color: colors.text }]}>Word not found</Text>
+          <Pressable
+            onPress={() => router.back()}
+            style={[styles.notFoundBack, { backgroundColor: colors.primary }]}
+          >
+            <Text style={styles.notFoundBackText}>Go back</Text>
+          </Pressable>
         </View>
       </View>
     );
@@ -63,13 +73,13 @@ export default function WordDetailScreen() {
     router.push("/speak");
   };
 
-  const simulateAudio = (lang: string) => {
-    setPlayingLang(lang);
+  const handleSpeak = (lang: "am" | "om" | "en") => {
+    const text = lang === "am" ? word.amharic : lang === "om" ? word.oromo : word.english;
+    const key = `${word.id}-${lang}`;
+    speak(text, lang, key);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    setTimeout(() => setPlayingLang(null), 1500);
   };
 
-  // Related words (same subject, different id)
   const related = WORDS.filter(
     (w) => w.subject === word.subject && w.id !== word.id
   ).slice(0, 3);
@@ -90,13 +100,9 @@ export default function WordDetailScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      {/* Header gradient */}
       <LinearGradient
         colors={["#1B6B3A", "#0F4022"]}
-        style={[
-          styles.header,
-          { paddingTop: insets.top + WEB_TOP + 12 },
-        ]}
+        style={[styles.header, { paddingTop: insets.top + WEB_TOP + 12 }]}
       >
         <View style={styles.headerRow}>
           <Pressable onPress={() => router.back()} style={styles.backCircle}>
@@ -104,21 +110,15 @@ export default function WordDetailScreen() {
           </Pressable>
           <View style={{ flex: 1 }} />
           <Pressable onPress={handleFav} style={styles.favCircle}>
-            <Feather
-              name="star"
-              size={20}
-              color={fav ? "#F5C842" : "#FFFFFF80"}
-            />
+            <Feather name="star" size={20} color={fav ? "#F5C842" : "#FFFFFF80"} />
           </Pressable>
         </View>
 
-        {/* Primary word */}
         <Text style={styles.primaryWord}>{word.amharic}</Text>
         {word.romanization && (
           <Text style={styles.romanization}>/ {word.romanization} /</Text>
         )}
 
-        {/* Badges */}
         <View style={styles.badgesRow}>
           <View style={[styles.badge, { backgroundColor: "#FFFFFF22" }]}>
             <Text style={styles.badgeText}>{word.pos}</Text>
@@ -136,81 +136,60 @@ export default function WordDetailScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.body}
       >
-        {/* All 3 languages with audio */}
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.border },
-          ]}
-        >
+        {/* Audio card — 3 real audio buttons */}
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
           <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>
-            PRONUNCIATION
+            PRONUNCIATION — TAP TO HEAR
           </Text>
-          {[
-            { lang: "አማርኛ", word: word.amharic, key: "am" },
-            { lang: "Oromo", word: word.oromo, key: "om" },
-            { lang: "English", word: word.english, key: "en" },
-          ].map((item, i) => (
-            <View key={item.key}>
-              {i > 0 && (
-                <View
-                  style={[
-                    styles.divider,
-                    { backgroundColor: colors.border },
-                  ]}
-                />
-              )}
-              <View style={styles.langRow}>
-                <View style={{ flex: 1 }}>
-                  <Text
+          {AUDIO_CONFIGS.map((cfg, i) => {
+            const wordText = cfg.lang === "am" ? word.amharic : cfg.lang === "om" ? word.oromo : word.english;
+            const key = `${word.id}-${cfg.lang}`;
+            const isPlaying = playingKey === key;
+            return (
+              <View key={cfg.lang}>
+                {i > 0 && (
+                  <View style={[styles.divider, { backgroundColor: colors.border }]} />
+                )}
+                <View style={styles.langRow}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.langLabel, { color: colors.mutedForeground }]}>
+                      {cfg.label}
+                    </Text>
+                    <Text style={[styles.langWord, { color: colors.text }]}>{wordText}</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => handleSpeak(cfg.lang)}
                     style={[
-                      styles.langLabel,
-                      { color: colors.mutedForeground },
+                      styles.audioBtn,
+                      { backgroundColor: isPlaying ? colors.primary : colors.greenBg },
                     ]}
                   >
-                    {item.lang}
-                  </Text>
-                  <Text style={[styles.langWord, { color: colors.text }]}>
-                    {item.word}
-                  </Text>
+                    {isPlaying ? (
+                      /* Animated "playing" indicator — 3 bars */
+                      <View style={styles.playingBars}>
+                        {[0, 1, 2].map((b) => (
+                          <View
+                            key={b}
+                            style={[
+                              styles.playingBar,
+                              { backgroundColor: "#fff", height: 8 + b * 4 },
+                            ]}
+                          />
+                        ))}
+                      </View>
+                    ) : (
+                      <Feather name="play" size={18} color={colors.primary} />
+                    )}
+                  </Pressable>
                 </View>
-                <Pressable
-                  onPress={() => simulateAudio(item.key)}
-                  style={[
-                    styles.audioBtn,
-                    {
-                      backgroundColor:
-                        playingLang === item.key
-                          ? colors.primary
-                          : colors.greenBg,
-                    },
-                  ]}
-                >
-                  <Feather
-                    name={
-                      playingLang === item.key ? "volume-2" : "play"
-                    }
-                    size={18}
-                    color={
-                      playingLang === item.key ? "#fff" : colors.primary
-                    }
-                  />
-                </Pressable>
               </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
 
         {/* Definition tabs */}
-        <View
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.border },
-          ]}
-        >
-          <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>
-            DEFINITION
-          </Text>
+        <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>DEFINITION</Text>
           <View style={styles.tabRow}>
             {(["english", "amharic", "oromo"] as DefTab[]).map((tab) => (
               <Pressable
@@ -218,18 +197,13 @@ export default function WordDetailScreen() {
                 onPress={() => setDefTab(tab)}
                 style={[
                   styles.tab,
-                  {
-                    backgroundColor:
-                      defTab === tab ? colors.primary : colors.muted,
-                  },
+                  { backgroundColor: defTab === tab ? colors.primary : colors.muted },
                 ]}
               >
                 <Text
                   style={[
                     styles.tabText,
-                    {
-                      color: defTab === tab ? "#fff" : colors.mutedForeground,
-                    },
+                    { color: defTab === tab ? "#fff" : colors.mutedForeground },
                   ]}
                 >
                   {tab === "amharic" ? "አማርኛ" : tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -238,33 +212,16 @@ export default function WordDetailScreen() {
             ))}
           </View>
           <Text style={[styles.defText, { color: colors.text }]}>
-            {defText ?? `The ${defTab} definition for "${word.english}" — see other tabs.`}
+            {defText ?? `See other language tabs for the definition of "${word.english}".`}
           </Text>
         </View>
 
         {/* Example sentence */}
         {(word.exampleAmharic || word.exampleEnglish || word.exampleOromo) && (
-          <View
-            style={[
-              styles.card,
-              { backgroundColor: colors.card, borderColor: colors.border },
-            ]}
-          >
-            <Text
-              style={[styles.cardTitle, { color: colors.mutedForeground }]}
-            >
+          <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
+            <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>
               EXAMPLE SENTENCE
             </Text>
-            <View
-              style={[
-                styles.exampleBox,
-                { backgroundColor: colors.greenBg, borderColor: colors.green + "30" },
-              ]}
-            >
-              <Text style={[styles.exampleText, { color: colors.primary }]}>
-                {exampleText ?? word.exampleEnglish}
-              </Text>
-            </View>
             <View style={styles.tabRow}>
               {(["english", "amharic", "oromo"] as DefTab[]).map((tab) => (
                 <Pressable
@@ -272,19 +229,13 @@ export default function WordDetailScreen() {
                   onPress={() => setDefTab(tab)}
                   style={[
                     styles.tab,
-                    {
-                      backgroundColor:
-                        defTab === tab ? colors.primary : colors.muted,
-                    },
+                    { backgroundColor: defTab === tab ? colors.primary : colors.muted },
                   ]}
                 >
                   <Text
                     style={[
                       styles.tabText,
-                      {
-                        color:
-                          defTab === tab ? "#fff" : colors.mutedForeground,
-                      },
+                      { color: defTab === tab ? "#fff" : colors.mutedForeground },
                     ]}
                   >
                     {tab === "amharic" ? "አማርኛ" : tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -292,15 +243,23 @@ export default function WordDetailScreen() {
                 </Pressable>
               ))}
             </View>
+            <View
+              style={[
+                styles.exampleBox,
+                { backgroundColor: colors.greenBg, borderColor: colors.green + "30" },
+              ]}
+            >
+              <Text style={[styles.exampleText, { color: colors.primary }]}>
+                {exampleText ?? word.exampleEnglish ?? ""}
+              </Text>
+            </View>
           </View>
         )}
 
         {/* Related words */}
         {related.length > 0 && (
           <View style={styles.related}>
-            <Text
-              style={[styles.cardTitle, { color: colors.mutedForeground }]}
-            >
+            <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>
               RELATED WORDS
             </Text>
             <View style={styles.relatedRow}>
@@ -310,23 +269,13 @@ export default function WordDetailScreen() {
                   onPress={() => router.push(`/word/${w.id}`)}
                   style={[
                     styles.relatedCard,
-                    {
-                      backgroundColor: colors.card,
-                      borderColor: colors.border,
-                    },
+                    { backgroundColor: colors.card, borderColor: colors.border },
                   ]}
                 >
-                  <Text
-                    style={[styles.relatedAmharic, { color: colors.primary }]}
-                  >
+                  <Text style={[styles.relatedAmharic, { color: colors.primary }]}>
                     {w.amharic}
                   </Text>
-                  <Text
-                    style={[
-                      styles.relatedEnglish,
-                      { color: colors.mutedForeground },
-                    ]}
-                  >
+                  <Text style={[styles.relatedEnglish, { color: colors.mutedForeground }]}>
                     {w.english}
                   </Text>
                 </Pressable>
@@ -335,7 +284,7 @@ export default function WordDetailScreen() {
           </View>
         )}
 
-        {/* Action buttons */}
+        {/* Actions */}
         <View style={styles.actions}>
           <Pressable
             onPress={handlePractice}
@@ -344,16 +293,9 @@ export default function WordDetailScreen() {
             <Feather name="mic" size={18} color="#fff" />
             <Text style={styles.practiceBtnText}>Practice this word</Text>
           </Pressable>
-          <Pressable
-            style={[
-              styles.reportBtn,
-              { borderColor: colors.border },
-            ]}
-          >
+          <Pressable style={[styles.reportBtn, { borderColor: colors.border }]}>
             <Feather name="flag" size={16} color={colors.mutedForeground} />
-            <Text
-              style={[styles.reportBtnText, { color: colors.mutedForeground }]}
-            >
+            <Text style={[styles.reportBtnText, { color: colors.mutedForeground }]}>
               Report an issue
             </Text>
           </Pressable>
@@ -365,15 +307,8 @@ export default function WordDetailScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: {
-    paddingHorizontal: 20,
-    paddingBottom: 28,
-  },
-  headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
+  header: { paddingHorizontal: 20, paddingBottom: 28 },
+  headerRow: { flexDirection: "row", alignItems: "center", marginBottom: 20 },
   backCircle: {
     width: 40,
     height: 40,
@@ -391,12 +326,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   backBtn: { padding: 16 },
-  primaryWord: {
-    fontSize: 48,
-    fontWeight: "700",
-    color: "#FFFFFF",
-    lineHeight: 58,
-  },
+  primaryWord: { fontSize: 48, fontWeight: "700", color: "#FFFFFF", lineHeight: 58 },
   romanization: {
     fontSize: 15,
     color: "#FFFFFFAA",
@@ -415,12 +345,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_600SemiBold",
   },
   body: { padding: 16, gap: 12, paddingBottom: 48 },
-  card: {
-    borderRadius: 16,
-    borderWidth: 1,
-    padding: 16,
-    gap: 14,
-  },
+  card: { borderRadius: 16, borderWidth: 1, padding: 16, gap: 14 },
   cardTitle: {
     fontSize: 10,
     fontWeight: "700",
@@ -428,12 +353,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_700Bold",
   },
   divider: { height: 1, marginVertical: 4 },
-  langRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    paddingVertical: 4,
-  },
+  langRow: { flexDirection: "row", alignItems: "center", gap: 12, paddingVertical: 4 },
   langLabel: {
     fontSize: 10,
     fontWeight: "700",
@@ -444,39 +364,27 @@ const styles = StyleSheet.create({
   },
   langWord: { fontSize: 20, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
   audioBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
   },
+  playingBars: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+  },
+  playingBar: {
+    width: 4,
+    borderRadius: 2,
+  },
   tabRow: { flexDirection: "row", gap: 8 },
-  tab: {
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-  },
-  tabText: {
-    fontSize: 12,
-    fontWeight: "600",
-    fontFamily: "Inter_600SemiBold",
-  },
-  defText: {
-    fontSize: 15,
-    fontFamily: "Inter_400Regular",
-    lineHeight: 24,
-  },
-  exampleBox: {
-    borderRadius: 12,
-    borderWidth: 1,
-    padding: 14,
-  },
-  exampleText: {
-    fontSize: 16,
-    fontWeight: "500",
-    fontFamily: "Inter_500Medium",
-    lineHeight: 24,
-  },
+  tab: { borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6 },
+  tabText: { fontSize: 12, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
+  defText: { fontSize: 15, fontFamily: "Inter_400Regular", lineHeight: 24 },
+  exampleBox: { borderRadius: 12, borderWidth: 1, padding: 14 },
+  exampleText: { fontSize: 16, fontWeight: "500", fontFamily: "Inter_500Medium", lineHeight: 24 },
   related: { gap: 12 },
   relatedRow: { flexDirection: "row", gap: 10 },
   relatedCard: {
@@ -498,12 +406,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     height: 52,
   },
-  practiceBtnText: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#fff",
-    fontFamily: "Inter_700Bold",
-  },
+  practiceBtnText: { fontSize: 16, fontWeight: "700", color: "#fff", fontFamily: "Inter_700Bold" },
   reportBtn: {
     flexDirection: "row",
     alignItems: "center",
@@ -514,6 +417,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   reportBtnText: { fontSize: 14, fontFamily: "Inter_500Medium" },
-  notFound: { flex: 1, alignItems: "center", justifyContent: "center" },
+  notFound: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
   notFoundText: { fontSize: 18, fontWeight: "700", fontFamily: "Inter_700Bold" },
+  notFoundBack: {
+    borderRadius: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  notFoundBackText: { fontSize: 15, fontWeight: "600", color: "#fff", fontFamily: "Inter_600SemiBold" },
 });

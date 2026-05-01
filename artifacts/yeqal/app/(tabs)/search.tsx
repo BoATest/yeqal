@@ -37,6 +37,8 @@ const SUBJECTS = [
   "animals",
   "greetings",
   "numbers",
+  "body",
+  "time",
 ];
 
 export default function SearchScreen() {
@@ -48,6 +50,8 @@ export default function SearchScreen() {
   const [query, setQuery] = useState("");
   const [lang, setLang] = useState<AppLanguage | "all">("all");
   const [subject, setSubject] = useState("all");
+  const [suggestion, setSuggestion] = useState("");
+  const [suggestionSent, setSuggestionSent] = useState(false);
 
   const results = (() => {
     let words = searchWords(query, lang === "all" ? "all" : lang);
@@ -57,9 +61,18 @@ export default function SearchScreen() {
     return words;
   })();
 
+  const hasQuery = query.trim().length > 1;
+  const noResults = hasQuery && results.length === 0;
+
+  const handleSendSuggestion = () => {
+    if (!suggestion.trim()) return;
+    setSuggestionSent(true);
+    setTimeout(() => setSuggestionSent(false), 4000);
+    setSuggestion("");
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      {/* Search header */}
       <View
         style={[
           styles.header,
@@ -81,7 +94,7 @@ export default function SearchScreen() {
             ref={inputRef}
             value={query}
             onChangeText={setQuery}
-            placeholder="Search Amharic · Oromo · English..."
+            placeholder="ፈልጉ · Search Amharic, Oromo, English..."
             placeholderTextColor={colors.mutedForeground}
             style={[styles.input, { color: colors.text }]}
             autoCorrect={false}
@@ -95,7 +108,6 @@ export default function SearchScreen() {
           )}
         </View>
 
-        {/* Language pills */}
         <FlatList
           horizontal
           data={LANG_PILLS}
@@ -110,9 +122,7 @@ export default function SearchScreen() {
                 style={[
                   styles.pill,
                   {
-                    backgroundColor: active
-                      ? colors.primary
-                      : colors.muted,
+                    backgroundColor: active ? colors.primary : colors.muted,
                     borderColor: active ? colors.primary : colors.border,
                   },
                 ]}
@@ -131,7 +141,6 @@ export default function SearchScreen() {
         />
       </View>
 
-      {/* Subject filter */}
       <FlatList
         horizontal
         data={SUBJECTS}
@@ -164,7 +173,6 @@ export default function SearchScreen() {
         }}
       />
 
-      {/* Results */}
       <FlatList
         data={results}
         keyExtractor={(w) => w.id}
@@ -176,19 +184,6 @@ export default function SearchScreen() {
         renderItem={({ item }) => (
           <WordCard word={item} isFavorite={isFavorite(item.id)} />
         )}
-        ListEmptyComponent={
-          <View style={styles.empty}>
-            <Feather name="search" size={40} color={colors.mutedForeground} />
-            <Text style={[styles.emptyTitle, { color: colors.text }]}>
-              No words found
-            </Text>
-            <Text
-              style={[styles.emptyText, { color: colors.mutedForeground }]}
-            >
-              Try searching in Amharic, Oromo, or English
-            </Text>
-          </View>
-        }
         ListHeaderComponent={
           results.length > 0 ? (
             <Text
@@ -197,6 +192,93 @@ export default function SearchScreen() {
               {results.length} word{results.length !== 1 ? "s" : ""}
               {query ? ` for "${query}"` : ""}
             </Text>
+          ) : null
+        }
+        ListEmptyComponent={
+          noResults ? (
+            <View
+              style={[
+                styles.notFoundCard,
+                { backgroundColor: colors.card, borderColor: colors.border },
+              ]}
+            >
+              <Feather name="search" size={36} color={colors.mutedForeground} />
+              <Text style={[styles.notFoundTitle, { color: colors.text }]}>
+                Word not found
+              </Text>
+              <Text
+                style={[
+                  styles.notFoundSub,
+                  { color: colors.mutedForeground },
+                ]}
+              >
+                "{query}" is not in the dictionary yet.
+              </Text>
+              <Text
+                style={[
+                  styles.notFoundSuggestLabel,
+                  { color: colors.mutedForeground },
+                ]}
+              >
+                Suggest it and we'll add it:
+              </Text>
+              {suggestionSent ? (
+                <View
+                  style={[
+                    styles.sentBadge,
+                    { backgroundColor: colors.greenBg, borderColor: colors.green + "40" },
+                  ]}
+                >
+                  <Feather name="check-circle" size={16} color={colors.primary} />
+                  <Text style={[styles.sentText, { color: colors.primary }]}>
+                    Suggestion sent — thank you!
+                  </Text>
+                </View>
+              ) : (
+                <View style={styles.suggestRow}>
+                  <TextInput
+                    value={suggestion}
+                    onChangeText={setSuggestion}
+                    placeholder={`Suggest "${query}" in all 3 languages...`}
+                    placeholderTextColor={colors.mutedForeground}
+                    style={[
+                      styles.suggestInput,
+                      {
+                        backgroundColor: colors.muted,
+                        borderColor: colors.border,
+                        color: colors.text,
+                      },
+                    ]}
+                  />
+                  <Pressable
+                    onPress={handleSendSuggestion}
+                    style={[
+                      styles.suggestBtn,
+                      {
+                        backgroundColor: suggestion.trim()
+                          ? colors.primary
+                          : colors.muted,
+                      },
+                    ]}
+                  >
+                    <Feather
+                      name="send"
+                      size={16}
+                      color={suggestion.trim() ? "#fff" : colors.mutedForeground}
+                    />
+                  </Pressable>
+                </View>
+              )}
+            </View>
+          ) : !hasQuery ? (
+            <View style={styles.emptyStart}>
+              <Text style={[styles.emptyStartText, { color: colors.mutedForeground }]}>
+                {WORDS.length} words · Amharic · Oromo · English
+              </Text>
+              <Text style={[styles.emptyStartHint, { color: colors.mutedForeground }]}>
+                Try: ቤት · mother · bishaan
+              </Text>
+            </View>
           ) : null
         }
       />
@@ -253,12 +335,76 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 4,
   },
-  empty: { alignItems: "center", paddingTop: 60, gap: 12 },
-  emptyTitle: { fontSize: 18, fontWeight: "700", fontFamily: "Inter_700Bold" },
-  emptyText: {
+  notFoundCard: {
+    borderRadius: 20,
+    borderWidth: 1,
+    padding: 24,
+    alignItems: "center",
+    gap: 10,
+    marginTop: 8,
+  },
+  notFoundTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+  },
+  notFoundSub: {
     fontSize: 14,
     fontFamily: "Inter_400Regular",
     textAlign: "center",
-    maxWidth: 240,
+  },
+  notFoundSuggestLabel: {
+    fontSize: 13,
+    fontFamily: "Inter_500Medium",
+    marginTop: 4,
+  },
+  suggestRow: {
+    flexDirection: "row",
+    gap: 8,
+    width: "100%",
+    marginTop: 4,
+  },
+  suggestInput: {
+    flex: 1,
+    borderRadius: 12,
+    borderWidth: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 14,
+    fontFamily: "Inter_400Regular",
+  },
+  suggestBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  sentBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginTop: 4,
+  },
+  sentText: {
+    fontSize: 14,
+    fontFamily: "Inter_600SemiBold",
+  },
+  emptyStart: {
+    alignItems: "center",
+    paddingTop: 48,
+    gap: 8,
+  },
+  emptyStartText: {
+    fontSize: 14,
+    fontFamily: "Inter_500Medium",
+  },
+  emptyStartHint: {
+    fontSize: 13,
+    fontFamily: "Inter_400Regular",
   },
 });
