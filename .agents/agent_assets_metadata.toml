@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "ZlPiYuPwvj5gZwus4aLsp"
+uri = "file://artifacts/yeqal/assets/images/icon.png"
+type = "image"
+title = "yeqal lion app icon"

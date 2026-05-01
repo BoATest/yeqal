@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/"
+title = "Yeqal ያቃል"
+version = "1.0.0"
+id = "artifacts/yeqal"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/" ]
+localPort = 19492
+
+[services.development]
+run = "pnpm --filter @workspace/yeqal run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/yeqal", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/yeqal", "run", "serve" ]
+
+[services.env]
+PORT = "19492"
+BASE_PATH = "/"
