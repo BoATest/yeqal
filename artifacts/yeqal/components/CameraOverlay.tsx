@@ -83,11 +83,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
       const apiKey = (typeof process !== "undefined" && process.env?.EXPO_PUBLIC_GOOGLE_VISION_KEY) ?? "";
 
       if (!apiKey) {
-        if (mode === "object") {
-          setError("Camera identification needs a Google Vision API key. Coming soon!");
-        } else {
-          setError("Text reading needs a Google Vision API key. For now, type your homework text manually.");
-        }
+        setNoApiKey(true);
         setIsCapturing(false);
         return;
       }
