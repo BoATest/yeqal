@@ -1,0 +1,5402 @@
+[
+  {
+    "id": "ethio-001",
+    "category": "Greetings & Courtesy",
+    "english": "hello",
+    "amharic": "ሰላም",
+    "amharicTranslit": "selam",
+    "afaanOromo": "akkam",
+    "oromoPronunciation": "akkam",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'hello' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-002",
+    "category": "Greetings & Courtesy",
+    "english": "welcome",
+    "amharic": "እንኳን ደህና መጡ",
+    "amharicTranslit": "enkwan dehna metu",
+    "afaanOromo": "baga nagaan dhuftan",
+    "oromoPronunciation": "baga nagaan dhuftan",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'welcome' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-003",
+    "category": "Greetings & Courtesy",
+    "english": "good morning",
+    "amharic": "እንደምን አደሩ",
+    "amharicTranslit": "endemin aderu",
+    "afaanOromo": "akkam bultan",
+    "oromoPronunciation": "akkam bultan",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'good morning' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-004",
+    "category": "Greetings & Courtesy",
+    "english": "good afternoon",
+    "amharic": "እንደምን ዋሉ",
+    "amharicTranslit": "endemin walu",
+    "afaanOromo": "akkam ooltan",
+    "oromoPronunciation": "akkam ooltan",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'good afternoon' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-005",
+    "category": "Greetings & Courtesy",
+    "english": "good evening",
+    "amharic": "እንደምን አመሹ",
+    "amharicTranslit": "endemin ameshu",
+    "afaanOromo": "akkam ooltan",
+    "oromoPronunciation": "akkam ooltan",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'good evening' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-006",
+    "category": "Greetings & Courtesy",
+    "english": "goodbye",
+    "amharic": "ደህና ሁን",
+    "amharicTranslit": "dehna hun",
+    "afaanOromo": "nagaatti",
+    "oromoPronunciation": "nagaatti",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'goodbye' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-007",
+    "category": "Greetings & Courtesy",
+    "english": "please",
+    "amharic": "እባክዎ",
+    "amharicTranslit": "ebakwo",
+    "afaanOromo": "maaloo",
+    "oromoPronunciation": "maaloo",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'please' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-008",
+    "category": "Greetings & Courtesy",
+    "english": "thank you",
+    "amharic": "አመሰግናለሁ",
+    "amharicTranslit": "ameseginalehu",
+    "afaanOromo": "galatoomi",
+    "oromoPronunciation": "galatoomi",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'thank you' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-009",
+    "category": "Greetings & Courtesy",
+    "english": "sorry",
+    "amharic": "ይቅርታ",
+    "amharicTranslit": "yikirta",
+    "afaanOromo": "dhiifama",
+    "oromoPronunciation": "dhiifama",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'sorry' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-010",
+    "category": "Greetings & Courtesy",
+    "english": "excuse me",
+    "amharic": "ይቅርታ",
+    "amharicTranslit": "yikirta",
+    "afaanOromo": "dhiifama",
+    "oromoPronunciation": "dhiifama",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'excuse me' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-011",
+    "category": "Greetings & Courtesy",
+    "english": "yes",
+    "amharic": "አዎ",
+    "amharicTranslit": "awo",
+    "afaanOromo": "eeyyee",
+    "oromoPronunciation": "eeyyee",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'yes' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-012",
+    "category": "Greetings & Courtesy",
+    "english": "no",
+    "amharic": "አይ",
+    "amharicTranslit": "ay",
+    "afaanOromo": "lakki",
+    "oromoPronunciation": "lakki",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'no' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-013",
+    "category": "Greetings & Courtesy",
+    "english": "okay",
+    "amharic": "እሺ",
+    "amharicTranslit": "ishi",
+    "afaanOromo": "tole",
+    "oromoPronunciation": "tole",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'okay' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-014",
+    "category": "Greetings & Courtesy",
+    "english": "how are you",
+    "amharic": "እንዴት ነህ",
+    "amharicTranslit": "endet neh",
+    "afaanOromo": "akkam jirta",
+    "oromoPronunciation": "akkam jirta",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'how are you' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-015",
+    "category": "Greetings & Courtesy",
+    "english": "I am fine",
+    "amharic": "ደህና ነኝ",
+    "amharicTranslit": "dehna negn",
+    "afaanOromo": "nagaan jira",
+    "oromoPronunciation": "nagaan jira",
+    "context": "daily greetings, politeness, first conversations",
+    "exampleEn": "Use 'I am fine' in greetings and courtesy situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "greetings-courtesy",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-016",
+    "category": "People & Family",
+    "english": "person",
+    "amharic": "ሰው",
+    "amharicTranslit": "sew",
+    "afaanOromo": "nama",
+    "oromoPronunciation": "nama",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'person' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-017",
+    "category": "People & Family",
+    "english": "man",
+    "amharic": "ወንድ",
+    "amharicTranslit": "wend",
+    "afaanOromo": "dhiira",
+    "oromoPronunciation": "dhiira",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'man' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-018",
+    "category": "People & Family",
+    "english": "woman",
+    "amharic": "ሴት",
+    "amharicTranslit": "set",
+    "afaanOromo": "dubartii",
+    "oromoPronunciation": "dubartii",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'woman' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-019",
+    "category": "People & Family",
+    "english": "child",
+    "amharic": "ልጅ",
+    "amharicTranslit": "lij",
+    "afaanOromo": "mucaa",
+    "oromoPronunciation": "mucaa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'child' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-020",
+    "category": "People & Family",
+    "english": "baby",
+    "amharic": "ሕፃን",
+    "amharicTranslit": "hisan",
+    "afaanOromo": "daa'ima",
+    "oromoPronunciation": "daa'ima",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'baby' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-021",
+    "category": "People & Family",
+    "english": "family",
+    "amharic": "ቤተሰብ",
+    "amharicTranslit": "beteseb",
+    "afaanOromo": "maatii",
+    "oromoPronunciation": "maatii",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'family' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-022",
+    "category": "People & Family",
+    "english": "mother",
+    "amharic": "እናት",
+    "amharicTranslit": "enat",
+    "afaanOromo": "haadha",
+    "oromoPronunciation": "haadha",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'mother' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-023",
+    "category": "People & Family",
+    "english": "father",
+    "amharic": "አባት",
+    "amharicTranslit": "abat",
+    "afaanOromo": "abbaa",
+    "oromoPronunciation": "abbaa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'father' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-024",
+    "category": "People & Family",
+    "english": "brother",
+    "amharic": "ወንድም",
+    "amharicTranslit": "wendim",
+    "afaanOromo": "obboleessa",
+    "oromoPronunciation": "obboleessa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'brother' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-025",
+    "category": "People & Family",
+    "english": "sister",
+    "amharic": "እህት",
+    "amharicTranslit": "ehet",
+    "afaanOromo": "obboleettii",
+    "oromoPronunciation": "obboleettii",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'sister' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-026",
+    "category": "People & Family",
+    "english": "friend",
+    "amharic": "ጓደኛ",
+    "amharicTranslit": "gwadegna",
+    "afaanOromo": "hiriyaa",
+    "oromoPronunciation": "hiriyaa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'friend' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-027",
+    "category": "People & Family",
+    "english": "teacher",
+    "amharic": "መምህር",
+    "amharicTranslit": "memhir",
+    "afaanOromo": "barsiisaa",
+    "oromoPronunciation": "barsiisaa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'teacher' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-028",
+    "category": "People & Family",
+    "english": "student",
+    "amharic": "ተማሪ",
+    "amharicTranslit": "temari",
+    "afaanOromo": "barataa",
+    "oromoPronunciation": "barataa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'student' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-029",
+    "category": "People & Family",
+    "english": "customer",
+    "amharic": "ደንበኛ",
+    "amharicTranslit": "denbegna",
+    "afaanOromo": "maamila",
+    "oromoPronunciation": "maamila",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'customer' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-030",
+    "category": "People & Family",
+    "english": "guest",
+    "amharic": "እንግዳ",
+    "amharicTranslit": "engida",
+    "afaanOromo": "keessummaa",
+    "oromoPronunciation": "keessummaa",
+    "context": "family, school, customer service, social conversation",
+    "exampleEn": "Use 'guest' in people and family situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "people-family",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-031",
+    "category": "Food & Drink",
+    "english": "food",
+    "amharic": "ምግብ",
+    "amharicTranslit": "migib",
+    "afaanOromo": "nyaata",
+    "oromoPronunciation": "nyaata",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'food' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-032",
+    "category": "Food & Drink",
+    "english": "water",
+    "amharic": "ውሃ",
+    "amharicTranslit": "wuha",
+    "afaanOromo": "bishaan",
+    "oromoPronunciation": "bishaan",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'water' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-033",
+    "category": "Food & Drink",
+    "english": "coffee",
+    "amharic": "ቡና",
+    "amharicTranslit": "buna",
+    "afaanOromo": "buna",
+    "oromoPronunciation": "buna",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'coffee' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-034",
+    "category": "Food & Drink",
+    "english": "tea",
+    "amharic": "ሻይ",
+    "amharicTranslit": "shay",
+    "afaanOromo": "shaayii",
+    "oromoPronunciation": "shaayii",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'tea' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-035",
+    "category": "Food & Drink",
+    "english": "milk",
+    "amharic": "ወተት",
+    "amharicTranslit": "wetet",
+    "afaanOromo": "aannan",
+    "oromoPronunciation": "aannan",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'milk' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-036",
+    "category": "Food & Drink",
+    "english": "bread",
+    "amharic": "ዳቦ",
+    "amharicTranslit": "dabo",
+    "afaanOromo": "buddeena",
+    "oromoPronunciation": "buddeena",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'bread' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-037",
+    "category": "Food & Drink",
+    "english": "injera",
+    "amharic": "እንጀራ",
+    "amharicTranslit": "injera",
+    "afaanOromo": "buddeena/xafii",
+    "oromoPronunciation": "buddeena/xafii",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'injera' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-038",
+    "category": "Food & Drink",
+    "english": "meat",
+    "amharic": "ሥጋ",
+    "amharicTranslit": "siga",
+    "afaanOromo": "foon",
+    "oromoPronunciation": "foon",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'meat' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-039",
+    "category": "Food & Drink",
+    "english": "chicken",
+    "amharic": "ዶሮ",
+    "amharicTranslit": "doro",
+    "afaanOromo": "lukkuu",
+    "oromoPronunciation": "lukkuu",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'chicken' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-040",
+    "category": "Food & Drink",
+    "english": "egg",
+    "amharic": "እንቁላል",
+    "amharicTranslit": "enkulal",
+    "afaanOromo": "hanqaaquu",
+    "oromoPronunciation": "hanqaaquu",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'egg' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-041",
+    "category": "Food & Drink",
+    "english": "rice",
+    "amharic": "ሩዝ",
+    "amharicTranslit": "ruz",
+    "afaanOromo": "ruuzii",
+    "oromoPronunciation": "ruuzii",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'rice' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-042",
+    "category": "Food & Drink",
+    "english": "salt",
+    "amharic": "ጨው",
+    "amharicTranslit": "chew",
+    "afaanOromo": "soogidda",
+    "oromoPronunciation": "soogidda",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'salt' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-043",
+    "category": "Food & Drink",
+    "english": "sugar",
+    "amharic": "ስኳር",
+    "amharicTranslit": "sikwar",
+    "afaanOromo": "sukkaara",
+    "oromoPronunciation": "sukkaara",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'sugar' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-044",
+    "category": "Food & Drink",
+    "english": "vegetable",
+    "amharic": "አትክልት",
+    "amharicTranslit": "atikilt",
+    "afaanOromo": "kuduraa",
+    "oromoPronunciation": "kuduraa",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'vegetable' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-045",
+    "category": "Food & Drink",
+    "english": "fruit",
+    "amharic": "ፍራፍሬ",
+    "amharicTranslit": "firafire",
+    "afaanOromo": "muduraa",
+    "oromoPronunciation": "muduraa",
+    "context": "restaurant, home, market, tourist menu translation",
+    "exampleEn": "Use 'fruit' in food and drink situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "food-drink",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-046",
+    "category": "Market & Money",
+    "english": "market",
+    "amharic": "ገበያ",
+    "amharicTranslit": "gebeya",
+    "afaanOromo": "gabaa",
+    "oromoPronunciation": "gabaa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'market' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-047",
+    "category": "Market & Money",
+    "english": "price",
+    "amharic": "ዋጋ",
+    "amharicTranslit": "waga",
+    "afaanOromo": "gatii",
+    "oromoPronunciation": "gatii",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'price' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-048",
+    "category": "Market & Money",
+    "english": "money",
+    "amharic": "ገንዘብ",
+    "amharicTranslit": "genzeb",
+    "afaanOromo": "maallaqa",
+    "oromoPronunciation": "maallaqa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'money' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-049",
+    "category": "Market & Money",
+    "english": "cash",
+    "amharic": "ጥሬ ገንዘብ",
+    "amharicTranslit": "tire genzeb",
+    "afaanOromo": "maallaqa harkaa",
+    "oromoPronunciation": "maallaqa harkaa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'cash' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-050",
+    "category": "Market & Money",
+    "english": "change",
+    "amharic": "መልስ",
+    "amharicTranslit": "mels",
+    "afaanOromo": "deebii",
+    "oromoPronunciation": "deebii",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'change' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-051",
+    "category": "Market & Money",
+    "english": "expensive",
+    "amharic": "ውድ",
+    "amharicTranslit": "wid",
+    "afaanOromo": "qaalii",
+    "oromoPronunciation": "qaalii",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'expensive' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-052",
+    "category": "Market & Money",
+    "english": "cheap",
+    "amharic": "ርካሽ",
+    "amharicTranslit": "irkash",
+    "afaanOromo": "rakasa",
+    "oromoPronunciation": "rakasa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'cheap' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-053",
+    "category": "Market & Money",
+    "english": "buy",
+    "amharic": "መግዛት",
+    "amharicTranslit": "megzat",
+    "afaanOromo": "bituu",
+    "oromoPronunciation": "bituu",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'buy' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-054",
+    "category": "Market & Money",
+    "english": "sell",
+    "amharic": "መሸጥ",
+    "amharicTranslit": "meshet",
+    "afaanOromo": "gurguruu",
+    "oromoPronunciation": "gurguruu",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'sell' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-055",
+    "category": "Market & Money",
+    "english": "discount",
+    "amharic": "ቅናሽ",
+    "amharicTranslit": "kinash",
+    "afaanOromo": "hir'ina gatii",
+    "oromoPronunciation": "hir'ina gatii",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'discount' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-056",
+    "category": "Market & Money",
+    "english": "receipt",
+    "amharic": "ደረሰኝ",
+    "amharicTranslit": "deresenj",
+    "afaanOromo": "nagahee",
+    "oromoPronunciation": "nagahee",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'receipt' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-057",
+    "category": "Market & Money",
+    "english": "shop",
+    "amharic": "ሱቅ",
+    "amharicTranslit": "suk",
+    "afaanOromo": "mana daldalaa",
+    "oromoPronunciation": "mana daldalaa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'shop' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-058",
+    "category": "Market & Money",
+    "english": "seller",
+    "amharic": "ሻጭ",
+    "amharicTranslit": "shach",
+    "afaanOromo": "gurguraa",
+    "oromoPronunciation": "gurguraa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'seller' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-059",
+    "category": "Market & Money",
+    "english": "buyer",
+    "amharic": "ገዢ",
+    "amharicTranslit": "gezi",
+    "afaanOromo": "bitataa",
+    "oromoPronunciation": "bitataa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'buyer' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-060",
+    "category": "Market & Money",
+    "english": "how much",
+    "amharic": "ስንት ነው",
+    "amharicTranslit": "sint new",
+    "afaanOromo": "meeqa",
+    "oromoPronunciation": "meeqa",
+    "context": "shopping, bargaining, small business, payment",
+    "exampleEn": "Use 'how much' in market and money situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "market-money",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-061",
+    "category": "Transport & Directions",
+    "english": "road",
+    "amharic": "መንገድ",
+    "amharicTranslit": "menged",
+    "afaanOromo": "karaa",
+    "oromoPronunciation": "karaa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'road' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-062",
+    "category": "Transport & Directions",
+    "english": "car",
+    "amharic": "መኪና",
+    "amharicTranslit": "mekina",
+    "afaanOromo": "konkolaataa",
+    "oromoPronunciation": "konkolaataa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'car' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-063",
+    "category": "Transport & Directions",
+    "english": "bus",
+    "amharic": "አውቶቡስ",
+    "amharicTranslit": "awtobus",
+    "afaanOromo": "baasii",
+    "oromoPronunciation": "baasii",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'bus' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-064",
+    "category": "Transport & Directions",
+    "english": "taxi",
+    "amharic": "ታክሲ",
+    "amharicTranslit": "taksi",
+    "afaanOromo": "taaksii",
+    "oromoPronunciation": "taaksii",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'taxi' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-065",
+    "category": "Transport & Directions",
+    "english": "airport",
+    "amharic": "አየር ማረፊያ",
+    "amharicTranslit": "ayer marefiya",
+    "afaanOromo": "buufata xiyyaaraa",
+    "oromoPronunciation": "buufata xiyyaaraa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'airport' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-066",
+    "category": "Transport & Directions",
+    "english": "station",
+    "amharic": "ጣቢያ",
+    "amharicTranslit": "tabiya",
+    "afaanOromo": "buufata",
+    "oromoPronunciation": "buufata",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'station' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-067",
+    "category": "Transport & Directions",
+    "english": "left",
+    "amharic": "ግራ",
+    "amharicTranslit": "gira",
+    "afaanOromo": "bitaa",
+    "oromoPronunciation": "bitaa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'left' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-068",
+    "category": "Transport & Directions",
+    "english": "right",
+    "amharic": "ቀኝ",
+    "amharicTranslit": "keny",
+    "afaanOromo": "mirga",
+    "oromoPronunciation": "mirga",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'right' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-069",
+    "category": "Transport & Directions",
+    "english": "straight",
+    "amharic": "ቀጥታ",
+    "amharicTranslit": "ketta",
+    "afaanOromo": "qajeelaa",
+    "oromoPronunciation": "qajeelaa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'straight' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-070",
+    "category": "Transport & Directions",
+    "english": "near",
+    "amharic": "ቅርብ",
+    "amharicTranslit": "kirb",
+    "afaanOromo": "dhihoo",
+    "oromoPronunciation": "dhihoo",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'near' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-071",
+    "category": "Transport & Directions",
+    "english": "far",
+    "amharic": "ሩቅ",
+    "amharicTranslit": "ruk",
+    "afaanOromo": "fagoo",
+    "oromoPronunciation": "fagoo",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'far' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-072",
+    "category": "Transport & Directions",
+    "english": "stop",
+    "amharic": "አቁም",
+    "amharicTranslit": "akum",
+    "afaanOromo": "dhaabi",
+    "oromoPronunciation": "dhaabi",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'stop' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-073",
+    "category": "Transport & Directions",
+    "english": "go",
+    "amharic": "ሂድ",
+    "amharicTranslit": "hid",
+    "afaanOromo": "deemi",
+    "oromoPronunciation": "deemi",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'go' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-074",
+    "category": "Transport & Directions",
+    "english": "come",
+    "amharic": "ና",
+    "amharicTranslit": "na",
+    "afaanOromo": "kottu",
+    "oromoPronunciation": "kottu",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'come' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-075",
+    "category": "Transport & Directions",
+    "english": "where",
+    "amharic": "የት",
+    "amharicTranslit": "yet",
+    "afaanOromo": "eessa",
+    "oromoPronunciation": "eessa",
+    "context": "taxi, bus, walking directions, travel",
+    "exampleEn": "Use 'where' in transport and directions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "transport-directions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-076",
+    "category": "Hotel & Travel",
+    "english": "hotel",
+    "amharic": "ሆቴል",
+    "amharicTranslit": "hotel",
+    "afaanOromo": "hoteela",
+    "oromoPronunciation": "hoteela",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'hotel' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-077",
+    "category": "Hotel & Travel",
+    "english": "room",
+    "amharic": "ክፍል",
+    "amharicTranslit": "kifil",
+    "afaanOromo": "kutaa",
+    "oromoPronunciation": "kutaa",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'room' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-078",
+    "category": "Hotel & Travel",
+    "english": "bed",
+    "amharic": "አልጋ",
+    "amharicTranslit": "alga",
+    "afaanOromo": "siree",
+    "oromoPronunciation": "siree",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'bed' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-079",
+    "category": "Hotel & Travel",
+    "english": "key",
+    "amharic": "ቁልፍ",
+    "amharicTranslit": "kulif",
+    "afaanOromo": "furtuu",
+    "oromoPronunciation": "furtuu",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'key' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-080",
+    "category": "Hotel & Travel",
+    "english": "bathroom",
+    "amharic": "መታጠቢያ",
+    "amharicTranslit": "metatebiya",
+    "afaanOromo": "mana fincaanii",
+    "oromoPronunciation": "mana fincaanii",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'bathroom' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-081",
+    "category": "Hotel & Travel",
+    "english": "reservation",
+    "amharic": "ቦታ ማስያዝ",
+    "amharicTranslit": "bota masyaz",
+    "afaanOromo": "iddoo qabachuu",
+    "oromoPronunciation": "iddoo qabachuu",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'reservation' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-082",
+    "category": "Hotel & Travel",
+    "english": "passport",
+    "amharic": "ፓስፖርት",
+    "amharicTranslit": "passport",
+    "afaanOromo": "paaspoortii",
+    "oromoPronunciation": "paaspoortii",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'passport' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-083",
+    "category": "Hotel & Travel",
+    "english": "luggage",
+    "amharic": "ሻንጣ",
+    "amharicTranslit": "shanta",
+    "afaanOromo": "baay'ee/korojoo",
+    "oromoPronunciation": "baay'ee/korojoo",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'luggage' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-084",
+    "category": "Hotel & Travel",
+    "english": "tourist",
+    "amharic": "ቱሪስት",
+    "amharicTranslit": "turist",
+    "afaanOromo": "turistii",
+    "oromoPronunciation": "turistii",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'tourist' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-085",
+    "category": "Hotel & Travel",
+    "english": "guide",
+    "amharic": "መመሪያ",
+    "amharicTranslit": "memeriya",
+    "afaanOromo": "qajeelchaa",
+    "oromoPronunciation": "qajeelchaa",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'guide' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-086",
+    "category": "Hotel & Travel",
+    "english": "map",
+    "amharic": "ካርታ",
+    "amharicTranslit": "karta",
+    "afaanOromo": "kaartaa",
+    "oromoPronunciation": "kaartaa",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'map' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-087",
+    "category": "Hotel & Travel",
+    "english": "ticket",
+    "amharic": "ትኬት",
+    "amharicTranslit": "tiket",
+    "afaanOromo": "tikkeettii",
+    "oromoPronunciation": "tikkeettii",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'ticket' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-088",
+    "category": "Hotel & Travel",
+    "english": "entrance",
+    "amharic": "መግቢያ",
+    "amharicTranslit": "megbia",
+    "afaanOromo": "seensa",
+    "oromoPronunciation": "seensa",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'entrance' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-089",
+    "category": "Hotel & Travel",
+    "english": "exit",
+    "amharic": "መውጫ",
+    "amharicTranslit": "mewcha",
+    "afaanOromo": "ba'uu",
+    "oromoPronunciation": "ba'uu",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'exit' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-090",
+    "category": "Hotel & Travel",
+    "english": "help desk",
+    "amharic": "መረጃ ዴስክ",
+    "amharicTranslit": "mereja desk",
+    "afaanOromo": "deeskii odeeffannoo",
+    "oromoPronunciation": "deeskii odeeffannoo",
+    "context": "hotel check-in, tourism, airport, guest support",
+    "exampleEn": "Use 'help desk' in hotel and travel situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "hotel-travel",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-091",
+    "category": "Emergency & Health",
+    "english": "help",
+    "amharic": "እርዳታ",
+    "amharicTranslit": "irdata",
+    "afaanOromo": "gargaarsa",
+    "oromoPronunciation": "gargaarsa",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'help' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-092",
+    "category": "Emergency & Health",
+    "english": "emergency",
+    "amharic": "አደጋ",
+    "amharicTranslit": "adega",
+    "afaanOromo": "balaa ariifachiisaa",
+    "oromoPronunciation": "balaa ariifachiisaa",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'emergency' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-093",
+    "category": "Emergency & Health",
+    "english": "police",
+    "amharic": "ፖሊስ",
+    "amharicTranslit": "polis",
+    "afaanOromo": "poolisii",
+    "oromoPronunciation": "poolisii",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'police' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-094",
+    "category": "Emergency & Health",
+    "english": "hospital",
+    "amharic": "ሆስፒታል",
+    "amharicTranslit": "hospital",
+    "afaanOromo": "hospitaala",
+    "oromoPronunciation": "hospitaala",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'hospital' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-095",
+    "category": "Emergency & Health",
+    "english": "doctor",
+    "amharic": "ሐኪም",
+    "amharicTranslit": "hakim",
+    "afaanOromo": "doktara",
+    "oromoPronunciation": "doktara",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'doctor' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-096",
+    "category": "Emergency & Health",
+    "english": "medicine",
+    "amharic": "መድሃኒት",
+    "amharicTranslit": "medhanit",
+    "afaanOromo": "qoricha",
+    "oromoPronunciation": "qoricha",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'medicine' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-097",
+    "category": "Emergency & Health",
+    "english": "pain",
+    "amharic": "ህመም",
+    "amharicTranslit": "himem",
+    "afaanOromo": "dhukkubbii",
+    "oromoPronunciation": "dhukkubbii",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'pain' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-098",
+    "category": "Emergency & Health",
+    "english": "sick",
+    "amharic": "ታምሜአለሁ",
+    "amharicTranslit": "tammealehu",
+    "afaanOromo": "dhukkubsadheera",
+    "oromoPronunciation": "dhukkubsadheera",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'sick' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-099",
+    "category": "Emergency & Health",
+    "english": "allergy",
+    "amharic": "አለርጂ",
+    "amharicTranslit": "alerji",
+    "afaanOromo": "alergii",
+    "oromoPronunciation": "alergii",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'allergy' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-100",
+    "category": "Emergency & Health",
+    "english": "fever",
+    "amharic": "ትኩሳት",
+    "amharicTranslit": "tikusat",
+    "afaanOromo": "ho'a qaamaa",
+    "oromoPronunciation": "ho'a qaamaa",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'fever' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-101",
+    "category": "Emergency & Health",
+    "english": "water needed",
+    "amharic": "ውሃ እፈልጋለሁ",
+    "amharicTranslit": "wuha efelegalhu",
+    "afaanOromo": "bishaan na barbaachisa",
+    "oromoPronunciation": "bishaan na barbaachisa",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'water needed' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-102",
+    "category": "Emergency & Health",
+    "english": "lost",
+    "amharic": "ጠፍቻለሁ",
+    "amharicTranslit": "tefchalehu",
+    "afaanOromo": "badeera",
+    "oromoPronunciation": "badeera",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'lost' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-103",
+    "category": "Emergency & Health",
+    "english": "danger",
+    "amharic": "አደጋ",
+    "amharicTranslit": "adega",
+    "afaanOromo": "balaa",
+    "oromoPronunciation": "balaa",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'danger' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-104",
+    "category": "Emergency & Health",
+    "english": "call",
+    "amharic": "ደውል",
+    "amharicTranslit": "dewul",
+    "afaanOromo": "bilbili",
+    "oromoPronunciation": "bilbili",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'call' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-105",
+    "category": "Emergency & Health",
+    "english": "now",
+    "amharic": "አሁን",
+    "amharicTranslit": "ahun",
+    "afaanOromo": "amma",
+    "oromoPronunciation": "amma",
+    "context": "safety, hospital, pharmacy, urgent help",
+    "exampleEn": "Use 'now' in emergency and health situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "emergency-health",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-106",
+    "category": "Time & Calendar",
+    "english": "today",
+    "amharic": "ዛሬ",
+    "amharicTranslit": "zare",
+    "afaanOromo": "har'a",
+    "oromoPronunciation": "har'a",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'today' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-107",
+    "category": "Time & Calendar",
+    "english": "tomorrow",
+    "amharic": "ነገ",
+    "amharicTranslit": "nege",
+    "afaanOromo": "boru",
+    "oromoPronunciation": "boru",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'tomorrow' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-108",
+    "category": "Time & Calendar",
+    "english": "yesterday",
+    "amharic": "ትናንት",
+    "amharicTranslit": "tinant",
+    "afaanOromo": "kaleessa",
+    "oromoPronunciation": "kaleessa",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'yesterday' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-109",
+    "category": "Time & Calendar",
+    "english": "morning",
+    "amharic": "ጠዋት",
+    "amharicTranslit": "tewat",
+    "afaanOromo": "ganama",
+    "oromoPronunciation": "ganama",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'morning' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-110",
+    "category": "Time & Calendar",
+    "english": "afternoon",
+    "amharic": "ከሰዓት በኋላ",
+    "amharicTranslit": "keseat behwala",
+    "afaanOromo": "waaree booda",
+    "oromoPronunciation": "waaree booda",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'afternoon' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-111",
+    "category": "Time & Calendar",
+    "english": "evening",
+    "amharic": "ምሽት",
+    "amharicTranslit": "mishit",
+    "afaanOromo": "galgala",
+    "oromoPronunciation": "galgala",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'evening' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-112",
+    "category": "Time & Calendar",
+    "english": "night",
+    "amharic": "ሌሊት",
+    "amharicTranslit": "lelit",
+    "afaanOromo": "halkan",
+    "oromoPronunciation": "halkan",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'night' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-113",
+    "category": "Time & Calendar",
+    "english": "week",
+    "amharic": "ሳምንት",
+    "amharicTranslit": "samint",
+    "afaanOromo": "torban",
+    "oromoPronunciation": "torban",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'week' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-114",
+    "category": "Time & Calendar",
+    "english": "month",
+    "amharic": "ወር",
+    "amharicTranslit": "wer",
+    "afaanOromo": "ji'a",
+    "oromoPronunciation": "ji'a",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'month' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-115",
+    "category": "Time & Calendar",
+    "english": "year",
+    "amharic": "ዓመት",
+    "amharicTranslit": "amet",
+    "afaanOromo": "waggaa",
+    "oromoPronunciation": "waggaa",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'year' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-116",
+    "category": "Time & Calendar",
+    "english": "hour",
+    "amharic": "ሰዓት",
+    "amharicTranslit": "seat",
+    "afaanOromo": "sa'aatii",
+    "oromoPronunciation": "sa'aatii",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'hour' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-117",
+    "category": "Time & Calendar",
+    "english": "minute",
+    "amharic": "ደቂቃ",
+    "amharicTranslit": "dekika",
+    "afaanOromo": "daqiiqaa",
+    "oromoPronunciation": "daqiiqaa",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'minute' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-118",
+    "category": "Time & Calendar",
+    "english": "early",
+    "amharic": "ቀደም",
+    "amharicTranslit": "kedem",
+    "afaanOromo": "ganamaan",
+    "oromoPronunciation": "ganamaan",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'early' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-119",
+    "category": "Time & Calendar",
+    "english": "late",
+    "amharic": "ዘግይቶ",
+    "amharicTranslit": "zegyito",
+    "afaanOromo": "turtii",
+    "oromoPronunciation": "turtii",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'late' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-120",
+    "category": "Time & Calendar",
+    "english": "again",
+    "amharic": "እንደገና",
+    "amharicTranslit": "endegena",
+    "afaanOromo": "ammas",
+    "oromoPronunciation": "ammas",
+    "context": "planning, appointments, schedules",
+    "exampleEn": "Use 'again' in time and calendar situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "time-calendar",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-121",
+    "category": "Numbers",
+    "english": "one",
+    "amharic": "አንድ",
+    "amharicTranslit": "and",
+    "afaanOromo": "tokko",
+    "oromoPronunciation": "tokko",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'one' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-122",
+    "category": "Numbers",
+    "english": "two",
+    "amharic": "ሁለት",
+    "amharicTranslit": "hulet",
+    "afaanOromo": "lama",
+    "oromoPronunciation": "lama",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'two' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-123",
+    "category": "Numbers",
+    "english": "three",
+    "amharic": "ሶስት",
+    "amharicTranslit": "sost",
+    "afaanOromo": "sadii",
+    "oromoPronunciation": "sadii",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'three' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-124",
+    "category": "Numbers",
+    "english": "four",
+    "amharic": "አራት",
+    "amharicTranslit": "arat",
+    "afaanOromo": "afur",
+    "oromoPronunciation": "afur",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'four' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-125",
+    "category": "Numbers",
+    "english": "five",
+    "amharic": "አምስት",
+    "amharicTranslit": "amist",
+    "afaanOromo": "shan",
+    "oromoPronunciation": "shan",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'five' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-126",
+    "category": "Numbers",
+    "english": "six",
+    "amharic": "ስድስት",
+    "amharicTranslit": "sidist",
+    "afaanOromo": "ja'a",
+    "oromoPronunciation": "ja'a",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'six' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-127",
+    "category": "Numbers",
+    "english": "seven",
+    "amharic": "ሰባት",
+    "amharicTranslit": "sebat",
+    "afaanOromo": "torba",
+    "oromoPronunciation": "torba",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'seven' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-128",
+    "category": "Numbers",
+    "english": "eight",
+    "amharic": "ስምንት",
+    "amharicTranslit": "simint",
+    "afaanOromo": "saddeet",
+    "oromoPronunciation": "saddeet",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'eight' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-129",
+    "category": "Numbers",
+    "english": "nine",
+    "amharic": "ዘጠኝ",
+    "amharicTranslit": "zetegn",
+    "afaanOromo": "sagal",
+    "oromoPronunciation": "sagal",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'nine' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-130",
+    "category": "Numbers",
+    "english": "ten",
+    "amharic": "አስር",
+    "amharicTranslit": "asir",
+    "afaanOromo": "kudhan",
+    "oromoPronunciation": "kudhan",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'ten' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-131",
+    "category": "Numbers",
+    "english": "twenty",
+    "amharic": "ሃያ",
+    "amharicTranslit": "haya",
+    "afaanOromo": "digdama",
+    "oromoPronunciation": "digdama",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'twenty' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-132",
+    "category": "Numbers",
+    "english": "hundred",
+    "amharic": "መቶ",
+    "amharicTranslit": "meto",
+    "afaanOromo": "dhibba",
+    "oromoPronunciation": "dhibba",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'hundred' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-133",
+    "category": "Numbers",
+    "english": "thousand",
+    "amharic": "ሺህ",
+    "amharicTranslit": "shih",
+    "afaanOromo": "kuma",
+    "oromoPronunciation": "kuma",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'thousand' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-134",
+    "category": "Numbers",
+    "english": "first",
+    "amharic": "መጀመሪያ",
+    "amharicTranslit": "mejemeriya",
+    "afaanOromo": "jalqabaa",
+    "oromoPronunciation": "jalqabaa",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'first' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-135",
+    "category": "Numbers",
+    "english": "last",
+    "amharic": "መጨረሻ",
+    "amharicTranslit": "mecheresha",
+    "afaanOromo": "dhumaa",
+    "oromoPronunciation": "dhumaa",
+    "context": "prices, quantity, age, addresses, classroom learning",
+    "exampleEn": "Use 'last' in numbers situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "numbers",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-136",
+    "category": "School & Learning",
+    "english": "school",
+    "amharic": "ትምህርት ቤት",
+    "amharicTranslit": "timhirt bet",
+    "afaanOromo": "mana barumsaa",
+    "oromoPronunciation": "mana barumsaa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'school' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-137",
+    "category": "School & Learning",
+    "english": "book",
+    "amharic": "መጽሐፍ",
+    "amharicTranslit": "metsihaf",
+    "afaanOromo": "kitaaba",
+    "oromoPronunciation": "kitaaba",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'book' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-138",
+    "category": "School & Learning",
+    "english": "pen",
+    "amharic": "ብዕር",
+    "amharicTranslit": "bir",
+    "afaanOromo": "qalama",
+    "oromoPronunciation": "qalama",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'pen' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-139",
+    "category": "School & Learning",
+    "english": "paper",
+    "amharic": "ወረቀት",
+    "amharicTranslit": "wereket",
+    "afaanOromo": "waraqaa",
+    "oromoPronunciation": "waraqaa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'paper' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-140",
+    "category": "School & Learning",
+    "english": "lesson",
+    "amharic": "ትምህርት",
+    "amharicTranslit": "timhirt",
+    "afaanOromo": "barumsa",
+    "oromoPronunciation": "barumsa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'lesson' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-141",
+    "category": "School & Learning",
+    "english": "question",
+    "amharic": "ጥያቄ",
+    "amharicTranslit": "tiyake",
+    "afaanOromo": "gaaffii",
+    "oromoPronunciation": "gaaffii",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'question' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-142",
+    "category": "School & Learning",
+    "english": "answer",
+    "amharic": "መልስ",
+    "amharicTranslit": "mels",
+    "afaanOromo": "deebii",
+    "oromoPronunciation": "deebii",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'answer' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-143",
+    "category": "School & Learning",
+    "english": "exam",
+    "amharic": "ፈተና",
+    "amharicTranslit": "fetena",
+    "afaanOromo": "qormaata",
+    "oromoPronunciation": "qormaata",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'exam' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-144",
+    "category": "School & Learning",
+    "english": "grade",
+    "amharic": "ውጤት",
+    "amharicTranslit": "wutet",
+    "afaanOromo": "bu'aa",
+    "oromoPronunciation": "bu'aa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'grade' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-145",
+    "category": "School & Learning",
+    "english": "class",
+    "amharic": "ክፍል",
+    "amharicTranslit": "kifil",
+    "afaanOromo": "kutaa",
+    "oromoPronunciation": "kutaa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'class' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-146",
+    "category": "School & Learning",
+    "english": "homework",
+    "amharic": "የቤት ስራ",
+    "amharicTranslit": "yebet sira",
+    "afaanOromo": "hojii manaa",
+    "oromoPronunciation": "hojii manaa",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'homework' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-147",
+    "category": "School & Learning",
+    "english": "read",
+    "amharic": "ማንበብ",
+    "amharicTranslit": "manbeb",
+    "afaanOromo": "dubbisuu",
+    "oromoPronunciation": "dubbisuu",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'read' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-148",
+    "category": "School & Learning",
+    "english": "write",
+    "amharic": "መጻፍ",
+    "amharicTranslit": "metsaf",
+    "afaanOromo": "barreessuu",
+    "oromoPronunciation": "barreessuu",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'write' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-149",
+    "category": "School & Learning",
+    "english": "learn",
+    "amharic": "መማር",
+    "amharicTranslit": "memar",
+    "afaanOromo": "barachuu",
+    "oromoPronunciation": "barachuu",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'learn' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-150",
+    "category": "School & Learning",
+    "english": "understand",
+    "amharic": "መረዳት",
+    "amharicTranslit": "meredat",
+    "afaanOromo": "hubachuu",
+    "oromoPronunciation": "hubachuu",
+    "context": "students, teachers, learning tasks",
+    "exampleEn": "Use 'understand' in school and learning situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "school-learning",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-151",
+    "category": "Home & Objects",
+    "english": "house",
+    "amharic": "ቤት",
+    "amharicTranslit": "bet",
+    "afaanOromo": "mana",
+    "oromoPronunciation": "mana",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'house' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-152",
+    "category": "Home & Objects",
+    "english": "door",
+    "amharic": "በር",
+    "amharicTranslit": "ber",
+    "afaanOromo": "balbala",
+    "oromoPronunciation": "balbala",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'door' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-153",
+    "category": "Home & Objects",
+    "english": "window",
+    "amharic": "መስኮት",
+    "amharicTranslit": "meskot",
+    "afaanOromo": "foddaa",
+    "oromoPronunciation": "foddaa",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'window' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-154",
+    "category": "Home & Objects",
+    "english": "chair",
+    "amharic": "ወንበር",
+    "amharicTranslit": "wenber",
+    "afaanOromo": "barcuma",
+    "oromoPronunciation": "barcuma",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'chair' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-155",
+    "category": "Home & Objects",
+    "english": "table",
+    "amharic": "ጠረጴዛ",
+    "amharicTranslit": "tereppeza",
+    "afaanOromo": "minjaala",
+    "oromoPronunciation": "minjaala",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'table' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-156",
+    "category": "Home & Objects",
+    "english": "phone",
+    "amharic": "ስልክ",
+    "amharicTranslit": "silk",
+    "afaanOromo": "bilbila",
+    "oromoPronunciation": "bilbila",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'phone' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-157",
+    "category": "Home & Objects",
+    "english": "bag",
+    "amharic": "ቦርሳ",
+    "amharicTranslit": "borsa",
+    "afaanOromo": "boorsaa",
+    "oromoPronunciation": "boorsaa",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'bag' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-158",
+    "category": "Home & Objects",
+    "english": "clothes",
+    "amharic": "ልብስ",
+    "amharicTranslit": "libs",
+    "afaanOromo": "uffata",
+    "oromoPronunciation": "uffata",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'clothes' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-159",
+    "category": "Home & Objects",
+    "english": "shoes",
+    "amharic": "ጫማ",
+    "amharicTranslit": "chama",
+    "afaanOromo": "kophee",
+    "oromoPronunciation": "kophee",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'shoes' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-160",
+    "category": "Home & Objects",
+    "english": "light",
+    "amharic": "መብራት",
+    "amharicTranslit": "mebrat",
+    "afaanOromo": "ibsaa",
+    "oromoPronunciation": "ibsaa",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'light' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-161",
+    "category": "Home & Objects",
+    "english": "water bottle",
+    "amharic": "የውሃ ጠርሙስ",
+    "amharicTranslit": "yewuha termus",
+    "afaanOromo": "qodaa bishaanii",
+    "oromoPronunciation": "qodaa bishaanii",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'water bottle' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-162",
+    "category": "Home & Objects",
+    "english": "soap",
+    "amharic": "ሳሙና",
+    "amharicTranslit": "samuna",
+    "afaanOromo": "saamunaa",
+    "oromoPronunciation": "saamunaa",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'soap' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-163",
+    "category": "Home & Objects",
+    "english": "blanket",
+    "amharic": "ብርድ ልብስ",
+    "amharicTranslit": "bird libs",
+    "afaanOromo": "uffata siree",
+    "oromoPronunciation": "uffata siree",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'blanket' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-164",
+    "category": "Home & Objects",
+    "english": "kitchen",
+    "amharic": "ወጥ ቤት",
+    "amharicTranslit": "wet bet",
+    "afaanOromo": "mana nyaataa",
+    "oromoPronunciation": "mana nyaataa",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'kitchen' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-165",
+    "category": "Home & Objects",
+    "english": "toilet",
+    "amharic": "መጸዳጃ",
+    "amharicTranslit": "metsedaja",
+    "afaanOromo": "mana fincaanii",
+    "oromoPronunciation": "mana fincaanii",
+    "context": "objects around the house and daily life",
+    "exampleEn": "Use 'toilet' in home and objects situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "home-objects",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-166",
+    "category": "Places",
+    "english": "city",
+    "amharic": "ከተማ",
+    "amharicTranslit": "ketema",
+    "afaanOromo": "magaalaa",
+    "oromoPronunciation": "magaalaa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'city' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-167",
+    "category": "Places",
+    "english": "village",
+    "amharic": "መንደር",
+    "amharicTranslit": "mender",
+    "afaanOromo": "ganda",
+    "oromoPronunciation": "ganda",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'village' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-168",
+    "category": "Places",
+    "english": "church",
+    "amharic": "ቤተ ክርስቲያን",
+    "amharicTranslit": "bete kiristiyan",
+    "afaanOromo": "mana kiristaanaa",
+    "oromoPronunciation": "mana kiristaanaa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'church' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-169",
+    "category": "Places",
+    "english": "mosque",
+    "amharic": "መስጊድ",
+    "amharicTranslit": "mesgid",
+    "afaanOromo": "masjiida",
+    "oromoPronunciation": "masjiida",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'mosque' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-170",
+    "category": "Places",
+    "english": "bank",
+    "amharic": "ባንክ",
+    "amharicTranslit": "bank",
+    "afaanOromo": "baankii",
+    "oromoPronunciation": "baankii",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'bank' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-171",
+    "category": "Places",
+    "english": "restaurant",
+    "amharic": "ምግብ ቤት",
+    "amharicTranslit": "migib bet",
+    "afaanOromo": "mana nyaataa",
+    "oromoPronunciation": "mana nyaataa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'restaurant' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-172",
+    "category": "Places",
+    "english": "pharmacy",
+    "amharic": "መድሃኒት ቤት",
+    "amharicTranslit": "medhanit bet",
+    "afaanOromo": "mana qorichaa",
+    "oromoPronunciation": "mana qorichaa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'pharmacy' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-173",
+    "category": "Places",
+    "english": "office",
+    "amharic": "ቢሮ",
+    "amharicTranslit": "biro",
+    "afaanOromo": "waajjira",
+    "oromoPronunciation": "waajjira",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'office' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-174",
+    "category": "Places",
+    "english": "school",
+    "amharic": "ትምህርት ቤት",
+    "amharicTranslit": "timhirt bet",
+    "afaanOromo": "mana barumsaa",
+    "oromoPronunciation": "mana barumsaa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'school' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-175",
+    "category": "Places",
+    "english": "park",
+    "amharic": "ፓርክ",
+    "amharicTranslit": "park",
+    "afaanOromo": "paarkii",
+    "oromoPronunciation": "paarkii",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'park' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-176",
+    "category": "Places",
+    "english": "museum",
+    "amharic": "ሙዚየም",
+    "amharicTranslit": "muziyam",
+    "afaanOromo": "muziyeemii",
+    "oromoPronunciation": "muziyeemii",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'museum' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-177",
+    "category": "Places",
+    "english": "toilet",
+    "amharic": "መጸዳጃ",
+    "amharicTranslit": "metsedaja",
+    "afaanOromo": "mana fincaanii",
+    "oromoPronunciation": "mana fincaanii",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'toilet' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-178",
+    "category": "Places",
+    "english": "entrance",
+    "amharic": "መግቢያ",
+    "amharicTranslit": "megbia",
+    "afaanOromo": "seensa",
+    "oromoPronunciation": "seensa",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'entrance' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-179",
+    "category": "Places",
+    "english": "exit",
+    "amharic": "መውጫ",
+    "amharicTranslit": "mewcha",
+    "afaanOromo": "ba'uu",
+    "oromoPronunciation": "ba'uu",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'exit' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-180",
+    "category": "Places",
+    "english": "address",
+    "amharic": "አድራሻ",
+    "amharicTranslit": "adrasha",
+    "afaanOromo": "teessoo",
+    "oromoPronunciation": "teessoo",
+    "context": "finding locations and understanding signs",
+    "exampleEn": "Use 'address' in places situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "places",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-181",
+    "category": "Technology",
+    "english": "app",
+    "amharic": "መተግበሪያ",
+    "amharicTranslit": "metegberiya",
+    "afaanOromo": "appii",
+    "oromoPronunciation": "appii",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'app' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-182",
+    "category": "Technology",
+    "english": "internet",
+    "amharic": "ኢንተርኔት",
+    "amharicTranslit": "internet",
+    "afaanOromo": "intarneetii",
+    "oromoPronunciation": "intarneetii",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'internet' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-183",
+    "category": "Technology",
+    "english": "password",
+    "amharic": "የይለፍ ቃል",
+    "amharicTranslit": "yeyilef kal",
+    "afaanOromo": "jecha icciitii",
+    "oromoPronunciation": "jecha icciitii",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'password' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-184",
+    "category": "Technology",
+    "english": "login",
+    "amharic": "መግባት",
+    "amharicTranslit": "megibat",
+    "afaanOromo": "seenuu",
+    "oromoPronunciation": "seenuu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'login' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-185",
+    "category": "Technology",
+    "english": "download",
+    "amharic": "ማውረድ",
+    "amharicTranslit": "mawred",
+    "afaanOromo": "buufachuu",
+    "oromoPronunciation": "buufachuu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'download' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-186",
+    "category": "Technology",
+    "english": "upload",
+    "amharic": "መጫን",
+    "amharicTranslit": "mechan",
+    "afaanOromo": "olkaa'uu",
+    "oromoPronunciation": "olkaa'uu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'upload' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-187",
+    "category": "Technology",
+    "english": "camera",
+    "amharic": "ካሜራ",
+    "amharicTranslit": "kamera",
+    "afaanOromo": "kaameraa",
+    "oromoPronunciation": "kaameraa",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'camera' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-188",
+    "category": "Technology",
+    "english": "image",
+    "amharic": "ምስል",
+    "amharicTranslit": "misil",
+    "afaanOromo": "suuraa",
+    "oromoPronunciation": "suuraa",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'image' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-189",
+    "category": "Technology",
+    "english": "video",
+    "amharic": "ቪዲዮ",
+    "amharicTranslit": "vidiyo",
+    "afaanOromo": "viidiyoo",
+    "oromoPronunciation": "viidiyoo",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'video' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-190",
+    "category": "Technology",
+    "english": "audio",
+    "amharic": "ድምፅ",
+    "amharicTranslit": "dimts",
+    "afaanOromo": "sagalee",
+    "oromoPronunciation": "sagalee",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'audio' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-191",
+    "category": "Technology",
+    "english": "text",
+    "amharic": "ጽሑፍ",
+    "amharicTranslit": "tsihuf",
+    "afaanOromo": "barreeffama",
+    "oromoPronunciation": "barreeffama",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'text' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-192",
+    "category": "Technology",
+    "english": "translate",
+    "amharic": "መተርጎም",
+    "amharicTranslit": "metergom",
+    "afaanOromo": "hiikuu",
+    "oromoPronunciation": "hiikuu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'translate' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-193",
+    "category": "Technology",
+    "english": "scan",
+    "amharic": "መቃኘት",
+    "amharicTranslit": "mekanyet",
+    "afaanOromo": "sakaanii",
+    "oromoPronunciation": "sakaanii",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'scan' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-194",
+    "category": "Technology",
+    "english": "save",
+    "amharic": "ማስቀመጥ",
+    "amharicTranslit": "maskemet",
+    "afaanOromo": "olkaa'uu",
+    "oromoPronunciation": "olkaa'uu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'save' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-195",
+    "category": "Technology",
+    "english": "share",
+    "amharic": "ማጋራት",
+    "amharicTranslit": "magarat",
+    "afaanOromo": "qooduu",
+    "oromoPronunciation": "qooduu",
+    "context": "app UI, digital tools, scanning, translation",
+    "exampleEn": "Use 'share' in technology situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "technology",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-196",
+    "category": "Culture & Religion",
+    "english": "holiday",
+    "amharic": "በዓል",
+    "amharicTranslit": "beal",
+    "afaanOromo": "ayyaana",
+    "oromoPronunciation": "ayyaana",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'holiday' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-197",
+    "category": "Culture & Religion",
+    "english": "culture",
+    "amharic": "ባህል",
+    "amharicTranslit": "bahil",
+    "afaanOromo": "aadaa",
+    "oromoPronunciation": "aadaa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'culture' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-198",
+    "category": "Culture & Religion",
+    "english": "language",
+    "amharic": "ቋንቋ",
+    "amharicTranslit": "kwankwa",
+    "afaanOromo": "afaan",
+    "oromoPronunciation": "afaan",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'language' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-199",
+    "category": "Culture & Religion",
+    "english": "music",
+    "amharic": "ሙዚቃ",
+    "amharicTranslit": "muzika",
+    "afaanOromo": "muuziqaa",
+    "oromoPronunciation": "muuziqaa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'music' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-200",
+    "category": "Culture & Religion",
+    "english": "dance",
+    "amharic": "ዳንስ",
+    "amharicTranslit": "dans",
+    "afaanOromo": "shubbisa",
+    "oromoPronunciation": "shubbisa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'dance' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-201",
+    "category": "Culture & Religion",
+    "english": "coffee ceremony",
+    "amharic": "የቡና ሥነ ስርዓት",
+    "amharicTranslit": "yebuna sine sirat",
+    "afaanOromo": "sirna buna",
+    "oromoPronunciation": "sirna buna",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'coffee ceremony' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-202",
+    "category": "Culture & Religion",
+    "english": "blessing",
+    "amharic": "ቡራኬ",
+    "amharicTranslit": "burake",
+    "afaanOromo": "eebba",
+    "oromoPronunciation": "eebba",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'blessing' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-203",
+    "category": "Culture & Religion",
+    "english": "prayer",
+    "amharic": "ጸሎት",
+    "amharicTranslit": "tselot",
+    "afaanOromo": "kadhannaa",
+    "oromoPronunciation": "kadhannaa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'prayer' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-204",
+    "category": "Culture & Religion",
+    "english": "church",
+    "amharic": "ቤተ ክርስቲያን",
+    "amharicTranslit": "bete kiristiyan",
+    "afaanOromo": "mana kiristaanaa",
+    "oromoPronunciation": "mana kiristaanaa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'church' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-205",
+    "category": "Culture & Religion",
+    "english": "mosque",
+    "amharic": "መስጊድ",
+    "amharicTranslit": "mesgid",
+    "afaanOromo": "masjiida",
+    "oromoPronunciation": "masjiida",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'mosque' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-206",
+    "category": "Culture & Religion",
+    "english": "fasting",
+    "amharic": "ጾም",
+    "amharicTranslit": "tsom",
+    "afaanOromo": "sooma",
+    "oromoPronunciation": "sooma",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'fasting' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-207",
+    "category": "Culture & Religion",
+    "english": "festival",
+    "amharic": "ፌስቲቫል",
+    "amharicTranslit": "festival",
+    "afaanOromo": "ayyaana",
+    "oromoPronunciation": "ayyaana",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'festival' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-208",
+    "category": "Culture & Religion",
+    "english": "traditional",
+    "amharic": "ባህላዊ",
+    "amharicTranslit": "bahlawi",
+    "afaanOromo": "aadaa",
+    "oromoPronunciation": "aadaa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'traditional' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-209",
+    "category": "Culture & Religion",
+    "english": "respect",
+    "amharic": "ክብር",
+    "amharicTranslit": "kibir",
+    "afaanOromo": "kabaja",
+    "oromoPronunciation": "kabaja",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'respect' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-210",
+    "category": "Culture & Religion",
+    "english": "elder",
+    "amharic": "አዛውንት",
+    "amharicTranslit": "azawint",
+    "afaanOromo": "jaarsa",
+    "oromoPronunciation": "jaarsa",
+    "context": "culture, holidays, respect, tourism explanation",
+    "exampleEn": "Use 'elder' in culture and religion situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "culture-religion",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-211",
+    "category": "Nature & Animals",
+    "english": "sun",
+    "amharic": "ፀሐይ",
+    "amharicTranslit": "tsehay",
+    "afaanOromo": "aduu",
+    "oromoPronunciation": "aduu",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'sun' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-212",
+    "category": "Nature & Animals",
+    "english": "rain",
+    "amharic": "ዝናብ",
+    "amharicTranslit": "zinab",
+    "afaanOromo": "rooba",
+    "oromoPronunciation": "rooba",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'rain' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-213",
+    "category": "Nature & Animals",
+    "english": "wind",
+    "amharic": "ነፋስ",
+    "amharicTranslit": "nefas",
+    "afaanOromo": "qilleensa",
+    "oromoPronunciation": "qilleensa",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'wind' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-214",
+    "category": "Nature & Animals",
+    "english": "mountain",
+    "amharic": "ተራራ",
+    "amharicTranslit": "terara",
+    "afaanOromo": "gaara",
+    "oromoPronunciation": "gaara",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'mountain' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-215",
+    "category": "Nature & Animals",
+    "english": "river",
+    "amharic": "ወንዝ",
+    "amharicTranslit": "wenz",
+    "afaanOromo": "lagaa",
+    "oromoPronunciation": "lagaa",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'river' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-216",
+    "category": "Nature & Animals",
+    "english": "lake",
+    "amharic": "ሐይቅ",
+    "amharicTranslit": "hayk",
+    "afaanOromo": "haroo",
+    "oromoPronunciation": "haroo",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'lake' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-217",
+    "category": "Nature & Animals",
+    "english": "tree",
+    "amharic": "ዛፍ",
+    "amharicTranslit": "zaf",
+    "afaanOromo": "muka",
+    "oromoPronunciation": "muka",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'tree' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-218",
+    "category": "Nature & Animals",
+    "english": "flower",
+    "amharic": "አበባ",
+    "amharicTranslit": "abeba",
+    "afaanOromo": "daraaraa",
+    "oromoPronunciation": "daraaraa",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'flower' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-219",
+    "category": "Nature & Animals",
+    "english": "animal",
+    "amharic": "እንስሳ",
+    "amharicTranslit": "insisa",
+    "afaanOromo": "bineensa",
+    "oromoPronunciation": "bineensa",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'animal' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-220",
+    "category": "Nature & Animals",
+    "english": "dog",
+    "amharic": "ውሻ",
+    "amharicTranslit": "wusha",
+    "afaanOromo": "saree",
+    "oromoPronunciation": "saree",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'dog' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-221",
+    "category": "Nature & Animals",
+    "english": "cat",
+    "amharic": "ድመት",
+    "amharicTranslit": "dimet",
+    "afaanOromo": "adurree",
+    "oromoPronunciation": "adurree",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'cat' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-222",
+    "category": "Nature & Animals",
+    "english": "cow",
+    "amharic": "ላም",
+    "amharicTranslit": "lam",
+    "afaanOromo": "sa'a",
+    "oromoPronunciation": "sa'a",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'cow' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-223",
+    "category": "Nature & Animals",
+    "english": "goat",
+    "amharic": "ፍየል",
+    "amharicTranslit": "fiyel",
+    "afaanOromo": "re'ee",
+    "oromoPronunciation": "re'ee",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'goat' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-224",
+    "category": "Nature & Animals",
+    "english": "sheep",
+    "amharic": "በግ",
+    "amharicTranslit": "beg",
+    "afaanOromo": "hoolaa",
+    "oromoPronunciation": "hoolaa",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'sheep' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-225",
+    "category": "Nature & Animals",
+    "english": "horse",
+    "amharic": "ፈረስ",
+    "amharicTranslit": "feres",
+    "afaanOromo": "farda",
+    "oromoPronunciation": "farda",
+    "context": "children learning, rural/agriculture/tourism vocabulary",
+    "exampleEn": "Use 'horse' in nature and animals situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "nature-animals",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-226",
+    "category": "Colors & Descriptions",
+    "english": "white",
+    "amharic": "ነጭ",
+    "amharicTranslit": "nech",
+    "afaanOromo": "adii",
+    "oromoPronunciation": "adii",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'white' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-227",
+    "category": "Colors & Descriptions",
+    "english": "black",
+    "amharic": "ጥቁር",
+    "amharicTranslit": "tikur",
+    "afaanOromo": "gurraacha",
+    "oromoPronunciation": "gurraacha",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'black' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-228",
+    "category": "Colors & Descriptions",
+    "english": "red",
+    "amharic": "ቀይ",
+    "amharicTranslit": "key",
+    "afaanOromo": "diimaa",
+    "oromoPronunciation": "diimaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'red' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-229",
+    "category": "Colors & Descriptions",
+    "english": "green",
+    "amharic": "አረንጓዴ",
+    "amharicTranslit": "arenguade",
+    "afaanOromo": "magariisa",
+    "oromoPronunciation": "magariisa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'green' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-230",
+    "category": "Colors & Descriptions",
+    "english": "blue",
+    "amharic": "ሰማያዊ",
+    "amharicTranslit": "semayawi",
+    "afaanOromo": "cuquliisa",
+    "oromoPronunciation": "cuquliisa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'blue' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-231",
+    "category": "Colors & Descriptions",
+    "english": "yellow",
+    "amharic": "ቢጫ",
+    "amharicTranslit": "bicha",
+    "afaanOromo": "keelloo",
+    "oromoPronunciation": "keelloo",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'yellow' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-232",
+    "category": "Colors & Descriptions",
+    "english": "big",
+    "amharic": "ትልቅ",
+    "amharicTranslit": "tilik",
+    "afaanOromo": "guddaa",
+    "oromoPronunciation": "guddaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'big' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-233",
+    "category": "Colors & Descriptions",
+    "english": "small",
+    "amharic": "ትንሽ",
+    "amharicTranslit": "tinish",
+    "afaanOromo": "xiqqaa",
+    "oromoPronunciation": "xiqqaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'small' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-234",
+    "category": "Colors & Descriptions",
+    "english": "new",
+    "amharic": "አዲስ",
+    "amharicTranslit": "adis",
+    "afaanOromo": "haaraa",
+    "oromoPronunciation": "haaraa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'new' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-235",
+    "category": "Colors & Descriptions",
+    "english": "old",
+    "amharic": "አሮጌ",
+    "amharicTranslit": "aroge",
+    "afaanOromo": "moofaa",
+    "oromoPronunciation": "moofaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'old' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-236",
+    "category": "Colors & Descriptions",
+    "english": "good",
+    "amharic": "ጥሩ",
+    "amharicTranslit": "tiru",
+    "afaanOromo": "gaarii",
+    "oromoPronunciation": "gaarii",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'good' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-237",
+    "category": "Colors & Descriptions",
+    "english": "bad",
+    "amharic": "መጥፎ",
+    "amharicTranslit": "metfo",
+    "afaanOromo": "hamaa",
+    "oromoPronunciation": "hamaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'bad' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-238",
+    "category": "Colors & Descriptions",
+    "english": "beautiful",
+    "amharic": "ቆንጆ",
+    "amharicTranslit": "konjo",
+    "afaanOromo": "bareedaa",
+    "oromoPronunciation": "bareedaa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'beautiful' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-239",
+    "category": "Colors & Descriptions",
+    "english": "clean",
+    "amharic": "ንጹህ",
+    "amharicTranslit": "nitsuh",
+    "afaanOromo": "qulqulluu",
+    "oromoPronunciation": "qulqulluu",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'clean' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-240",
+    "category": "Colors & Descriptions",
+    "english": "hot",
+    "amharic": "ሙቅ",
+    "amharicTranslit": "muk",
+    "afaanOromo": "ho'aa",
+    "oromoPronunciation": "ho'aa",
+    "context": "describing objects, clothes, places, people",
+    "exampleEn": "Use 'hot' in colors and descriptions situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "colors-descriptions",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-241",
+    "category": "Common Verbs",
+    "english": "eat",
+    "amharic": "መብላት",
+    "amharicTranslit": "meblat",
+    "afaanOromo": "nyaachuu",
+    "oromoPronunciation": "nyaachuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'eat' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-242",
+    "category": "Common Verbs",
+    "english": "drink",
+    "amharic": "መጠጣት",
+    "amharicTranslit": "metetat",
+    "afaanOromo": "dhuguu",
+    "oromoPronunciation": "dhuguu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'drink' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-243",
+    "category": "Common Verbs",
+    "english": "sleep",
+    "amharic": "መተኛት",
+    "amharicTranslit": "metenyat",
+    "afaanOromo": "rafuu",
+    "oromoPronunciation": "rafuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'sleep' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-244",
+    "category": "Common Verbs",
+    "english": "walk",
+    "amharic": "መሄድ",
+    "amharicTranslit": "mehed",
+    "afaanOromo": "deemuu",
+    "oromoPronunciation": "deemuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'walk' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-245",
+    "category": "Common Verbs",
+    "english": "run",
+    "amharic": "መሮጥ",
+    "amharicTranslit": "merot",
+    "afaanOromo": "fiiguu",
+    "oromoPronunciation": "fiiguu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'run' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-246",
+    "category": "Common Verbs",
+    "english": "sit",
+    "amharic": "መቀመጥ",
+    "amharicTranslit": "mekemet",
+    "afaanOromo": "taa'uu",
+    "oromoPronunciation": "taa'uu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'sit' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-247",
+    "category": "Common Verbs",
+    "english": "stand",
+    "amharic": "መቆም",
+    "amharicTranslit": "mekom",
+    "afaanOromo": "dhaabbachuu",
+    "oromoPronunciation": "dhaabbachuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'stand' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-248",
+    "category": "Common Verbs",
+    "english": "open",
+    "amharic": "መክፈት",
+    "amharicTranslit": "mekfet",
+    "afaanOromo": "banuu",
+    "oromoPronunciation": "banuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'open' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-249",
+    "category": "Common Verbs",
+    "english": "close",
+    "amharic": "መዝጋት",
+    "amharicTranslit": "mezgat",
+    "afaanOromo": "cufuu",
+    "oromoPronunciation": "cufuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'close' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-250",
+    "category": "Common Verbs",
+    "english": "give",
+    "amharic": "መስጠት",
+    "amharicTranslit": "mestet",
+    "afaanOromo": "kennuu",
+    "oromoPronunciation": "kennuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'give' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-251",
+    "category": "Common Verbs",
+    "english": "take",
+    "amharic": "መውሰድ",
+    "amharicTranslit": "mewsed",
+    "afaanOromo": "fudhachuu",
+    "oromoPronunciation": "fudhachuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'take' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-252",
+    "category": "Common Verbs",
+    "english": "see",
+    "amharic": "ማየት",
+    "amharicTranslit": "mayet",
+    "afaanOromo": "arguu",
+    "oromoPronunciation": "arguu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'see' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-253",
+    "category": "Common Verbs",
+    "english": "hear",
+    "amharic": "መስማት",
+    "amharicTranslit": "mesmat",
+    "afaanOromo": "dhaga'uu",
+    "oromoPronunciation": "dhaga'uu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'hear' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-254",
+    "category": "Common Verbs",
+    "english": "speak",
+    "amharic": "መናገር",
+    "amharicTranslit": "menager",
+    "afaanOromo": "dubbachuu",
+    "oromoPronunciation": "dubbachuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'speak' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-255",
+    "category": "Common Verbs",
+    "english": "ask",
+    "amharic": "መጠየቅ",
+    "amharicTranslit": "meteyek",
+    "afaanOromo": "gaafachuu",
+    "oromoPronunciation": "gaafachuu",
+    "context": "building basic sentences and understanding actions",
+    "exampleEn": "Use 'ask' in common verbs situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "common-verbs",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-256",
+    "category": "Useful Phrases",
+    "english": "I need help",
+    "amharic": "እርዳታ እፈልጋለሁ",
+    "amharicTranslit": "irdata efelegalhu",
+    "afaanOromo": "gargaarsa na barbaachisa",
+    "oromoPronunciation": "gargaarsa na barbaachisa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I need help' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-257",
+    "category": "Useful Phrases",
+    "english": "I do not understand",
+    "amharic": "አልገባኝም",
+    "amharicTranslit": "algebagnim",
+    "afaanOromo": "naaf hin galle",
+    "oromoPronunciation": "naaf hin galle",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I do not understand' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-258",
+    "category": "Useful Phrases",
+    "english": "Please repeat",
+    "amharic": "እባክዎ ይድገሙ",
+    "amharicTranslit": "ebakwo yidgemu",
+    "afaanOromo": "maaloo irra deebi'aa",
+    "oromoPronunciation": "maaloo irra deebi'aa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Please repeat' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-259",
+    "category": "Useful Phrases",
+    "english": "Speak slowly",
+    "amharic": "በቀስታ ይናገሩ",
+    "amharicTranslit": "bekesta yinageru",
+    "afaanOromo": "suuta dubbadhaa",
+    "oromoPronunciation": "suuta dubbadhaa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Speak slowly' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-260",
+    "category": "Useful Phrases",
+    "english": "Where is this place",
+    "amharic": "ይህ ቦታ የት ነው",
+    "amharicTranslit": "yih bota yet new",
+    "afaanOromo": "iddoon kun eessa",
+    "oromoPronunciation": "iddoon kun eessa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Where is this place' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-261",
+    "category": "Useful Phrases",
+    "english": "I want this",
+    "amharic": "ይህን እፈልጋለሁ",
+    "amharicTranslit": "yihin efelegalhu",
+    "afaanOromo": "kana nan barbaada",
+    "oromoPronunciation": "kana nan barbaada",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I want this' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-262",
+    "category": "Useful Phrases",
+    "english": "I don't want this",
+    "amharic": "ይህን አልፈልግም",
+    "amharicTranslit": "yihin alfeligim",
+    "afaanOromo": "kana hin barbaadu",
+    "oromoPronunciation": "kana hin barbaadu",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I don't want this' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-263",
+    "category": "Useful Phrases",
+    "english": "Can you help me",
+    "amharic": "ሊረዱኝ ይችላሉ",
+    "amharicTranslit": "liredun yichilalu",
+    "afaanOromo": "na gargaaruu dandeessu",
+    "oromoPronunciation": "na gargaaruu dandeessu",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Can you help me' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-264",
+    "category": "Useful Phrases",
+    "english": "I am lost",
+    "amharic": "ጠፍቻለሁ",
+    "amharicTranslit": "tefchalehu",
+    "afaanOromo": "badeera",
+    "oromoPronunciation": "badeera",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I am lost' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-265",
+    "category": "Useful Phrases",
+    "english": "Call the police",
+    "amharic": "ፖሊስ ይጥሩ",
+    "amharicTranslit": "polis yitiru",
+    "afaanOromo": "poolisii waamaa",
+    "oromoPronunciation": "poolisii waamaa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Call the police' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-266",
+    "category": "Useful Phrases",
+    "english": "I am learning",
+    "amharic": "እየተማርኩ ነው",
+    "amharicTranslit": "eyetemareku new",
+    "afaanOromo": "barachaan jira",
+    "oromoPronunciation": "barachaan jira",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I am learning' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-267",
+    "category": "Useful Phrases",
+    "english": "What does this mean",
+    "amharic": "ይህ ምን ማለት ነው",
+    "amharicTranslit": "yih min malet new",
+    "afaanOromo": "kun maal jechuudha",
+    "oromoPronunciation": "kun maal jechuudha",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'What does this mean' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-268",
+    "category": "Useful Phrases",
+    "english": "Can I take a photo",
+    "amharic": "ፎቶ ማንሳት እችላለሁ",
+    "amharicTranslit": "foto mansat echilalehu",
+    "afaanOromo": "suuraa kaasuu nan danda'aa",
+    "oromoPronunciation": "suuraa kaasuu nan danda'aa",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Can I take a photo' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-269",
+    "category": "Useful Phrases",
+    "english": "I am vegetarian",
+    "amharic": "ስጋ አልበላም",
+    "amharicTranslit": "siga albelam",
+    "afaanOromo": "foon hin nyaadhu",
+    "oromoPronunciation": "foon hin nyaadhu",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'I am vegetarian' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-270",
+    "category": "Useful Phrases",
+    "english": "Thank you very much",
+    "amharic": "በጣም አመሰግናለሁ",
+    "amharicTranslit": "betam ameseginalehu",
+    "afaanOromo": "baay'ee galatoomi",
+    "oromoPronunciation": "baay'ee galatoomi",
+    "context": "real-life communication and tourist survival phrases",
+    "exampleEn": "Use 'Thank you very much' in useful phrases situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "useful-phrases",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-271",
+    "category": "App UI Labels",
+    "english": "translate",
+    "amharic": "ተርጉም",
+    "amharicTranslit": "tergum",
+    "afaanOromo": "hiiki",
+    "oromoPronunciation": "hiiki",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'translate' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-272",
+    "category": "App UI Labels",
+    "english": "scan image",
+    "amharic": "ምስል ቃኝ",
+    "amharicTranslit": "misil kagn",
+    "afaanOromo": "suuraa sakaani",
+    "oromoPronunciation": "suuraa sakaani",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'scan image' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-273",
+    "category": "App UI Labels",
+    "english": "dictionary",
+    "amharic": "መዝገበ ቃላት",
+    "amharicTranslit": "mezgebe kalat",
+    "afaanOromo": "galmee jechootaa",
+    "oromoPronunciation": "galmee jechootaa",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'dictionary' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-274",
+    "category": "App UI Labels",
+    "english": "my words",
+    "amharic": "የእኔ ቃላት",
+    "amharicTranslit": "ye'ene kalat",
+    "afaanOromo": "jechoota koo",
+    "oromoPronunciation": "jechoota koo",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'my words' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-275",
+    "category": "App UI Labels",
+    "english": "learn",
+    "amharic": "ተማር",
+    "amharicTranslit": "temar",
+    "afaanOromo": "baradhu",
+    "oromoPronunciation": "baradhu",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'learn' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-276",
+    "category": "App UI Labels",
+    "english": "practice",
+    "amharic": "ተለማመድ",
+    "amharicTranslit": "telemamed",
+    "afaanOromo": "shaakali",
+    "oromoPronunciation": "shaakali",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'practice' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-277",
+    "category": "App UI Labels",
+    "english": "save word",
+    "amharic": "ቃል አስቀምጥ",
+    "amharicTranslit": "kal askemet",
+    "afaanOromo": "jecha olkaa'i",
+    "oromoPronunciation": "jecha olkaa'i",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'save word' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-278",
+    "category": "App UI Labels",
+    "english": "remove",
+    "amharic": "አስወግድ",
+    "amharicTranslit": "aswegid",
+    "afaanOromo": "haqi",
+    "oromoPronunciation": "haqi",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'remove' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-279",
+    "category": "App UI Labels",
+    "english": "search",
+    "amharic": "ፈልግ",
+    "amharicTranslit": "felig",
+    "afaanOromo": "barbaadi",
+    "oromoPronunciation": "barbaadi",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'search' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-280",
+    "category": "App UI Labels",
+    "english": "upload",
+    "amharic": "ጫን",
+    "amharicTranslit": "chan",
+    "afaanOromo": "olkaa'i",
+    "oromoPronunciation": "olkaa'i",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'upload' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-281",
+    "category": "App UI Labels",
+    "english": "camera",
+    "amharic": "ካሜራ",
+    "amharicTranslit": "kamera",
+    "afaanOromo": "kaameraa",
+    "oromoPronunciation": "kaameraa",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'camera' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-282",
+    "category": "App UI Labels",
+    "english": "continue",
+    "amharic": "ቀጥል",
+    "amharicTranslit": "ketil",
+    "afaanOromo": "itti fufi",
+    "oromoPronunciation": "itti fufi",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'continue' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-283",
+    "category": "App UI Labels",
+    "english": "settings",
+    "amharic": "ቅንብሮች",
+    "amharicTranslit": "kinibiroch",
+    "afaanOromo": "sirreeffamoota",
+    "oromoPronunciation": "sirreeffamoota",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'settings' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-284",
+    "category": "App UI Labels",
+    "english": "language",
+    "amharic": "ቋንቋ",
+    "amharicTranslit": "kwankwa",
+    "afaanOromo": "afaan",
+    "oromoPronunciation": "afaan",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'language' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-285",
+    "category": "App UI Labels",
+    "english": "offline",
+    "amharic": "ከመስመር ውጭ",
+    "amharicTranslit": "kemesmer wuch",
+    "afaanOromo": "intarneetii malee",
+    "oromoPronunciation": "intarneetii malee",
+    "context": "labels and actions for the app interface",
+    "exampleEn": "Use 'offline' in app ui labels situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "app-ui-labels",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-286",
+    "category": "Tourism & Ethiopia",
+    "english": "Ethiopia",
+    "amharic": "ኢትዮጵያ",
+    "amharicTranslit": "ityopiya",
+    "afaanOromo": "Itoophiyaa",
+    "oromoPronunciation": "Itoophiyaa",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Ethiopia' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-287",
+    "category": "Tourism & Ethiopia",
+    "english": "Addis Ababa",
+    "amharic": "አዲስ አበባ",
+    "amharicTranslit": "adis abeba",
+    "afaanOromo": "Finfinnee",
+    "oromoPronunciation": "Finfinnee",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Addis Ababa' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-288",
+    "category": "Tourism & Ethiopia",
+    "english": "Lalibela",
+    "amharic": "ላሊበላ",
+    "amharicTranslit": "lalibela",
+    "afaanOromo": "Laalibela",
+    "oromoPronunciation": "Laalibela",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Lalibela' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-289",
+    "category": "Tourism & Ethiopia",
+    "english": "Axum",
+    "amharic": "አክሱም",
+    "amharicTranslit": "aksum",
+    "afaanOromo": "Aksum",
+    "oromoPronunciation": "Aksum",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Axum' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-290",
+    "category": "Tourism & Ethiopia",
+    "english": "Gondar",
+    "amharic": "ጎንደር",
+    "amharicTranslit": "gonder",
+    "afaanOromo": "Gondar",
+    "oromoPronunciation": "Gondar",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Gondar' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-291",
+    "category": "Tourism & Ethiopia",
+    "english": "Harar",
+    "amharic": "ሐረር",
+    "amharicTranslit": "harer",
+    "afaanOromo": "Harar",
+    "oromoPronunciation": "Harar",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Harar' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-292",
+    "category": "Tourism & Ethiopia",
+    "english": "Simien Mountains",
+    "amharic": "ሰሜን ተራሮች",
+    "amharicTranslit": "semen teraroch",
+    "afaanOromo": "Gaara Simien",
+    "oromoPronunciation": "Gaara Simien",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Simien Mountains' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-293",
+    "category": "Tourism & Ethiopia",
+    "english": "Blue Nile",
+    "amharic": "ዓባይ",
+    "amharicTranslit": "abay",
+    "afaanOromo": "Abbayyaa",
+    "oromoPronunciation": "Abbayyaa",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'Blue Nile' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-294",
+    "category": "Tourism & Ethiopia",
+    "english": "museum",
+    "amharic": "ሙዚየም",
+    "amharicTranslit": "muziyam",
+    "afaanOromo": "muziyeemii",
+    "oromoPronunciation": "muziyeemii",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'museum' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-295",
+    "category": "Tourism & Ethiopia",
+    "english": "guide",
+    "amharic": "አስጎብኚ",
+    "amharicTranslit": "asgobign",
+    "afaanOromo": "qajeelchaa",
+    "oromoPronunciation": "qajeelchaa",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'guide' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-296",
+    "category": "Tourism & Ethiopia",
+    "english": "ticket office",
+    "amharic": "የትኬት ቢሮ",
+    "amharicTranslit": "yetiket biro",
+    "afaanOromo": "waajjira tikkeettii",
+    "oromoPronunciation": "waajjira tikkeettii",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'ticket office' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-297",
+    "category": "Tourism & Ethiopia",
+    "english": "entrance fee",
+    "amharic": "የመግቢያ ክፍያ",
+    "amharicTranslit": "yemegbiya kifiya",
+    "afaanOromo": "kaffaltii seensaa",
+    "oromoPronunciation": "kaffaltii seensaa",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'entrance fee' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-298",
+    "category": "Tourism & Ethiopia",
+    "english": "local food",
+    "amharic": "የአካባቢ ምግብ",
+    "amharicTranslit": "ye'akababi migib",
+    "afaanOromo": "nyaata naannoo",
+    "oromoPronunciation": "nyaata naannoo",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'local food' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-299",
+    "category": "Tourism & Ethiopia",
+    "english": "souvenir",
+    "amharic": "ስጦታ",
+    "amharicTranslit": "sitota",
+    "afaanOromo": "yaadannoo",
+    "oromoPronunciation": "yaadannoo",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'souvenir' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  },
+  {
+    "id": "ethio-300",
+    "category": "Tourism & Ethiopia",
+    "english": "photo",
+    "amharic": "ፎቶ",
+    "amharicTranslit": "foto",
+    "afaanOromo": "suuraa",
+    "oromoPronunciation": "suuraa",
+    "context": "tourism cards and Ethiopia-specific learning content",
+    "exampleEn": "Use 'photo' in tourism and ethiopia situations.",
+    "difficulty": "beginner",
+    "tags": [
+      "tourism-ethiopia",
+      "beginner",
+      "ethio-lang-mvp"
+    ],
+    "reviewStatus": "starter_ai_generated_review_with_native_speaker"
+  }
+]

@@ -15,7 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useColors } from "@/hooks/useColors";
 import { AppLanguage } from "@/data/types";
-import { WORDS } from "@/data/words";
+import { ALL_WORDS } from "@/data/allWords";
 
 const WEB_TOP = Platform.OS === "web" ? 67 : 0;
 const WEB_BOTTOM = Platform.OS === "web" ? 34 : 0;
@@ -116,7 +116,7 @@ function findLocalTranslation(
   tgtLang: AppLanguage
 ): string | null {
   const lower = text.toLowerCase().trim();
-  for (const word of WORDS) {
+  for (const word of ALL_WORDS) {
     let matches = false;
     if (srcLang === "amharic" && (word.amharic === text || word.amharic.includes(text))) matches = true;
     if (srcLang === "oromo" && word.oromo.toLowerCase() === lower) matches = true;
@@ -145,6 +145,7 @@ export default function TranslateScreen() {
   const [recordingPerson, setRecordingPerson] = useState<TransPerson | null>(null);
   const [translatingPerson, setTranslatingPerson] = useState<TransPerson | null>(null);
   const [noSpeechSupport, setNoSpeechSupport] = useState(false);
+  const [micError, setMicError] = useState<Partial<Record<TransPerson, string>>>({});
   const [selectedSit, setSelectedSit] = useState<string | null>(null);
   const [speakingPhrase, setSpeakingPhrase] = useState<string | null>(null);
 
@@ -250,6 +251,7 @@ export default function TranslateScreen() {
 
   const startRecording = (person: TransPerson) => {
     if (noSpeechSupport) return;
+    setMicError((prev) => ({ ...prev, [person]: undefined }));
     if (recordingPerson) {
       stopRecording();
       return;
@@ -287,9 +289,19 @@ export default function TranslateScreen() {
       stopWave();
     };
 
-    rec.onerror = () => {
+    rec.onerror = (e: any) => {
       setRecordingPerson(null);
       stopWave();
+      const errCode = e?.error ?? "";
+      const msg =
+        errCode === "not-allowed"
+          ? "Microphone access denied — tap to enable in browser settings"
+          : errCode === "no-speech"
+          ? "No speech detected — tap to try again"
+          : errCode === "network"
+          ? "Network error — check your connection and tap to retry"
+          : "Microphone not working — tap here to try again";
+      setMicError((prev) => ({ ...prev, [person]: msg }));
     };
 
     activeRec.current = rec;
@@ -392,6 +404,17 @@ export default function TranslateScreen() {
             </Text>
           )}
         </View>
+
+        {/* Mic error banner — tap to retry */}
+        {micError[person] && (
+          <Pressable
+            onPress={() => startRecording(person)}
+            style={styles.micErrorBanner}
+          >
+            <Feather name="alert-circle" size={14} color="#DC2626" />
+            <Text style={styles.micErrorText}>{micError[person]}</Text>
+          </Pressable>
+        )}
 
         {/* Waveform + mic button */}
         <View style={styles.micRow}>
@@ -754,5 +777,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  micErrorBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: "#FEE2E2",
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  micErrorText: {
+    flex: 1,
+    fontSize: 12,
+    color: "#DC2626",
+    fontFamily: "Inter_600SemiBold",
+    lineHeight: 17,
   },
 });

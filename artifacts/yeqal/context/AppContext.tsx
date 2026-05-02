@@ -1,11 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { AppLanguage, Child, HomeworkSession, UserProfile, UserRole } from "@/data/types";
+import { saveSession, upsertProfile, upsertChildren } from "@/lib/supabaseWords";
 
 const STORAGE_KEY = "yeqal_profile_v3";
 const SESSIONS_KEY = "yeqal_homework_sessions";
 const ACTIVE_CHILD_KEY = "yeqal_active_child";
+const DEVICE_KEY = "yeqal_device_id";
+
+function generateDeviceId(): string {
+  return "dev-" + Math.random().toString(36).slice(2, 10) + "-" + Date.now().toString(36);
+}
 
 const DEFAULT_CHILD: Child = {
   id: "c1",
@@ -37,6 +43,7 @@ interface AppContextType {
   isLoading: boolean;
   activeChildId: string | null;
   activeChild: Child | null;
+  deviceId: string | null;
   setActiveChildId: (id: string) => void;
   setProfile: (p: UserProfile) => void;
   updateProfile: (updates: Partial<UserProfile>) => void;
@@ -62,16 +69,25 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [searchLanguage, setSearchLanguage] = useState<AppLanguage>("english");
   const [activeChildId, setActiveChildIdState] = useState<string | null>(null);
+  const [deviceId, setDeviceId] = useState<string | null>(null);
+  const deviceIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     Promise.all([
       AsyncStorage.getItem(STORAGE_KEY),
       AsyncStorage.getItem(ACTIVE_CHILD_KEY),
-    ]).then(([stored, savedActiveId]) => {
+      AsyncStorage.getItem(DEVICE_KEY),
+    ]).then(([stored, savedActiveId, savedDeviceId]) => {
+      // Device ID
+      const did = savedDeviceId ?? generateDeviceId();
+      if (!savedDeviceId) AsyncStorage.setItem(DEVICE_KEY, did);
+      setDeviceId(did);
+      deviceIdRef.current = did;
+
+      // Profile
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
-          // Migrate old profiles
           if (parsed.children) {
             parsed.children = parsed.children.map((c: Child) => ({
               ...c,
@@ -97,6 +113,23 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   const save = async (p: UserProfile) => {
     setProfileState(p);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    // Sync to Supabase (fire and forget)
+    const did = deviceIdRef.current;
+    if (did) {
+      upsertProfile({
+        deviceId: did,
+        name: p.name,
+        role: p.role,
+        uiLanguage: p.uiLanguage,
+        learningLanguage: p.learningLanguage,
+        isPremium: p.isPremium,
+        streak: p.streak,
+        xp: p.xp,
+        favorites: p.favorites,
+        learnedWords: p.learnedWords,
+      });
+      upsertChildren(did, p.children);
+    }
   };
 
   const setProfile = (p: UserProfile) => save(p);
@@ -157,6 +190,7 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   };
 
   const saveHomeworkSession = async (session: HomeworkSession) => {
+    // 1. Local AsyncStorage (always)
     try {
       const stored = await AsyncStorage.getItem(SESSIONS_KEY);
       const sessions: HomeworkSession[] = stored ? JSON.parse(stored) : [];
@@ -166,7 +200,20 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
         JSON.stringify(sessions.slice(0, 30))
       );
     } catch {
-      // silent fail
+      // silent
+    }
+    // 2. Supabase (fire and forget)
+    const did = deviceIdRef.current;
+    const child = profile?.children.find((c) => c.id === activeChildId) ?? profile?.children[0];
+    if (did) {
+      saveSession({
+        deviceId: did,
+        childId: child?.id,
+        childName: child?.name,
+        gradeLevel: child?.gradeLevel,
+        inputText: session.inputText,
+        wordIds: session.wordIds,
+      });
     }
   };
 
@@ -187,6 +234,7 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
         isLoading,
         activeChildId,
         activeChild,
+        deviceId,
         setActiveChildId,
         setProfile,
         updateProfile,

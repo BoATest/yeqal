@@ -35,6 +35,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
   const [permissionDenied, setPermissionDenied] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [noApiKey, setNoApiKey] = useState(false);
 
   const startCamera = useCallback(async () => {
     if (Platform.OS !== "web" || typeof navigator === "undefined") return;
