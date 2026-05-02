@@ -71,16 +71,24 @@ export default function RootLayout() {
     if (document.getElementById("yeqal-ethiopic-font")) return;
     const link = document.createElement("link");
     link.id = "yeqal-ethiopic-font";
-    link.rel = "stylesheet";
+    link.rel = "preload";
+    link.setAttribute("as", "style");
     link.href =
       "https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap";
     document.head.appendChild(link);
-    // Apply Ethiopic range to all text elements via a style tag
+    const linkActual = document.createElement("link");
+    linkActual.id = "yeqal-ethiopic-font-actual";
+    linkActual.rel = "stylesheet";
+    linkActual.href = link.href;
+    document.head.appendChild(linkActual);
+    // Fallback font-face for Ethiopic codepoints only — does not override Inter
     const style = document.createElement("style");
     style.id = "yeqal-ethiopic-style";
     style.textContent = `
-      @supports (unicode-range: U+1200-137F) {
-        * { font-family: Inter, 'Noto Sans Ethiopic', system-ui !important; }
+      @font-face {
+        font-family: 'YeqalEthiopic';
+        src: local('Noto Sans Ethiopic');
+        unicode-range: U+1200-137F, U+1380-139F, U+2D80-2DDF, U+AB00-AB2F;
       }
     `;
     document.head.appendChild(style);
