@@ -1,6 +1,7 @@
 import { Word, Subject } from "./types";
 import { WORDS } from "./words";
 import { ethioLangSeedDictionary } from "./ethiolang";
+import { ethioLangBatch2 } from "./ethiolangBatch2";
 
 const CATEGORY_TO_SUBJECT: Record<string, Subject> = {
   "Greetings & Courtesy": "greetings",
@@ -43,12 +44,22 @@ const ethiolangAsWords: Word[] = ethioLangSeedDictionary.map((e) => ({
   exampleEnglish: e.exampleEn,
 }));
 
-// Merge: existing detailed words take precedence, then ethiolang words (skip duplicates by English)
+// Merge all sources — existing detailed words take precedence, no duplicate English
 const existingEnglish = new Set(WORDS.map((w) => w.english.toLowerCase()));
+
 const uniqueEthiolang = ethiolangAsWords.filter(
   (w) => !existingEnglish.has(w.english.toLowerCase())
 );
 
-export const ALL_WORDS: Word[] = [...WORDS, ...uniqueEthiolang];
+// Add Batch 2 — skip anything already in WORDS or Batch 1
+const allExistingEnglish = new Set([
+  ...WORDS.map((w) => w.english.toLowerCase()),
+  ...uniqueEthiolang.map((w) => w.english.toLowerCase()),
+]);
+const uniqueBatch2 = ethioLangBatch2.filter(
+  (w) => !allExistingEnglish.has(w.english.toLowerCase())
+);
+
+export const ALL_WORDS: Word[] = [...WORDS, ...uniqueEthiolang, ...uniqueBatch2];
 
 export default ALL_WORDS;
