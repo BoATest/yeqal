@@ -3,7 +3,7 @@
 ## Overview
 YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school families. It lets parents help their children with homework across **Amharic, Afaan Oromo, and English** — no more calling the neighbor at 9pm.
 
-**Target users:** Ethiopian parents (role: parent/diaspora) helping children (Grade 1–6) with language homework.
+**Target users:** Ethiopian parents (role: parent/diaspora) helping children (Grade 1–8) with language homework.
 
 ## Tech Stack
 - **Framework:** Expo (React Native) with Expo Router v6, file-based routing
@@ -15,6 +15,8 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 - **Gradient:** expo-linear-gradient
 - **Storage:** @react-native-async-storage/async-storage
 - **Audio:** Web SpeechSynthesis API (browser built-in); native falls back to timed animation
+- **Voice input:** Web SpeechRecognition API (Chrome/Edge/Safari)
+- **Translation:** Local word lookup first; LibreTranslate API fallback
 
 ## Design System
 - **Primary:** #1B6B3A (Ethiopian green)
@@ -27,33 +29,89 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 
 ## App Structure
 
-### Screens
+### Screens (6 tabs)
 - `app/_layout.tsx` — Root layout with providers, onboarding check, Stack navigator, Noto Sans Ethiopic injection, OfflineBanner
 - `app/onboarding.tsx` — 3-slide emotional onboarding story
 - `app/setup.tsx` — Language & role selection (2 steps)
-- `app/(tabs)/_layout.tsx` — 5-tab classic tab bar
-- `app/(tabs)/index.tsx` — Home dashboard
+- `app/(tabs)/_layout.tsx` — **6-tab** tab bar (Home, Search, Homework, Translate, Speak, Profile)
+- `app/(tabs)/index.tsx` — Home dashboard with **multi-child switcher** (Phase A)
 - `app/(tabs)/search.tsx` — Trilingual dictionary search with "word not found — suggest it?" form
-- `app/(tabs)/homework.tsx` — Homework text analyzer with translation table, practice chips, AsyncStorage session saving
-- `app/(tabs)/speak.tsx` — Speaking practice (word mode + situations) with countdown timer, waveform animation, color-coded scores
-- `app/(tabs)/profile.tsx` — User profile, children, badges, settings, WhatsApp share
+- `app/(tabs)/homework.tsx` — Homework helper with **active child header**, **curriculum topic detection** (Phase A+D), **Point & Learn camera button** (Phase C)
+- `app/(tabs)/translate.tsx` — **NEW: Live Translator** (Phase B) — two-panel voice translator with situation phrases
+- `app/(tabs)/speak.tsx` — Speaking practice (word mode + situations) with countdown timer, waveform, scores
+- `app/(tabs)/profile.tsx` — User profile with **per-child learning language selector** (Phase A), children, badges, settings, WhatsApp share
 - `app/word/[id].tsx` — Word detail with real SpeechSynthesis audio for all 3 languages, examples, related words
 - `app/flashcard.tsx` — Spaced-repetition flashcard quiz
 
-### Data (mock, no backend)
-- `data/words.ts` — **87 words** across 10 categories (family, food, school, nature, animals, greetings, numbers, body, time, verbs/general) with trilingual translations, romanization, definitions, examples
-- `data/types.ts` — TypeScript interfaces (Word, UserProfile, Child, HomeworkSession, etc.)
-- `context/AppContext.tsx` — App state: profile, favorites, learned words, XP, streak, homework session persistence
+### Data (no backend)
+- `data/words.ts` — **116 words** across 20 categories (added: colors, shapes, clothes, weather, actions, math, geography, history, science, abstract/civics, economy, community, nature extended)
+- `data/types.ts` — TypeScript interfaces (Word, UserProfile, Child, HomeworkSession) — Child now has `learningLanguage` and optional `schoolName`; Subject type expanded to 23 categories
+- `data/curriculum.ts` — **NEW: Grade 1–8 curriculum map** (Phase D) — topics per grade+language, keyword lists, `findTopicForQuestion()` and `getCurriculumContext()` helpers
+- `context/AppContext.tsx` — App state: `activeChildId`, `activeChild`, `setActiveChildId`, multi-child support; storage key bumped to `yeqal_profile_v3`
 - `constants/colors.ts` — Design tokens
 
 ### Components
 - `components/WordCard.tsx` — Trilingual word card with subject tags
 - `components/OfflineBanner.tsx` — Animated offline detection banner (web only)
 - `components/ErrorBoundary.tsx` — React error boundary with debug modal
+- `components/CameraOverlay.tsx` — **NEW: Camera overlay** (Phase C) — getUserMedia web camera, object/text mode, Google Vision API integration (graceful no-key fallback)
 
 ### Hooks
 - `hooks/useColors.ts` — Color scheme hook (light/dark palette)
-- `hooks/useAudio.ts` — SpeechSynthesis hook: `speak(text, lang, key)` + `playingKey` state; web uses Web Speech API, native falls back to timed animation
+- `hooks/useAudio.ts` — SpeechSynthesis hook: `speak(text, lang, key)` + `playingKey` state
+
+## Feature Phases
+
+### Phase A — Multi-child Support ✅
+- `activeChildId` + `setActiveChildId` in AppContext (persisted to AsyncStorage)
+- Home screen: single child shows compact stat card; 2+ children show horizontal scrollable chip switcher
+- Homework screen: shows "Helping [avatar] [name] · Grade X · Language" in header
+- Add Child form in profile: new **Learning Language** pill selector (Amharic / Oromo / English)
+- Child type now has `learningLanguage: AppLanguage`
+
+### Phase B — Live Translator ✅
+- `app/(tabs)/translate.tsx` — new 6th tab
+- Two-panel layout (Person A / Person B) each with language picker, transcript, translation, mic button
+- Swap button reverses language direction
+- SpeechRecognition (web/Chrome): tap mic to start, tap again or auto-stop on silence
+- Translation: local word lookup first → LibreTranslate API fallback → graceful "coming soon" message
+- SpeechSynthesis for spoken translation output
+- 6 situation phrase banks: Market, Bus Station, Health Center, Elders, School Meeting, Coffee Ceremony
+- Each situation has 5 trilingual phrase cards with play buttons
+
+### Phase C — Camera Point & Learn ✅
+- `components/CameraOverlay.tsx` — full-screen camera overlay
+- Two modes: "Learn Object" (OBJECT_LOCALIZATION) and "Read Text" (TEXT_DETECTION)
+- Uses `navigator.mediaDevices.getUserMedia` for web camera access
+- Google Vision API integration — graceful "API key needed" fallback
+- Camera result (object label or detected text) auto-fills homework input
+- Homework screen "Point & Learn" button opens the overlay
+
+### Phase D — Curriculum Context ✅
+- `data/curriculum.ts` — Grade 1–8 curriculum map for Amharic / Oromo / English
+- Each grade+language has named topics with keyword arrays and trilingual term lists
+- `findTopicForQuestion(text, gradeLevel, language)` detects the most likely topic
+- Homework screen shows gold curriculum badge when a topic is detected
+- Shows: "[Grade X Language] · [Topic Name] — This looks like a [Subject] lesson"
+
+### Phase E — 500-Word Dictionary (116 words done) ✅
+- Added 76 new words (w041–w116):
+  - Colors: red, blue, green, yellow, white, black
+  - Shapes: circle, square, triangle
+  - Clothes: shirt, shoes, dress
+  - Weather: hot, cold, rain, wind
+  - Actions: eat, drink, run, walk, read, write, listen
+  - Nature: soil, seed, plant, root, leaf, fruit
+  - Community: market, hospital, church, government
+  - Math: add, subtract, multiply, equal, number
+  - Geography: country, city, village, border, map
+  - History: king, battle, tradition, history
+  - Science: energy, electricity, machine, experiment
+  - Civics: democracy, rights, responsibility, equality
+  - Economics: trade, export, import, development
+  - Extended: morning, evening, sun, moon, star, love, peace, work, friend, tree, river, sky, heat, forest, mountain, language, health
+
+### Phase F — Supabase ⏭️ Skipped (needs credentials)
 
 ## Onboarding Flow
 1. Slide 1: "Your child has homework. You don't speak the language." (dark navy/purple)
@@ -62,43 +120,20 @@ YEQAL (ያቃል, "it speaks") is a mobile learning app for Ethiopian school fam
 → Setup: language selection + role → `AsyncStorage.setItem('yeqal_onboarded', 'true')`
 → Home dashboard
 
-## Key Features (v1)
-- **87-word trilingual dictionary** across 10 subjects: family, food, school, nature, animals, greetings, numbers, body, time, verbs
-- **Real-time trilingual search** with "Word not found — suggest it?" form on empty results
-- **Homework helper:** "ያቃላል... Explaining..." loading state, word-by-word translation table (Amharic|Oromo|English), practice chips, AsyncStorage session saving (last 30 sessions)
-- **Real SpeechSynthesis audio** on word detail and speaking practice ("Hear it first" button)
-- **Speaking practice** with countdown timer (3-2-1), 7-bar animated waveform, color-coded pronunciation scores (red <50 / amber 50-70 / green 70+), microphone permission request, service error state
-- **Situation conversations** (6 Ethiopian scenarios: Market, Bus Station, Elders, Health Center, School Meeting, Coffee Ceremony)
-- **Flashcard quiz** with Easy/Medium/Hard spaced repetition
-- **Parent dashboard** with child skill bars, WhatsApp share button (formatted message with child stats)
-- **Add Child form** in profile: name, grade level, emoji avatar picker, remove child
-- **Offline banner:** animates in when network is lost, out when restored (web only via window events)
-- **Noto Sans Ethiopic font** injected from Google Fonts CDN for proper Ge'ez script rendering on web
-- **Streak tracking, XP system, achievement badges**
-- **AsyncStorage-persisted user profile** (key: `yeqal_profile_v2`)
-
 ## AsyncStorage Keys
 - `yeqal_onboarded` — onboarding completed flag
-- `yeqal_profile_v2` — user profile (bumped from v1 to handle Child.avatar migration)
+- `yeqal_profile_v3` — user profile (bumped from v2 to handle `learningLanguage` in Child and multi-child activeChildId)
+- `yeqal_active_child` — active child ID for multi-child switching
 - `yeqal_homework_sessions` — array of up to 30 homework sessions (id, timestamp, inputText, wordIds)
-
-## Planned Features (v1.1+, needs backend)
-- Camera-based homework photo scanning
-- Supabase backend for multi-device sync + sessions table
-- Ethiopian AI tutor (Hasab AI integration) for real pronunciation scoring
-- School class code system (YEQA24)
-- Push notification reminders
-- More words (target: 500+ in Supabase)
-- Service worker / PWA offline mode
-- Google Play support
 
 ## Development Notes
 - No backend — all data is local (AsyncStorage)
 - Ethiopic script: system font on Android/iOS; Noto Sans Ethiopic loaded from CDN on web
 - SpeechSynthesis audio: works in Chrome/Edge/Safari on web; native falls back to timed animation
+- SpeechRecognition (Translate tab): Chrome/Edge only; graceful fallback shown for unsupported browsers
 - Pronunciation scoring is simulated (random 60–96 range) pending Hasab AI integration
-- Default demo profile: Selam (parent), child Liya Grade 4 (streak 7, XP 280)
-- Storage key migrated from `yeqal_profile_v1` to `yeqal_profile_v2` to handle the added `avatar` field in Child interface
+- Default demo profile: Selam (parent), child Liya Grade 4 (streak 7, XP 280, learningLanguage: amharic)
+- Google Vision API key expected at `EXPO_PUBLIC_GOOGLE_VISION_KEY` env variable
 
 ## Workflow
 - Expo dev server: `artifacts/yeqal: expo`
@@ -115,21 +150,24 @@ artifacts/yeqal/
 │   ├── flashcard.tsx         # Spaced repetition flashcards
 │   ├── word/[id].tsx         # Word detail screen with real audio
 │   └── (tabs)/
-│       ├── _layout.tsx       # Classic tab bar
-│       ├── index.tsx         # Home dashboard
+│       ├── _layout.tsx       # 6-tab bar (Home/Search/Homework/Translate/Speak/Profile)
+│       ├── index.tsx         # Home dashboard + multi-child switcher
 │       ├── search.tsx        # Dictionary search + suggest form
-│       ├── homework.tsx      # Homework helper + translation table
+│       ├── homework.tsx      # Homework helper + curriculum + camera + active child
+│       ├── translate.tsx     # NEW: Live Translator with SpeechRecognition + situations
 │       ├── speak.tsx         # Speaking practice + waveform + timer
-│       └── profile.tsx       # Profile + WhatsApp share + Add child
+│       └── profile.tsx       # Profile + learning language per child + WhatsApp share
 ├── components/
+│   ├── CameraOverlay.tsx     # NEW: Camera overlay with Vision API integration
 │   ├── WordCard.tsx          # Trilingual word card
 │   ├── OfflineBanner.tsx     # Animated offline banner (web)
 │   └── ErrorBoundary.tsx     # Error boundary with debug modal
-├── context/AppContext.tsx    # Global state + session saving
+├── context/AppContext.tsx    # Global state + activeChild + session saving
 ├── constants/colors.ts       # Design tokens
 ├── data/
-│   ├── words.ts              # 87 trilingual words
-│   └── types.ts              # TypeScript types (Subject includes body + time)
+│   ├── words.ts              # 116 trilingual words (w001–w116)
+│   ├── curriculum.ts         # NEW: Grade 1–8 curriculum map (Phase D)
+│   └── types.ts              # TypeScript types (23 Subject categories, Child.learningLanguage)
 ├── hooks/
 │   ├── useColors.ts          # Color scheme hook
 │   └── useAudio.ts           # SpeechSynthesis hook

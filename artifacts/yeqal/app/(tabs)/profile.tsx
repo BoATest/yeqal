@@ -56,6 +56,7 @@ export default function ProfileScreen() {
   const [newChildName, setNewChildName] = useState("");
   const [newChildGrade, setNewChildGrade] = useState("4");
   const [newChildAvatar, setNewChildAvatar] = useState("👧");
+  const [newChildLang, setNewChildLang] = useState<AppLanguage>("amharic");
   const [addChildError, setAddChildError] = useState("");
 
   const levelXP = (profile?.xp ?? 0) % 500;
@@ -94,6 +95,7 @@ export default function ProfileScreen() {
       id: Date.now().toString(),
       name: newChildName.trim(),
       gradeLevel: grade,
+      learningLanguage: newChildLang,
       initials: newChildName.trim().charAt(0).toUpperCase(),
       avatar: newChildAvatar,
       streak: 0,
@@ -104,6 +106,7 @@ export default function ProfileScreen() {
     setNewChildName("");
     setNewChildGrade("4");
     setNewChildAvatar("👧");
+    setNewChildLang("amharic");
     setAddChildError("");
     setShowAddChild(false);
   };
@@ -248,6 +251,36 @@ export default function ProfileScreen() {
                         ]}
                       >
                         <Text style={styles.avatarEmoji}>{emoji}</Text>
+                      </Pressable>
+                    ))}
+                  </View>
+
+                  <Text style={[styles.formLabel, { color: colors.mutedForeground }]}>
+                    LEARNING LANGUAGE
+                  </Text>
+                  <View style={styles.langPickerRow}>
+                    {LANG_OPTIONS.map((opt) => (
+                      <Pressable
+                        key={opt.key}
+                        onPress={() => setNewChildLang(opt.key)}
+                        style={[
+                          styles.langPickerBtn,
+                          {
+                            backgroundColor:
+                              newChildLang === opt.key ? colors.primary : colors.muted,
+                            borderColor:
+                              newChildLang === opt.key ? colors.primary : colors.border,
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.langPickerBtnText,
+                            { color: newChildLang === opt.key ? "#fff" : colors.text },
+                          ]}
+                        >
+                          {opt.label}
+                        </Text>
                       </Pressable>
                     ))}
                   </View>
@@ -664,4 +697,12 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     marginTop: 8,
   },
+  langPickerRow: { flexDirection: "row", gap: 8, flexWrap: "wrap", marginTop: 4 },
+  langPickerBtn: {
+    borderRadius: 20,
+    borderWidth: 1.5,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+  },
+  langPickerBtnText: { fontSize: 13, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
 });

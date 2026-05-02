@@ -37,9 +37,9 @@ const QUICK_ACTIONS = [
     fg: "#1C1C28",
   },
   {
-    icon: "layers" as const,
-    label: "Flashcard\nQuiz",
-    route: "/flashcard" as const,
+    icon: "refresh-cw" as const,
+    label: "Live\nTranslate",
+    route: "/translate" as const,
     bg: "#1A6B9A",
     fg: "#FFFFFF",
   },
@@ -54,7 +54,7 @@ const QUICK_ACTIONS = [
 
 export default function HomeScreen() {
   const colors = useColors();
-  const { profile } = useApp();
+  const { profile, activeChild, activeChildId, setActiveChildId } = useApp();
   const insets = useSafeAreaInsets();
 
   const wordOfDay = useMemo(() => WORDS[new Date().getDate() % WORDS.length], []);
@@ -122,43 +122,91 @@ export default function HomeScreen() {
         </LinearGradient>
 
         <View style={styles.body}>
-          {/* Parent alert card */}
+          {/* Multi-child switcher (Phase A) */}
           {profile?.role === "parent" && (profile?.children?.length ?? 0) > 0 && (
-            <Pressable
-              onPress={() => router.push("/profile")}
-              style={({ pressed }) => [
-                styles.alertCard,
-                {
-                  backgroundColor: colors.tealBg,
-                  borderColor: colors.teal + "40",
-                  opacity: pressed ? 0.85 : 1,
-                },
-              ]}
-            >
-              <View
-                style={[
-                  styles.alertIcon,
-                  { backgroundColor: colors.teal + "22" },
-                ]}
-              >
-                <Feather name="users" size={18} color={colors.teal} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={[styles.alertTitle, { color: colors.teal }]}>
-                  {profile.children[0]?.name} practiced today
-                </Text>
-                <Text
-                  style={[
-                    styles.alertSub,
-                    { color: colors.mutedForeground },
+            <View style={styles.childSwitcherSection}>
+              {(profile.children.length === 1) ? (
+                /* Single child — compact stat row */
+                <Pressable
+                  onPress={() => router.push("/profile")}
+                  style={({ pressed }) => [
+                    styles.alertCard,
+                    {
+                      backgroundColor: colors.tealBg,
+                      borderColor: colors.teal + "40",
+                      opacity: pressed ? 0.85 : 1,
+                    },
                   ]}
                 >
-                  Streak: {profile.children[0]?.streak ?? 0} days · XP:{" "}
-                  {profile.children[0]?.xp ?? 0}
-                </Text>
-              </View>
-              <Feather name="chevron-right" size={18} color={colors.teal} />
-            </Pressable>
+                  <View style={[styles.alertIcon, { backgroundColor: colors.teal + "22" }]}>
+                    <Text style={styles.childAvatarSingle}>
+                      {profile.children[0]?.avatar ?? "👦"}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.alertTitle, { color: colors.teal }]}>
+                      {profile.children[0]?.name} · Grade {profile.children[0]?.gradeLevel}
+                    </Text>
+                    <Text style={[styles.alertSub, { color: colors.mutedForeground }]}>
+                      🔥 {profile.children[0]?.streak ?? 0} day streak · ⭐ {profile.children[0]?.xp ?? 0} XP
+                    </Text>
+                  </View>
+                  <Feather name="chevron-right" size={18} color={colors.teal} />
+                </Pressable>
+              ) : (
+                /* Multiple children — horizontal switcher */
+                <View>
+                  <Text style={[styles.switcherLabel, { color: colors.mutedForeground }]}>
+                    HELPING
+                  </Text>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    style={styles.childScroll}
+                    contentContainerStyle={{ gap: 10 }}
+                  >
+                    {profile.children.map((child) => {
+                      const isActive = child.id === (activeChildId ?? profile.children[0]?.id);
+                      return (
+                        <Pressable
+                          key={child.id}
+                          onPress={() => {
+                            setActiveChildId(child.id);
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                          }}
+                          style={[
+                            styles.childChip,
+                            {
+                              backgroundColor: isActive ? colors.primary : colors.card,
+                              borderColor: isActive ? colors.primary : colors.border,
+                            },
+                          ]}
+                        >
+                          <Text style={styles.childChipAvatar}>{child.avatar}</Text>
+                          <View>
+                            <Text style={[styles.childChipName, { color: isActive ? "#fff" : colors.text }]}>
+                              {child.name}
+                            </Text>
+                            <Text style={[styles.childChipGrade, { color: isActive ? "#FFFFFFAA" : colors.mutedForeground }]}>
+                              Grade {child.gradeLevel}
+                            </Text>
+                          </View>
+                          {isActive && (
+                            <View style={styles.activeIndicator} />
+                          )}
+                        </Pressable>
+                      );
+                    })}
+                    <Pressable
+                      onPress={() => router.push("/profile")}
+                      style={[styles.addChildChip, { backgroundColor: colors.muted, borderColor: colors.border }]}
+                    >
+                      <Feather name="plus" size={18} color={colors.mutedForeground} />
+                    </Pressable>
+                  </ScrollView>
+                </View>
+              )}
+            </View>
           )}
 
           {/* Word of the Day */}
@@ -500,4 +548,42 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   miniEnglish: { fontSize: 13, fontFamily: "Inter_400Regular" },
+  // Child switcher
+  childSwitcherSection: { marginBottom: 20 },
+  switcherLabel: {
+    fontSize: 10,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+    letterSpacing: 1,
+    marginBottom: 10,
+  },
+  childScroll: { overflow: "visible" as any },
+  childChip: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+  childChipAvatar: { fontSize: 22 },
+  childChipName: { fontSize: 14, fontWeight: "700", fontFamily: "Inter_700Bold" },
+  childChipGrade: { fontSize: 11, fontFamily: "Inter_400Regular" },
+  activeIndicator: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#FFFFFF",
+    marginLeft: 4,
+  },
+  addChildChip: {
+    width: 48,
+    height: 48,
+    borderRadius: 16,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  childAvatarSingle: { fontSize: 22 },
 });

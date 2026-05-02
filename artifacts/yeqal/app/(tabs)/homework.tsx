@@ -18,6 +18,9 @@ import { useColors } from "@/hooks/useColors";
 import { useApp } from "@/context/AppContext";
 import { WORDS } from "@/data/words";
 import { HomeworkSession, Word } from "@/data/types";
+import { CameraOverlay } from "@/components/CameraOverlay";
+import { findTopicForQuestion, getSubjectLabel } from "@/data/curriculum";
+import type { CurriculumTopic } from "@/data/curriculum";
 
 const WEB_TOP = Platform.OS === "web" ? 67 : 0;
 const WEB_BOTTOM = Platform.OS === "web" ? 34 : 0;
@@ -43,7 +46,7 @@ function findWordsInText(text: string): Word[] {
 
 export default function HomeworkScreen() {
   const colors = useColors();
-  const { saveHomeworkSession } = useApp();
+  const { saveHomeworkSession, activeChild } = useApp();
   const insets = useSafeAreaInsets();
 
   const [text, setText] = useState("");
@@ -51,17 +54,29 @@ export default function HomeworkScreen() {
   const [results, setResults] = useState<Word[] | null>(null);
   const [savedWords, setSavedWords] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
+  const [showCamera, setShowCamera] = useState(false);
+  const [curriculumTopic, setCurriculumTopic] = useState<CurriculumTopic | null>(null);
 
   const handleAnalyze = async () => {
     if (!text.trim()) return;
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setIsAnalyzing(true);
     setResults(null);
+    setCurriculumTopic(null);
     setError(null);
     try {
       await new Promise((r) => setTimeout(r, 1400));
       const found = findWordsInText(text);
       setResults(found);
+      // Detect curriculum topic based on active child
+      if (activeChild) {
+        const topic = findTopicForQuestion(
+          text,
+          activeChild.gradeLevel,
+          activeChild.learningLanguage
+        );
+        setCurriculumTopic(topic);
+      }
       if (found.length > 0) {
         const session: HomeworkSession = {
           id: Date.now().toString(),
@@ -98,6 +113,7 @@ export default function HomeworkScreen() {
     setResults(null);
     setSavedWords(new Set());
     setError(null);
+    setCurriculumTopic(null);
   };
 
   const detectedScript = /[\u1200-\u137F]/.test(text)
@@ -124,9 +140,20 @@ export default function HomeworkScreen() {
             <Text style={[styles.title, { color: colors.text }]}>
               Homework Helper
             </Text>
-            <Text style={[styles.subtitle, { color: colors.mutedForeground }]}>
-              Type or paste your homework text — see every word explained
-            </Text>
+            {activeChild ? (
+              <Text style={[styles.activeChildBadge, { color: colors.primary }]}>
+                {activeChild.avatar} Helping {activeChild.name} · Grade {activeChild.gradeLevel} ·{" "}
+                {activeChild.learningLanguage === "amharic"
+                  ? "አማርኛ"
+                  : activeChild.learningLanguage === "oromo"
+                  ? "Oromo"
+                  : "English"}
+              </Text>
+            ) : (
+              <Text style={[styles.subtitle, { color: colors.mutedForeground }]}>
+                Type or paste your homework text — see every word explained
+              </Text>
+            )}
           </View>
         </View>
 
@@ -227,26 +254,27 @@ export default function HomeworkScreen() {
           </View>
         )}
 
-        {/* Camera placeholder */}
-        <View
-          style={[
+        {/* Camera button (Phase C) */}
+        <Pressable
+          onPress={() => setShowCamera(true)}
+          style={({ pressed }) => [
             styles.cameraCard,
-            { backgroundColor: colors.muted, borderColor: colors.border },
+            { backgroundColor: colors.card, borderColor: colors.border, opacity: pressed ? 0.85 : 1 },
           ]}
         >
-          <Feather name="camera" size={20} color={colors.mutedForeground} />
+          <View style={[styles.cameraIconBox, { backgroundColor: colors.greenBg }]}>
+            <Feather name="camera" size={20} color={colors.primary} />
+          </View>
           <View style={{ flex: 1 }}>
             <Text style={[styles.cameraTitle, { color: colors.text }]}>
-              Photo homework
+              Point & Learn
             </Text>
             <Text style={[styles.cameraDesc, { color: colors.mutedForeground }]}>
-              Coming in v1.1 — photograph your textbook
+              Photograph a word or object to identify it in 3 languages
             </Text>
           </View>
-          <View style={[styles.soonBadge, { backgroundColor: colors.accent + "18" }]}>
-            <Text style={[styles.soonText, { color: colors.accent }]}>Soon</Text>
-          </View>
-        </View>
+          <Feather name="chevron-right" size={16} color={colors.mutedForeground} />
+        </Pressable>
 
         {/* Results */}
         {results !== null && (
@@ -271,6 +299,20 @@ export default function HomeworkScreen() {
             ) : (
               <>
                 {/* Results header + Practice All */}
+                {/* Curriculum topic badge */}
+                {curriculumTopic && (
+                  <View style={[styles.curriculumBadge, { backgroundColor: colors.goldBg, borderColor: colors.gold + "40" }]}>
+                    <Feather name="book" size={14} color={colors.gold} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={[styles.curriculumBadgeTitle, { color: colors.text }]}>
+                        {curriculumTopic.gradeLabel} · {curriculumTopic.name}
+                      </Text>
+                      <Text style={[styles.curriculumBadgeSub, { color: colors.mutedForeground }]}>
+                        This looks like a {getSubjectLabel(curriculumTopic.subject)} lesson
+                      </Text>
+                    </View>
+                  </View>
+                )}
                 <View style={styles.resultsHeader}>
                   <Text style={[styles.resultsTitle, { color: colors.text }]}>
                     {results.length} word{results.length !== 1 ? "s" : ""} found
@@ -438,6 +480,21 @@ export default function HomeworkScreen() {
           </View>
         )}
       </ScrollView>
+
+      {/* Camera Overlay */}
+      {showCamera && (
+        <CameraOverlay
+          onClose={() => setShowCamera(false)}
+          onResult={(result) => {
+            setShowCamera(false);
+            if (result.mode === "object" && result.objectLabel) {
+              setText(result.objectLabel);
+            } else if (result.mode === "text" && result.detectedText) {
+              setText(result.detectedText);
+            }
+          }}
+        />
+      )}
     </View>
   );
 }
@@ -451,6 +508,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: { fontSize: 22, fontWeight: "700", fontFamily: "Inter_700Bold" },
+  activeChildBadge: {
+    fontSize: 13,
+    fontFamily: "Inter_600SemiBold",
+    fontWeight: "600",
+    marginTop: 3,
+  },
   subtitle: {
     fontSize: 13,
     fontFamily: "Inter_400Regular",
@@ -516,10 +579,28 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: 24,
   },
+  cameraIconBox: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   cameraTitle: { fontSize: 14, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
   cameraDesc: { fontSize: 12, fontFamily: "Inter_400Regular", marginTop: 2 },
   soonBadge: { borderRadius: 8, paddingHorizontal: 8, paddingVertical: 4 },
   soonText: { fontSize: 11, fontWeight: "700", fontFamily: "Inter_700Bold" },
+  curriculumBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 12,
+  },
+  curriculumBadgeTitle: { fontSize: 13, fontWeight: "700", fontFamily: "Inter_700Bold" },
+  curriculumBadgeSub: { fontSize: 12, fontFamily: "Inter_400Regular", marginTop: 1 },
   results: { gap: 0 },
   emptyResults: {
     borderRadius: 14,

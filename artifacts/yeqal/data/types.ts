@@ -10,7 +10,20 @@ export type Subject =
   | "numbers"
   | "body"
   | "time"
-  | "verbs";
+  | "verbs"
+  | "colors"
+  | "shapes"
+  | "clothes"
+  | "weather"
+  | "actions"
+  | "math"
+  | "geography"
+  | "history"
+  | "science"
+  | "abstract"
+  | "economy"
+  | "community";
+
 export type AppLanguage = "amharic" | "oromo" | "english";
 export type UserRole = "parent" | "student" | "teacher" | "diaspora";
 export type SkillKey = "speaking" | "listening" | "reading" | "writing";
@@ -36,6 +49,8 @@ export interface Child {
   id: string;
   name: string;
   gradeLevel: number;
+  learningLanguage: AppLanguage;
+  schoolName?: string;
   initials: string;
   avatar: string;
   streak: number;

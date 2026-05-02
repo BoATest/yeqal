@@ -1,0 +1,265 @@
+You have built the Yeqal app with 87 words, real audio, homework helper, and speaking practice. Now add 4 high-value new features AND connect the real backend services. Build everything below in order.
+
+---
+
+## PHASE A — MULTI-CHILD SUPPORT (do this first, 30 minutes)
+
+The children data model needs these fields added:
+- grade_level (integer 1–8)
+- learning_language ('amharic' | 'oromo' | 'english')
+- school_name (text, optional)
+- class_code (text, optional)
+- teacher_name (text, optional)
+
+UI changes:
+1. Home screen: if more than 1 child exists, show a horizontal scroll child-switcher row just below the header. Each child shows their emoji avatar + name + grade badge. Tapping switches the "active child" — all subsequent screens (homework, practice, dashboard) use that child's grade and language.
+
+2. Add child form: extend it to include grade level (1–8 picker), learning language selector (Amharic / Oromo / English), and optionally school name.
+
+3. Homework helper: show the active child's name and grade at the top — "Helping Liya · Grade 4 · Amharic". This context is passed to the explanation engine.
+
+4. Parent dashboard: if multiple children, show a tab row at the top (one tab per child). Each tab shows that child's own streak, XP, and skill bars independently.
+
+---
+
+## PHASE B — LIVE TRANSLATOR (walkie-talkie mode)
+
+Add a new screen called "Live Translator" accessible from:
+- Bottom navigation as a 5th tab with icon 🔄
+- A card on the home screen: "Speak any language — hear it in another"
+
+The screen layout:
+- Full screen divided into two halves by a horizontal divider
+- Top half: Person A (e.g. parent who speaks Amharic)
+  - Language selector: pill buttons [Amharic] [Oromo] [English]
+  - Large press-and-hold button: "Hold to speak"
+  - Transcript area: shows what was heard in light text
+  - Translation area: shows translated text in bold
+- Bottom half: Person B (e.g. teacher who speaks Oromo)
+  - Same layout, different language selection
+  - Large press-and-hold button at the bottom half
+- Between the two halves: a swap button (⇅) that switches A and B languages
+
+How it works (implement this exactly):
+
+1. User presses and holds the speak button
+2. Use Web Speech API SpeechRecognition:
+   - lang attribute: 'am-ET' for Amharic, 'om' for Oromo, 'en-US' for English
+   - continuous: false, interimResults: true
+3. While speaking: show animated waveform bars (3–5 bars with staggered CSS animation)
+4. On recognition result:
+   a. FIRST — look up exact word match in your local words array. If found, use your stored translation immediately (instant, no API call)
+   b. If not found — call LibreTranslate API (free, open-source):
+      POST https://libretranslate.com/translate
+      Body: { q: recognizedText, source: sourceLangCode, target: targetLangCode, api_key: '' }
+      Language codes: Amharic = 'am', Oromo = 'om', English = 'en'
+      Note: LibreTranslate may not support Amharic/Oromo — if API returns error, fall back to showing original text with a note "Full translation coming soon"
+   c. Display translated text in the other person's half
+5. Automatically play translated text using SpeechSynthesis:
+   - lang: 'am-ET' for Amharic, 'en-US' for English
+   - pitch: 1, rate: 0.85 (slightly slower for clarity)
+   - Show speaker animation while playing
+
+Situations mode (add below the translator):
+- A scrollable row of situation cards: "Market 🛒" | "Bus Station 🚌" | "Health Center 🏥" | "Meeting Elders 🙏" | "School Meeting 🏫" | "Coffee Ceremony ☕"
+- Tapping a situation loads 5 pre-written phrase pairs (Amharic ↔ Oromo ↔ English) relevant to that situation
+- Each phrase has a tap-to-speak button that speaks it in the selected language
+- These phrases come from your local words/phrases data — no API needed
+
+---
+
+## PHASE C — CAMERA POINT AND LEARN
+
+Add a camera feature accessible from:
+- A camera button (📷) in the top-right of the home screen search bar
+- A "Point & Learn" section in the Homework Helper screen
+
+Implementation:
+
+1. Camera capture:
+   - Use HTML5 getUserMedia({ video: true }) to open the device camera
+   - Show live camera preview in a fullscreen overlay
+   - Large circular capture button at the bottom (white circle on dark overlay)
+   - "X" close button top-right
+   - Two mode buttons at the top: [Learn Object] [Read Text]
+
+2. Learn Object mode:
+   - User points at an object and taps capture
+   - Send the image to Google Cloud Vision API (Object Localization):
+     URL: https://vision.googleapis.com/v1/images:annotate?key=GOOGLE_VISION_API_KEY
+     Body: { requests: [{ image: { content: base64ImageData }, features: [{ type: 'OBJECT_LOCALIZATION', maxResults: 3 }] }] }
+   - Take the top result's English name (e.g. "Cow", "Tree", "House")
+   - Search your local words array for that English name (case-insensitive)
+   - If found: show the full word card (Amharic + Oromo + English + audio buttons + example sentence)
+   - If not found: show the English name + "This word is not in our dictionary yet. Add it?" button
+   - Add a "Practice this word" button at the bottom
+
+3. Read Text mode (Homework Camera):
+   - User points at a textbook page and captures
+   - Send to Google Cloud Vision API with TEXT_DETECTION feature type
+   - Extract detected text
+   - Pass extracted text directly to the Homework Helper explanation function (reuse existing logic)
+   - Show "Found text: ..." then the full homework explanation
+
+4. Handle errors gracefully:
+   - Camera permission denied: show friendly message "We need camera access to identify objects. Please allow camera in your phone settings."
+   - Vision API error or no key: show "Camera identification not available right now. Try typing the word instead." — do NOT crash or show raw error
+   - No internet: "Camera identification needs internet. Your dictionary works offline."
+
+---
+
+## PHASE D — CURRICULUM BOOKS (grade-specific homework help)
+
+This makes the homework helper dramatically smarter when the parent's child grade is known.
+
+Step 1: Add curriculum data structure
+Create a file src/data/curriculum.js with this structure:
+Each grade has an array of topics, and each topic has key vocabulary:
+
+export const CURRICULUM = {
+  grade1: {
+    amharic: {
+      topics: [
+        { name: "Family", keywords: ["mother","father","sister","brother","home","family"], amharic_terms: ["እናት","አባት","እህት","ወንድም","ቤት","ቤተሰብ"] },
+        { name: "Body parts", keywords: ["head","hand","foot","eye","ear","nose"], amharic_terms: ["ራስ","እጅ","እግር","ዓይን","귀","አፍንጫ"] },
+        { name: "Animals", keywords: ["cow","horse","lion","bird","fish","dog"], amharic_terms: ["ላም","ፈረስ","አንበሳ","ወፍ","ዓሳ","ውሻ"] },
+        { name: "Numbers 1-10", keywords: ["one","two","three","four","five","six","seven","eight","nine","ten"], amharic_terms: ["አንድ","ሁለት","ሦስት","አራት","አምስት","ስድስት","ሰባት","ስምንት","ዘጠኝ","አሥር"] },
+      ]
+    },
+    oromo: {
+      topics: [
+        { name: "Family", keywords: ["haadha","abbaa","obboleettii","obboleessa","mana"], oromo_terms: ["Haadha","Abbaa","Obboleettii","Obboleessa","Mana"] },
+        { name: "Animals", keywords: ["sa'a","farda","leenca","simbiroo"], oromo_terms: ["Sa'a","Farda","Leenca","Simbiroo"] },
+      ]
+    }
+  },
+  grade2: { /* expand */ },
+  grade3: { /* expand */ },
+  grade4: {
+    amharic: {
+      topics: [
+        { name: "Environment", keywords: ["forest","river","mountain","soil","water","air"], amharic_terms: ["ደን","ወንዝ","ተራራ","አፈር","ውሃ","አየር"] },
+        { name: "Community", keywords: ["neighborhood","market","church","school","hospital"], amharic_terms: ["ሰፈር","ገበያ","ቤተ ክርስቲያን","ትምህርት ቤት","ሆስፒታል"] },
+      ]
+    }
+  },
+  grade5: { /* expand */ },
+  grade6: { /* expand */ },
+  grade7: { /* expand */ },
+  grade8: { /* expand */ }
+};
+
+export function getCurriculumContext(gradeLevel, language) {
+  const grade = CURRICULUM['grade' + gradeLevel];
+  if (!grade) return null;
+  return grade[language] || grade['amharic'] || null;
+}
+
+export function findTopicForQuestion(questionText, gradeLevel, language) {
+  const ctx = getCurriculumContext(gradeLevel, language);
+  if (!ctx) return null;
+  const lower = questionText.toLowerCase();
+  for (const topic of ctx.topics) {
+    if (topic.keywords.some(kw => lower.includes(kw))) {
+      return topic;
+    }
+  }
+  return null;
+}
+
+Step 2: Update Homework Helper to use curriculum context
+In the homework helper explanation function, before generating a response:
+1. Get the active child's grade_level
+2. Call findTopicForQuestion(userInput, gradeLevel, learningLanguage)
+3. If a matching topic is found: prefix the explanation with "This looks like a Grade [X] [Topic Name] question. Here are the key words for this topic: ..."
+4. Show a "This is from Grade [X] curriculum" badge at the top of the result
+5. Show related curriculum words as extra practice chips below the main result
+
+Step 3: Subject selector in homework helper
+Add a horizontal scroll row of subject pills below the text input:
+[General] [Amharic Language] [Oromo Language] [English] [Science] [Social Studies] [Math]
+Tapping a subject filters the curriculum context and word suggestions to that subject.
+
+Step 4: Grade display
+At the top of Homework Helper: "Helping [child name] · Grade [X] · [Subject]"
+If no child is selected: show "Select a child to get grade-specific help" with a link to add a child.
+
+---
+
+## PHASE E — EXPAND WORD DATABASE TO 500 WORDS
+
+The current 87 words are not enough for meaningful homework help. Add these words now (in the local words array AND in Supabase when connected):
+
+Categories to add (add at minimum 5 words per category):
+
+GRADE 1-2 VOCABULARY:
+Colors: red=ቀይ/Diimaa, blue=ሰማያዊ/Cuquliisaa, green=አረንጓዴ/Magariisa, yellow=ቢጫ/Keelloo, white=ነጭ/Adii, black=ጥቁር/Gurraacha
+Shapes: circle=ክብ, square=ካሬ, triangle=ሦስት ማዕዘን
+Clothes: shirt=ሸሚዝ/Shaartiilee, shoes=ጫማ/Kophee, dress=ቀሚስ/Uffata
+Weather: hot=ሞቃት/Ho'aa, cold=ቀዝቃዛ/Qorraa, rain=ዝናብ/Rooba, wind=ንፋስ/Qilleensa
+Actions (verbs): eat=ብላ/Nyaadhu, drink=ጠጣ/Dhugi, run=ሮጥ/Fiigi, walk=ሂድ/Deemi, read=አንብብ/Dubbisi, write=ጻፍ/Barreessi, listen=ስማ/Caqasi
+
+GRADE 3-4 VOCABULARY:
+Nature-Science: soil=አፈር/Lafa, seed=ዘር/Sanyii, plant=ተክል/Biqilaa, root=ሥር/Hidda, leaf=ቅጠል/Baala, fruit=ፍሬ/Firii
+Community: market=ገበያ/Gabaa, hospital=ሆስፒታል/Hospitaala, church=ቤተ ክርስቲያን/Waldaa, government=መንግሥት/Mootummaa
+Math words: add=ደምር/Ida'i, subtract=ቀነስ/Hir'isi, multiply=አባዛ/Baay'isi, equal=እኩል/Wal-qixa, number=ቁጥር/Lakkoofsa
+
+GRADE 5-6 VOCABULARY:
+Geography: country=ሃገር/Biyya, city=ከተማ/Magaalaa, village=ቀበሌ/Ganda, border=ድንበር/Daangaa, map=ካርታ/Kaartaa
+History: king=ንጉሥ/Mootii, battle=ጦርነት/Lola, tradition=ባህል/Aadaa, culture=ባህል/Aadaa
+Science: energy=ሃይል/Humna, electricity=ኤሌክትሪክ/Ibsaa, machine=ማሽን/Maashinii, experiment=ሙከራ/Qormaata
+
+GRADE 7-8 VOCABULARY:
+Abstract concepts: democracy=ዴሞክራሲ/Dimokiraasii, rights=መብቶች/Mirga, responsibility=ኃላፊነት/Itti-gaafatamummaa, equality=እኩልነት/Walqixxummaa
+Economy: trade=ንግድ/Daldalaa, export=ወጪ/Alergii, import=ገቢ/Galii, development=ልማት/Guddinaa
+
+For each word added, include:
+- word_amharic (Ge'ez script)
+- word_oromo (Latin script)
+- word_english
+- grade_level (1-8 appropriate)
+- subject ('general' | 'science' | 'math' | 'social_studies')
+- definition_english (one sentence)
+
+---
+
+## PHASE F — SUPABASE REAL CONNECTION
+
+Connect the app to real Supabase. Create a Supabase project at supabase.com (free tier) and:
+
+1. Environment variables needed (.env file):
+   VITE_SUPABASE_URL=your_project_url
+   VITE_SUPABASE_ANON_KEY=your_anon_key
+   VITE_GOOGLE_VISION_KEY=your_vision_api_key (for camera feature)
+   VITE_HASAB_API_KEY=your_hasab_key (when available)
+
+2. Create Supabase client in src/lib/supabase.js:
+   import { createClient } from '@supabase/supabase-js'
+   export const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
+
+3. Migrate local words array to Supabase words table. Keep local array as offline fallback — on app load, try to fetch from Supabase; if offline, use local array.
+
+4. Sessions: when a practice session completes, save to Supabase sessions table (user_id, child_id, session_type, words_practiced, score, duration_seconds).
+
+5. Children: save child profiles to Supabase children table. Link to auth user.
+
+6. Real-time parent dashboard: use Supabase Realtime to subscribe to sessions table for the active child:
+   supabase.channel('child-sessions').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'sessions', filter: 'child_id=eq.' + childId }, payload => { refreshDashboard(); }).subscribe()
+
+---
+
+## IMPORTANT: DO NOT BREAK WHAT WORKS
+
+The following things are already working — do not rewrite or remove them:
+- Web Speech API audio playback
+- Homework helper word-by-word table
+- Speaking practice countdown + waveform + score display
+- WhatsApp share button and message format
+- Offline banner
+- Noto Sans Ethiopic font loading
+- Onboarding 3-slide flow
+- Add child form with emoji picker
+
+Build each phase in order (A → B → C → D → E → F). After each phase, the app must still run without errors. Test the app compiles and the main home screen renders before moving to the next phase.
+
+After all phases: take a screenshot of: (1) Home screen, (2) Live Translator, (3) Camera Point & Learn, (4) Homework Helper with grade context showing, (5) Parent dashboard with 2 children tabs.

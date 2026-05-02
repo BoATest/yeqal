@@ -30,7 +30,7 @@ export default function TabLayout() {
           paddingBottom: isWeb ? 20 : 8,
         },
         tabBarLabelStyle: {
-          fontSize: 11,
+          fontSize: 10,
           fontFamily: "Inter_600SemiBold",
           marginTop: -2,
         },
@@ -53,7 +53,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <Feather name="home" size={22} color={color} />
+            <Feather name="home" size={20} color={color} />
           ),
         }}
       />
@@ -62,7 +62,7 @@ export default function TabLayout() {
         options={{
           title: "Search",
           tabBarIcon: ({ color }) => (
-            <Feather name="search" size={22} color={color} />
+            <Feather name="search" size={20} color={color} />
           ),
         }}
       />
@@ -71,7 +71,16 @@ export default function TabLayout() {
         options={{
           title: "Homework",
           tabBarIcon: ({ color }) => (
-            <Feather name="book-open" size={22} color={color} />
+            <Feather name="book-open" size={20} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="translate"
+        options={{
+          title: "Translate",
+          tabBarIcon: ({ color }) => (
+            <Feather name="refresh-cw" size={20} color={color} />
           ),
         }}
       />
@@ -80,7 +89,7 @@ export default function TabLayout() {
         options={{
           title: "Speak",
           tabBarIcon: ({ color }) => (
-            <Feather name="mic" size={22} color={color} />
+            <Feather name="mic" size={20} color={color} />
           ),
         }}
       />
@@ -89,7 +98,7 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <Feather name="user" size={22} color={color} />
+            <Feather name="user" size={20} color={color} />
           ),
         }}
       />
