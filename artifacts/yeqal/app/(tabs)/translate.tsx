@@ -352,9 +352,14 @@ export default function TranslateScreen() {
     const isTrans = translatingPerson === person;
     const bgColor = person === "A" ? colors.greenBg : colors.blueBg;
     const accentColor = person === "A" ? colors.primary : colors.blue;
+    const roleLabel = person === "A" ? "You speak:" : "They hear:";
+    const roleLabelColor = person === "A" ? colors.primary : colors.blue;
 
     return (
       <View style={[styles.panel, { backgroundColor: bgColor }]}>
+        {/* Role label */}
+        <Text style={[styles.roleLabel, { color: roleLabelColor }]}>{roleLabel}</Text>
+
         {/* Lang pills */}
         <View style={styles.langPills}>
           {LANG_OPTIONS.map((opt) => (
@@ -440,12 +445,17 @@ export default function TranslateScreen() {
               styles.micBtn,
               {
                 backgroundColor: isRec ? colors.destructive : accentColor,
+                shadowColor: isRec ? colors.destructive : "transparent",
+                shadowOpacity: isRec ? 0.5 : 0,
+                shadowRadius: isRec ? 10 : 0,
+                shadowOffset: { width: 0, height: 0 },
+                elevation: isRec ? 6 : 0,
               },
             ]}
           >
             <Feather
               name={isRec ? "square" : "mic"}
-              size={22}
+              size={26}
               color="#fff"
             />
           </Pressable>
@@ -700,10 +710,18 @@ const styles = StyleSheet.create({
     height: 40,
   },
   waveBar: { width: 4, height: 32, borderRadius: 2 },
+  roleLabel: {
+    fontSize: 12,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+    letterSpacing: 0.4,
+    textTransform: "uppercase",
+    marginBottom: -4,
+  },
   micBtn: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     alignItems: "center",
     justifyContent: "center",
   },

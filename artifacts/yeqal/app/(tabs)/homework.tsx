@@ -56,9 +56,15 @@ export default function HomeworkScreen() {
   const [error, setError] = useState<string | null>(null);
   const [showCamera, setShowCamera] = useState(false);
   const [curriculumTopic, setCurriculumTopic] = useState<CurriculumTopic | null>(null);
+  const [emptyPrompt, setEmptyPrompt] = useState(false);
 
   const handleAnalyze = async () => {
-    if (!text.trim()) return;
+    if (!text.trim()) {
+      setEmptyPrompt(true);
+      setTimeout(() => setEmptyPrompt(false), 3000);
+      return;
+    }
+    setEmptyPrompt(false);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setIsAnalyzing(true);
     setResults(null);
@@ -234,6 +240,16 @@ export default function HomeworkScreen() {
           )}
         </Pressable>
 
+        {/* Empty input gentle prompt */}
+        {emptyPrompt && (
+          <View style={[styles.emptyPromptCard, { backgroundColor: colors.goldBg, borderColor: colors.gold + "40" }]}>
+            <Feather name="edit-3" size={16} color={colors.gold} />
+            <Text style={[styles.emptyPromptText, { color: colors.text }]}>
+              Type or paste your homework question first — even a single word works!
+            </Text>
+          </View>
+        )}
+
         {/* Error state */}
         {error && (
           <View
@@ -298,6 +314,14 @@ export default function HomeworkScreen() {
               </View>
             ) : (
               <>
+                {/* Explanation paragraph */}
+                <View style={[styles.explanationCard, { backgroundColor: colors.greenBg, borderColor: colors.green + "30" }]}>
+                  <Feather name="info" size={14} color={colors.primary} />
+                  <Text style={[styles.explanationText, { color: colors.text }]}>
+                    Tap any word in the table below to hear it spoken in all 3 languages and see its full meaning.
+                  </Text>
+                </View>
+
                 {/* Results header + Practice All */}
                 {/* Curriculum topic badge */}
                 {curriculumTopic && (
@@ -687,6 +711,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  emptyPromptCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 12,
+  },
+  emptyPromptText: { flex: 1, fontSize: 13, fontFamily: "Inter_400Regular", lineHeight: 18 },
+  explanationCard: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 12,
+  },
+  explanationText: { flex: 1, fontSize: 13, fontFamily: "Inter_400Regular", lineHeight: 18 },
   chipsLabel: {
     fontSize: 10,
     fontWeight: "700",

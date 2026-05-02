@@ -222,27 +222,6 @@ export default function WordDetailScreen() {
             <Text style={[styles.cardTitle, { color: colors.mutedForeground }]}>
               EXAMPLE SENTENCE
             </Text>
-            <View style={styles.tabRow}>
-              {(["english", "amharic", "oromo"] as DefTab[]).map((tab) => (
-                <Pressable
-                  key={tab}
-                  onPress={() => setDefTab(tab)}
-                  style={[
-                    styles.tab,
-                    { backgroundColor: defTab === tab ? colors.primary : colors.muted },
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.tabText,
-                      { color: defTab === tab ? "#fff" : colors.mutedForeground },
-                    ]}
-                  >
-                    {tab === "amharic" ? "አማርኛ" : tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
             <View
               style={[
                 styles.exampleBox,

@@ -33,12 +33,25 @@ export function CameraOverlay({ onClose, onResult }: Props) {
   const [mode, setMode] = useState<CameraMode>("object");
   const [cameraReady, setCameraReady] = useState(false);
   const [permissionDenied, setPermissionDenied] = useState(false);
+  const [cameraErrorMsg, setCameraErrorMsg] = useState<string | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [noApiKey, setNoApiKey] = useState(false);
 
+  const cameraTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const startCamera = useCallback(async () => {
     if (Platform.OS !== "web" || typeof navigator === "undefined") return;
+    setCameraErrorMsg(null);
+    setPermissionDenied(false);
+
+    // 3-second timeout in case stream stalls before playing
+    cameraTimeoutRef.current = setTimeout(() => {
+      if (!videoRef.current || videoRef.current.readyState < 2) {
+        setCameraErrorMsg("Camera is taking too long to load. Try closing and reopening.");
+      }
+    }, 3000);
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment" },
@@ -46,17 +59,40 @@ export function CameraOverlay({ onClose, onResult }: Props) {
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        videoRef.current.play();
-        setCameraReady(true);
+        videoRef.current.onloadedmetadata = () => {
+          if (cameraTimeoutRef.current) {
+            clearTimeout(cameraTimeoutRef.current);
+            cameraTimeoutRef.current = null;
+          }
+          videoRef.current?.play().then(() => setCameraReady(true)).catch(() => {
+            setCameraErrorMsg("Could not start camera preview. Try refreshing.");
+          });
+        };
       }
-    } catch {
-      setPermissionDenied(true);
+    } catch (err: any) {
+      if (cameraTimeoutRef.current) {
+        clearTimeout(cameraTimeoutRef.current);
+        cameraTimeoutRef.current = null;
+      }
+      const name = err?.name ?? "";
+      if (name === "NotAllowedError" || name === "PermissionDeniedError") {
+        setPermissionDenied(true);
+      } else if (name === "NotFoundError" || name === "DevicesNotFoundError") {
+        setCameraErrorMsg("No camera found on this device.");
+      } else if (name === "OverconstrainedError") {
+        setCameraErrorMsg("Camera mode not supported. Try a different browser.");
+      } else if (name === "NotReadableError" || name === "TrackStartError") {
+        setCameraErrorMsg("Camera is in use by another app. Close it and try again.");
+      } else {
+        setCameraErrorMsg("Could not access camera. Try refreshing or using a different browser.");
+      }
     }
   }, []);
 
   useEffect(() => {
     startCamera();
     return () => {
+      if (cameraTimeoutRef.current) clearTimeout(cameraTimeoutRef.current);
       streamRef.current?.getTracks().forEach((t) => t.stop());
     };
   }, [startCamera]);
@@ -163,6 +199,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
             ref={videoRef as any}
             style={webStyles.video}
             playsInline
+            autoPlay
             muted
           />
           <canvas ref={canvasRef as any} style={webStyles.canvas} />
@@ -200,8 +237,24 @@ export function CameraOverlay({ onClose, onResult }: Props) {
             <Feather name="camera-off" size={28} color="#FFFFFF" />
             <Text style={styles.stateTitle}>Camera access denied</Text>
             <Text style={styles.stateDesc}>
-              We need camera access to identify objects. Please allow camera in your browser settings.
+              Allow camera access in your browser settings, then tap Retry.
             </Text>
+            <Pressable onPress={startCamera} style={styles.retryBtn}>
+              <Text style={styles.retryBtnText}>Retry</Text>
+            </Pressable>
+          </View>
+        )}
+
+        {cameraErrorMsg && (
+          <View style={[styles.stateCard, { backgroundColor: "#00000099" }]}>
+            <Feather name="alert-triangle" size={28} color="#F59E0B" />
+            <Text style={styles.stateTitle}>{cameraErrorMsg}</Text>
+            <Pressable onPress={startCamera} style={styles.retryBtn}>
+              <Text style={styles.retryBtnText}>Try again</Text>
+            </Pressable>
+            <Pressable onPress={onClose} style={[styles.retryBtn, { backgroundColor: "#FFFFFF15" }]}>
+              <Text style={styles.retryBtnText}>Type instead</Text>
+            </Pressable>
           </View>
         )}
 
@@ -235,7 +288,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
         )}
 
         {/* Capture button */}
-        {!permissionDenied && !error && !noApiKey && (
+        {!permissionDenied && !cameraErrorMsg && !error && !noApiKey && (
           <View style={styles.captureRow}>
             {isCapturing ? (
               <View style={styles.capturingState}>
@@ -257,7 +310,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
         )}
 
         {/* Guide text */}
-        {!error && !permissionDenied && !noApiKey && !isCapturing && (
+        {!error && !permissionDenied && !cameraErrorMsg && !noApiKey && !isCapturing && (
           <Text style={styles.guideText}>
             {mode === "object"
               ? "Point at an object and tap the button"

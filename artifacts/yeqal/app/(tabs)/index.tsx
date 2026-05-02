@@ -15,6 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useColors } from "@/hooks/useColors";
 import { useApp } from "@/context/AppContext";
+import { useAudio } from "@/hooks/useAudio";
 import { WORDS } from "@/data/words";
 
 const WEB_TOP = Platform.OS === "web" ? 67 : 0;
@@ -57,6 +58,7 @@ export default function HomeScreen() {
   const { profile, activeChild, activeChildId, setActiveChildId } = useApp();
   const insets = useSafeAreaInsets();
 
+  const { speak, playingKey } = useAudio();
   const wordOfDay = useMemo(() => WORDS[new Date().getDate() % WORDS.length], []);
 
   const getGreeting = () => {
@@ -258,7 +260,20 @@ export default function HomeScreen() {
                   <Text style={styles.wotdExample} numberOfLines={1}>
                     {wordOfDay.exampleEnglish}
                   </Text>
-                  <Feather name="volume-2" size={18} color="#FFFFFF80" />
+                  <Pressable
+                    onPress={(e) => {
+                      e.stopPropagation?.();
+                      speak(wordOfDay.amharic, "am", `wotd-${wordOfDay.id}`);
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    }}
+                    hitSlop={12}
+                  >
+                    <Feather
+                      name={playingKey === `wotd-${wordOfDay.id}` ? "volume-2" : "volume-1"}
+                      size={22}
+                      color={playingKey === `wotd-${wordOfDay.id}` ? "#FFFFFF" : "#FFFFFF80"}
+                    />
+                  </Pressable>
                 </View>
               </LinearGradient>
             </Pressable>
@@ -296,7 +311,7 @@ export default function HomeScreen() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={[styles.sectionLabel, { color: colors.mutedForeground }]}>
-                RECENTLY ADDED
+                START HERE — COMMON WORDS
               </Text>
               <Pressable onPress={() => router.push("/search")}>
                 <Text style={[styles.seeAll, { color: colors.primary }]}>

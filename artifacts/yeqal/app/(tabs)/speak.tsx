@@ -32,7 +32,27 @@ const SITUATIONS = [
 
 const NUM_BARS = 7;
 type Mode = "word" | "situation";
-type RecordingState = "idle" | "recording" | "analyzing" | "scored";
+type RecordingState = "idle" | "recording" | "analyzing" | "scored" | "selfrate";
+
+const HASAB_KEY = process.env.EXPO_PUBLIC_HASAB_KEY ?? "";
+
+function scoreSpeech(heard: string, target: string): number {
+  const a = heard.toLowerCase().trim();
+  const b = target.toLowerCase().trim();
+  if (!a || !b) return 0;
+  if (a === b) return 97;
+  if (a.includes(b) || b.includes(a)) return 90;
+  const aWords = a.split(/\s+/);
+  const bWords = b.split(/\s+/);
+  let matches = 0;
+  for (const w of aWords) {
+    if (bWords.some((bw) => bw.startsWith(w.slice(0, 3)) || w.startsWith(bw.slice(0, 3)))) {
+      matches++;
+    }
+  }
+  const ratio = matches / Math.max(aWords.length, bWords.length);
+  return Math.round(50 + ratio * 45);
+}
 
 export default function SpeakScreen() {
   const colors = useColors();
@@ -49,13 +69,24 @@ export default function SpeakScreen() {
   const [wordIndex, setWordIndex] = useState(Math.floor(Math.random() * WORDS.length));
   const [recordingState, setRecordingState] = useState<RecordingState>("idle");
   const [score, setScore] = useState(0);
+  const [transcript, setTranscript] = useState("");
   const [countdown, setCountdown] = useState<number | null>(null);
   const [permissionDenied, setPermissionDenied] = useState(false);
   const [serviceError, setServiceError] = useState(false);
+  const [hasSpeechSupport, setHasSpeechSupport] = useState(false);
 
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const autoStopRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const waveAnimsRef = useRef<Animated.CompositeAnimation[]>([]);
+  const srRef = useRef<any>(null);
+  const transcriptRef = useRef("");
+
+  useEffect(() => {
+    if (Platform.OS === "web" && typeof window !== "undefined") {
+      const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      setHasSpeechSupport(!!SR);
+    }
+  }, []);
 
   const currentWord = WORDS[wordIndex];
 
@@ -110,34 +141,61 @@ export default function SpeakScreen() {
     setCountdown(null);
   };
 
-  const finishRecording = () => {
+  const applyScore = (heard: string, targetWord: typeof currentWord) => {
+    const targets = [
+      targetWord.english,
+      targetWord.romanization ?? "",
+      targetWord.amharic,
+      targetWord.oromo,
+    ].filter(Boolean);
+    const best = targets.reduce((max, t) => Math.max(max, scoreSpeech(heard, t)), 0);
+    const clamped = Math.min(99, Math.max(best, heard.trim().length > 1 ? 52 : 0));
+    setScore(clamped);
+    setTranscript(heard);
+    scoreAnim.setValue(0);
+    Animated.spring(scoreAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      tension: 80,
+      friction: 8,
+    }).start();
+    setRecordingState("scored");
+  };
+
+  const stopSR = () => {
+    if (srRef.current) {
+      try { srRef.current.stop(); } catch { /* ignore */ }
+      srRef.current = null;
+    }
+  };
+
+  const finishRecording = (heardOverride?: string) => {
     clearTimers();
     stopPulse();
     stopWaveform();
-    setRecordingState("analyzing");
+    stopSR();
     setServiceError(false);
 
+    if (!hasSpeechSupport) {
+      setRecordingState("selfrate");
+      return;
+    }
+
+    setRecordingState("analyzing");
     setTimeout(() => {
       try {
-        const newScore = Math.floor(Math.random() * 36) + 60;
-        setScore(newScore);
-        scoreAnim.setValue(0);
-        Animated.spring(scoreAnim, {
-          toValue: 1,
-          useNativeDriver: true,
-          tension: 80,
-          friction: 8,
-        }).start();
-        setRecordingState("scored");
+        applyScore(heardOverride ?? "", currentWord);
       } catch {
         setServiceError(true);
         setRecordingState("idle");
       }
-    }, 1200);
+    }, 600);
   };
 
   const requestMicAndRecord = async () => {
     setPermissionDenied(false);
+    setTranscript("");
+
     if (Platform.OS === "web" && typeof navigator !== "undefined" && navigator.mediaDevices) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -166,13 +224,61 @@ export default function SpeakScreen() {
       });
     }, 1000);
 
-    autoStopRef.current = setTimeout(finishRecording, 3200);
+    // Start real SpeechRecognition on web
+    if (hasSpeechSupport && typeof window !== "undefined") {
+      const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SR) {
+        let latestTranscript = "";
+        const rec = new SR();
+        rec.lang = "am-ET";
+        rec.continuous = true;
+        rec.interimResults = true;
+        rec.onresult = (e: any) => {
+          latestTranscript = Array.from(e.results as any[])
+            .map((r: any) => r[0].transcript)
+            .join(" ");
+          transcriptRef.current = latestTranscript;
+          setTranscript(latestTranscript);
+        };
+        rec.onend = () => {
+          if (srRef.current === rec) {
+            srRef.current = null;
+            clearTimers();
+            stopPulse();
+            stopWaveform();
+            setRecordingState("analyzing");
+            setTimeout(() => applyScore(latestTranscript, currentWord), 400);
+          }
+        };
+        rec.onerror = () => {
+          if (srRef.current === rec) srRef.current = null;
+        };
+        srRef.current = rec;
+        try { rec.start(); } catch { srRef.current = null; }
+      }
+    }
+
+    autoStopRef.current = setTimeout(() => finishRecording(transcriptRef.current), 3200);
+  };
+
+  const handleSelfRate = (selfScore: number) => {
+    setScore(selfScore);
+    setTranscript("");
+    scoreAnim.setValue(0);
+    Animated.spring(scoreAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      tension: 80,
+      friction: 8,
+    }).start();
+    setRecordingState("scored");
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
   };
 
   const handleMicPress = async () => {
     if (recordingState === "recording") {
-      finishRecording();
-    } else if (recordingState === "idle" || recordingState === "scored") {
+      finishRecording(transcriptRef.current);
+    } else if (recordingState === "idle" || recordingState === "scored" || recordingState === "selfrate") {
       await requestMicAndRecord();
     }
   };
@@ -181,9 +287,12 @@ export default function SpeakScreen() {
     clearTimers();
     stopPulse();
     stopWaveform();
+    stopSR();
     setRecordingState("idle");
     scoreAnim.setValue(0);
     setServiceError(false);
+    setTranscript("");
+    transcriptRef.current = "";
     setWordIndex((i) => (i + 1) % WORDS.length);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
@@ -394,6 +503,29 @@ export default function SpeakScreen() {
               )}
             </View>
 
+            {/* Self-rate mode (native / no SR support) */}
+            {recordingState === "selfrate" && (
+              <View style={[styles.scoreCard, { backgroundColor: colors.card, borderColor: colors.border, marginHorizontal: 20 }]}>
+                <Text style={[styles.scoreFeedback, { color: colors.text, textAlign: "center" }]}>
+                  How did it go? Rate yourself:
+                </Text>
+                <View style={styles.selfRateRow}>
+                  <Pressable onPress={() => handleSelfRate(40)} style={[styles.selfRateBtn, { backgroundColor: "#EF444420", borderColor: "#EF444440" }]}>
+                    <Text style={[styles.selfRateIcon]}>😓</Text>
+                    <Text style={[styles.selfRateLabel, { color: "#EF4444" }]}>Still learning</Text>
+                  </Pressable>
+                  <Pressable onPress={() => handleSelfRate(72)} style={[styles.selfRateBtn, { backgroundColor: "#F59E0B20", borderColor: "#F59E0B40" }]}>
+                    <Text style={[styles.selfRateIcon]}>🙂</Text>
+                    <Text style={[styles.selfRateLabel, { color: "#F59E0B" }]}>Getting there</Text>
+                  </Pressable>
+                  <Pressable onPress={() => handleSelfRate(95)} style={[styles.selfRateBtn, { backgroundColor: "#22C55E20", borderColor: "#22C55E40" }]}>
+                    <Text style={[styles.selfRateIcon]}>🎉</Text>
+                    <Text style={[styles.selfRateLabel, { color: "#22C55E" }]}>Nailed it!</Text>
+                  </Pressable>
+                </View>
+              </View>
+            )}
+
             {/* Score display */}
             {recordingState === "scored" && (
               <Animated.View
@@ -408,6 +540,14 @@ export default function SpeakScreen() {
                   },
                 ]}
               >
+                {transcript ? (
+                  <View style={[styles.transcriptRow, { backgroundColor: colors.muted, borderRadius: 10 }]}>
+                    <Feather name="mic" size={13} color={colors.mutedForeground} />
+                    <Text style={[styles.transcriptLabel, { color: colors.mutedForeground }]}>
+                      We heard: <Text style={{ color: colors.text, fontWeight: "600" }}>{transcript}</Text>
+                    </Text>
+                  </View>
+                ) : null}
                 <Text style={[styles.scoreNumber, { color: scoreColor }]}>
                   {score}
                 </Text>
@@ -440,7 +580,7 @@ export default function SpeakScreen() {
               </Animated.View>
             )}
 
-            {recordingState === "idle" && (
+            {(recordingState === "idle" || recordingState === "selfrate") && (
               <Pressable onPress={nextWord} style={styles.skipBtn}>
                 <Text style={[styles.skipText, { color: colors.mutedForeground }]}>
                   Skip this word
@@ -637,6 +777,27 @@ const styles = StyleSheet.create({
   scoreBtnText: { fontSize: 14, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
   skipBtn: { alignItems: "center", paddingVertical: 8 },
   skipText: { fontSize: 13, fontFamily: "Inter_400Regular" },
+  selfRateRow: { flexDirection: "row", gap: 10, width: "100%", marginTop: 8 },
+  selfRateBtn: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1,
+    paddingVertical: 14,
+    alignItems: "center",
+    gap: 6,
+  },
+  selfRateIcon: { fontSize: 24 },
+  selfRateLabel: { fontSize: 11, fontWeight: "700", fontFamily: "Inter_700Bold", textAlign: "center" },
+  transcriptRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginBottom: 8,
+    alignSelf: "stretch",
+  },
+  transcriptLabel: { fontSize: 13, fontFamily: "Inter_400Regular", flex: 1, lineHeight: 18 },
   situations: { paddingHorizontal: 20, gap: 10 },
   situationDesc: { fontSize: 13, fontFamily: "Inter_400Regular", marginBottom: 4 },
   situationCard: {

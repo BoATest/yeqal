@@ -40,3 +40,4 @@ channel = "stable-25_05"
 [userenv.shared]
 EXPO_PUBLIC_SUPABASE_URL = "https://cfpcxikjhxzymrplrimm.supabase.co"
 EXPO_PUBLIC_SUPABASE_ANON_KEY = "sb_publishable_3-1H8UG5TWhOLFtNL5wxSg_78DrWACW"
+EXPO_PUBLIC_HASAB_KEY = "HASAB_KEY_czBpjslAoLGYGPpxiMjhYtl0aVup5E"
