@@ -13,6 +13,14 @@ function generateDeviceId(): string {
   return "dev-" + Math.random().toString(36).slice(2, 10) + "-" + Date.now().toString(36);
 }
 
+function todayStr(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function yesterdayStr(): string {
+  return new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+}
+
 const DEFAULT_CHILD: Child = {
   id: "c1",
   name: "Liya",
@@ -33,6 +41,8 @@ const DEFAULT_PROFILE: UserProfile = {
   isPremium: false,
   streak: 7,
   xp: 450,
+  dailyGoal: 10,
+  dailyWordsToday: 0,
   children: [DEFAULT_CHILD],
   favorites: ["w001", "w013", "w032"],
   learnedWords: ["w007", "w009", "w010", "w011", "w022", "w023"],
@@ -52,6 +62,7 @@ interface AppContextType {
   setName: (name: string) => void;
   toggleFavorite: (wordId: string) => void;
   markLearned: (wordId: string) => void;
+  incrementDailyWord: () => void;
   addChild: (child: Child) => void;
   removeChild: (childId: string) => void;
   isFavorite: (wordId: string) => boolean;
@@ -78,13 +89,12 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
       AsyncStorage.getItem(ACTIVE_CHILD_KEY),
       AsyncStorage.getItem(DEVICE_KEY),
     ]).then(([stored, savedActiveId, savedDeviceId]) => {
-      // Device ID
       const did = savedDeviceId ?? generateDeviceId();
       if (!savedDeviceId) AsyncStorage.setItem(DEVICE_KEY, did);
       setDeviceId(did);
       deviceIdRef.current = did;
 
-      // Profile
+      let parsedProfile: UserProfile = DEFAULT_PROFILE;
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
@@ -95,17 +105,46 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
               learningLanguage: c.learningLanguage ?? "amharic",
             }));
           }
-          setProfileState(parsed);
-          const firstId = parsed.children?.[0]?.id ?? null;
+          parsedProfile = {
+            ...DEFAULT_PROFILE,
+            ...parsed,
+            dailyGoal: parsed.dailyGoal ?? 10,
+            dailyWordsToday: parsed.dailyWordsToday ?? 0,
+          };
+          const firstId = parsedProfile.children?.[0]?.id ?? null;
           setActiveChildIdState(savedActiveId ?? firstId);
         } catch {
-          setProfileState(DEFAULT_PROFILE);
           setActiveChildIdState(DEFAULT_CHILD.id);
         }
       } else {
-        setProfileState(DEFAULT_PROFILE);
         setActiveChildIdState(DEFAULT_CHILD.id);
       }
+
+      // Check streak on open
+      const today = todayStr();
+      const yesterday = yesterdayStr();
+      const last = parsedProfile.lastStreakDate ?? "";
+      let streakUpdate: Partial<UserProfile> = {};
+
+      if (last !== today) {
+        if (last === yesterday) {
+          streakUpdate = { streak: parsedProfile.streak + 1, lastStreakDate: today };
+        } else if (last === "") {
+          streakUpdate = { streak: parsedProfile.streak, lastStreakDate: today };
+        } else {
+          streakUpdate = { streak: 1, lastStreakDate: today };
+        }
+      }
+
+      // Reset daily word count if new day
+      let dailyUpdate: Partial<UserProfile> = {};
+      if (parsedProfile.lastDailyDate !== today) {
+        dailyUpdate = { dailyWordsToday: 0, lastDailyDate: today };
+      }
+
+      const finalProfile = { ...parsedProfile, ...streakUpdate, ...dailyUpdate };
+      setProfileState(finalProfile);
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(finalProfile));
       setIsLoading(false);
     });
   }, []);
@@ -113,7 +152,6 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   const save = async (p: UserProfile) => {
     setProfileState(p);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-    // Sync to Supabase (fire and forget)
     const did = deviceIdRef.current;
     if (did) {
       upsertProfile({
@@ -140,8 +178,7 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   };
 
   const setRole = (role: UserRole) => updateProfile({ role });
-  const setLearningLanguage = (lang: AppLanguage) =>
-    updateProfile({ learningLanguage: lang });
+  const setLearningLanguage = (lang: AppLanguage) => updateProfile({ learningLanguage: lang });
   const setName = (name: string) => updateProfile({ name });
 
   const setActiveChildId = (id: string) => {
@@ -161,6 +198,21 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
     if (!profile) return;
     if (profile.learnedWords.includes(wordId)) return;
     save({ ...profile, learnedWords: [...profile.learnedWords, wordId] });
+  };
+
+  const incrementDailyWord = () => {
+    if (!profile) return;
+    const today = todayStr();
+    const resetDaily = profile.lastDailyDate !== today ? { dailyWordsToday: 0 } : {};
+    const newCount = (resetDaily.dailyWordsToday ?? profile.dailyWordsToday ?? 0) + 1;
+    const xpGain = 5;
+    save({
+      ...profile,
+      ...resetDaily,
+      dailyWordsToday: newCount,
+      lastDailyDate: today,
+      xp: profile.xp + xpGain,
+    });
   };
 
   const addChild = (child: Child) => {
@@ -190,19 +242,12 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
   };
 
   const saveHomeworkSession = async (session: HomeworkSession) => {
-    // 1. Local AsyncStorage (always)
     try {
       const stored = await AsyncStorage.getItem(SESSIONS_KEY);
       const sessions: HomeworkSession[] = stored ? JSON.parse(stored) : [];
       sessions.unshift(session);
-      await AsyncStorage.setItem(
-        SESSIONS_KEY,
-        JSON.stringify(sessions.slice(0, 30))
-      );
-    } catch {
-      // silent
-    }
-    // 2. Supabase (fire and forget)
+      await AsyncStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions.slice(0, 30)));
+    } catch { /* silent */ }
     const did = deviceIdRef.current;
     const child = profile?.children.find((c) => c.id === activeChildId) ?? profile?.children[0];
     if (did) {
@@ -217,10 +262,8 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
     }
   };
 
-  const isFavorite = (wordId: string) =>
-    profile?.favorites.includes(wordId) ?? false;
-  const isLearned = (wordId: string) =>
-    profile?.learnedWords.includes(wordId) ?? false;
+  const isFavorite = (wordId: string) => profile?.favorites.includes(wordId) ?? false;
+  const isLearned = (wordId: string) => profile?.learnedWords.includes(wordId) ?? false;
 
   const activeChild =
     profile?.children.find((c) => c.id === activeChildId) ??
@@ -243,6 +286,7 @@ export function AppProvider({ children: node }: { children: React.ReactNode }) {
         setName,
         toggleFavorite,
         markLearned,
+        incrementDailyWord,
         addChild,
         removeChild,
         isFavorite,

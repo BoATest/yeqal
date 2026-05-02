@@ -14,8 +14,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColors } from "@/hooks/useColors";
 import { useApp } from "@/context/AppContext";
 import WordCard from "@/components/WordCard";
-import { WORDS, searchWords } from "@/data/words";
-import { AppLanguage } from "@/data/types";
+import { ALL_WORDS, ALL_SUBJECTS, searchAllWords } from "@/data/allWords";
+import { AppLanguage, Subject } from "@/data/types";
 
 const WEB_TOP = Platform.OS === "web" ? 67 : 0;
 const TAB_BAR = Platform.OS === "web" ? 84 : 60;
@@ -24,21 +24,8 @@ const WEB_BOTTOM = Platform.OS === "web" ? 34 : 0;
 const LANG_PILLS: { key: AppLanguage | "all"; label: string }[] = [
   { key: "all", label: "All" },
   { key: "amharic", label: "አማርኛ" },
-  { key: "oromo", label: "Oromo" },
+  { key: "oromo", label: "Oromoo" },
   { key: "english", label: "English" },
-];
-
-const SUBJECTS = [
-  "all",
-  "family",
-  "food",
-  "school",
-  "nature",
-  "animals",
-  "greetings",
-  "numbers",
-  "body",
-  "time",
 ];
 
 export default function SearchScreen() {
@@ -49,12 +36,12 @@ export default function SearchScreen() {
 
   const [query, setQuery] = useState("");
   const [lang, setLang] = useState<AppLanguage | "all">("all");
-  const [subject, setSubject] = useState("all");
+  const [subject, setSubject] = useState<Subject | "all">("all");
   const [suggestion, setSuggestion] = useState("");
   const [suggestionSent, setSuggestionSent] = useState(false);
 
   const results = (() => {
-    let words = searchWords(query, lang === "all" ? "all" : lang);
+    let words = searchAllWords(query, lang === "all" ? "all" : lang);
     if (subject !== "all") {
       words = words.filter((w) => w.subject === subject);
     }
@@ -83,6 +70,7 @@ export default function SearchScreen() {
           },
         ]}
       >
+        {/* Search input */}
         <View
           style={[
             styles.inputRow,
@@ -108,6 +96,7 @@ export default function SearchScreen() {
           )}
         </View>
 
+        {/* Language pills */}
         <FlatList
           horizontal
           data={LANG_PILLS}
@@ -141,17 +130,18 @@ export default function SearchScreen() {
         />
       </View>
 
+      {/* Category / subject pills */}
       <FlatList
         horizontal
-        data={SUBJECTS}
-        keyExtractor={(s) => s}
+        data={ALL_SUBJECTS}
+        keyExtractor={(s) => s.key}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.subjectRow}
         renderItem={({ item: s }) => {
-          const active = subject === s;
+          const active = subject === s.key;
           return (
             <Pressable
-              onPress={() => setSubject(s)}
+              onPress={() => setSubject(s.key as Subject | "all")}
               style={[
                 styles.subjectPill,
                 {
@@ -160,13 +150,14 @@ export default function SearchScreen() {
                 },
               ]}
             >
+              <Text style={styles.subjectEmoji}>{s.emoji}</Text>
               <Text
                 style={[
                   styles.subjectText,
                   { color: active ? colors.accent : colors.mutedForeground },
                 ]}
               >
-                {s === "all" ? "All topics" : s}
+                {s.label}
               </Text>
             </Pressable>
           );
@@ -189,8 +180,8 @@ export default function SearchScreen() {
             <Text
               style={[styles.resultCount, { color: colors.mutedForeground }]}
             >
-              {results.length} word{results.length !== 1 ? "s" : ""}
-              {query ? ` for "${query}"` : ""}
+              {results.length.toLocaleString()} word{results.length !== 1 ? "s" : ""}
+              {query ? ` for "${query}"` : subject !== "all" ? ` in ${ALL_SUBJECTS.find(s => s.key === subject)?.label}` : ""}
             </Text>
           ) : null
         }
@@ -207,18 +198,12 @@ export default function SearchScreen() {
                 Word not found
               </Text>
               <Text
-                style={[
-                  styles.notFoundSub,
-                  { color: colors.mutedForeground },
-                ]}
+                style={[styles.notFoundSub, { color: colors.mutedForeground }]}
               >
                 "{query}" is not in the dictionary yet.
               </Text>
               <Text
-                style={[
-                  styles.notFoundSuggestLabel,
-                  { color: colors.mutedForeground },
-                ]}
+                style={[styles.notFoundSuggestLabel, { color: colors.mutedForeground }]}
               >
                 Suggest it and we'll add it:
               </Text>
@@ -255,9 +240,7 @@ export default function SearchScreen() {
                     style={[
                       styles.suggestBtn,
                       {
-                        backgroundColor: suggestion.trim()
-                          ? colors.primary
-                          : colors.muted,
+                        backgroundColor: suggestion.trim() ? colors.primary : colors.muted,
                       },
                     ]}
                   >
@@ -273,10 +256,10 @@ export default function SearchScreen() {
           ) : !hasQuery ? (
             <View style={styles.emptyStart}>
               <Text style={[styles.emptyStartText, { color: colors.mutedForeground }]}>
-                {WORDS.length} words · Amharic · Oromo · English
+                {ALL_WORDS.length.toLocaleString()} words · Amharic · Oromo · English
               </Text>
               <Text style={[styles.emptyStartHint, { color: colors.mutedForeground }]}>
-                Try: ቤት · mother · bishaan
+                Try: ቤት · mother · bishaan · hotel
               </Text>
             </View>
           ) : null
@@ -318,15 +301,18 @@ const styles = StyleSheet.create({
   pillText: { fontSize: 13, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
   subjectRow: { gap: 8, paddingHorizontal: 16, paddingVertical: 10 },
   subjectPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
     borderRadius: 20,
     borderWidth: 1,
     paddingHorizontal: 12,
     paddingVertical: 5,
   },
+  subjectEmoji: { fontSize: 13 },
   subjectText: {
     fontSize: 12,
     fontWeight: "600",
-    textTransform: "capitalize",
     fontFamily: "Inter_600SemiBold",
   },
   resultCount: {
@@ -343,27 +329,14 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 8,
   },
-  notFoundTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    fontFamily: "Inter_700Bold",
-  },
+  notFoundTitle: { fontSize: 18, fontWeight: "700", fontFamily: "Inter_700Bold" },
   notFoundSub: {
     fontSize: 14,
     fontFamily: "Inter_400Regular",
     textAlign: "center",
   },
-  notFoundSuggestLabel: {
-    fontSize: 13,
-    fontFamily: "Inter_500Medium",
-    marginTop: 4,
-  },
-  suggestRow: {
-    flexDirection: "row",
-    gap: 8,
-    width: "100%",
-    marginTop: 4,
-  },
+  notFoundSuggestLabel: { fontSize: 13, fontFamily: "Inter_500Medium", marginTop: 4 },
+  suggestRow: { flexDirection: "row", gap: 8, width: "100%", marginTop: 4 },
   suggestInput: {
     flex: 1,
     borderRadius: 12,
@@ -390,21 +363,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 4,
   },
-  sentText: {
-    fontSize: 14,
-    fontFamily: "Inter_600SemiBold",
-  },
-  emptyStart: {
-    alignItems: "center",
-    paddingTop: 48,
-    gap: 8,
-  },
-  emptyStartText: {
-    fontSize: 14,
-    fontFamily: "Inter_500Medium",
-  },
-  emptyStartHint: {
-    fontSize: 13,
-    fontFamily: "Inter_400Regular",
-  },
+  sentText: { fontSize: 14, fontFamily: "Inter_600SemiBold" },
+  emptyStart: { alignItems: "center", paddingTop: 48, gap: 8 },
+  emptyStartText: { fontSize: 14, fontFamily: "Inter_500Medium" },
+  emptyStartHint: { fontSize: 13, fontFamily: "Inter_400Regular" },
 });

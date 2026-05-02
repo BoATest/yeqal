@@ -5,10 +5,7 @@ import { supabase, isSupabaseConfigured } from "./supabase";
 export async function fetchWords(): Promise<Word[]> {
   if (!isSupabaseConfigured || !supabase) return ALL_WORDS;
   try {
-    const { data, error } = await supabase
-      .from("words")
-      .select("*")
-      .limit(2000);
+    const { data, error } = await supabase.from("words").select("*").limit(2000);
     if (error || !data || data.length === 0) return ALL_WORDS;
     const remote: Word[] = data.map((r: any) => ({
       id: r.id,
@@ -46,9 +43,7 @@ export async function saveSession(params: {
       input_text: params.inputText,
       word_ids: params.wordIds,
     });
-  } catch {
-    // silent — local AsyncStorage is the fallback
-  }
+  } catch { /* silent — AsyncStorage is the fallback */ }
 }
 
 export async function upsertProfile(params: {
@@ -62,28 +57,28 @@ export async function upsertProfile(params: {
   xp: number;
   favorites: string[];
   learnedWords: string[];
+  authUserId?: string;
+  email?: string;
 }): Promise<void> {
   if (!isSupabaseConfigured || !supabase) return;
   try {
-    await supabase.from("profiles").upsert(
-      {
-        device_id: params.deviceId,
-        name: params.name,
-        role: params.role,
-        ui_language: params.uiLanguage,
-        learning_language: params.learningLanguage,
-        is_premium: params.isPremium,
-        streak: params.streak,
-        xp: params.xp,
-        favorites: params.favorites,
-        learned_words: params.learnedWords,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "device_id" }
-    );
-  } catch {
-    // silent
-  }
+    const row: Record<string, any> = {
+      device_id: params.deviceId,
+      name: params.name,
+      role: params.role,
+      ui_language: params.uiLanguage,
+      learning_language: params.learningLanguage,
+      is_premium: params.isPremium,
+      streak: params.streak,
+      xp: params.xp,
+      favorites: params.favorites,
+      learned_words: params.learnedWords,
+      updated_at: new Date().toISOString(),
+    };
+    if (params.authUserId) row.auth_user_id = params.authUserId;
+    if (params.email) row.email = params.email;
+    await supabase.from("profiles").upsert(row, { onConflict: "device_id" });
+  } catch { /* silent */ }
 }
 
 export async function upsertChildren(deviceId: string, children: any[]): Promise<void> {
@@ -107,7 +102,26 @@ export async function upsertChildren(deviceId: string, children: any[]): Promise
       updated_at: new Date().toISOString(),
     }));
     await supabase.from("children").upsert(rows, { onConflict: "id" });
-  } catch {
-    // silent
-  }
+  } catch { /* silent */ }
+}
+
+export async function syncAuthUser(params: {
+  deviceId: string;
+  authUserId: string;
+  email: string;
+  name: string;
+}): Promise<void> {
+  if (!isSupabaseConfigured || !supabase) return;
+  try {
+    await supabase.from("profiles").upsert(
+      {
+        device_id: params.deviceId,
+        auth_user_id: params.authUserId,
+        email: params.email,
+        name: params.name,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "device_id" }
+    );
+  } catch { /* silent */ }
 }

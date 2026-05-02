@@ -75,6 +75,10 @@ export interface UserProfile {
   isPremium: boolean;
   streak: number;
   xp: number;
+  lastStreakDate?: string;
+  dailyGoal: number;
+  dailyWordsToday: number;
+  lastDailyDate?: string;
   children: Child[];
   favorites: string[];
   learnedWords: string[];
