@@ -67,7 +67,7 @@ export default function OnboardingScreen() {
     if (currentSlide < SLIDES.length - 1) {
       goToSlide(currentSlide + 1);
     } else {
-      router.replace("/setup");
+      router.replace("/auth");
     }
   };
 
@@ -86,7 +86,7 @@ export default function OnboardingScreen() {
       >
         {/* Skip button */}
         <Pressable
-          onPress={() => router.replace("/setup")}
+          onPress={() => router.replace("/auth")}
           style={styles.skipBtn}
         >
           <Text style={styles.skipText}>Skip</Text>

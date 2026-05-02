@@ -1,0 +1,364 @@
+The app is working. Now build these 4 things in order to get to real beta users this week.
+Do not change anything that is currently working. Build each item, test it compiles, then move to the next.
+
+---
+
+## 1. SPEAKING PRACTICE — REAL DUOLINGO-STYLE FEEDBACK
+
+The current speaking feature gives high scores even for wrong words. Fix it completely.
+
+### New speaking flow (3 attempts system):
+
+State variables to add:
+  const [attemptCount, setAttemptCount] = useState(0);       // 0, 1, 2
+  const [allAttempts, setAllAttempts] = useState([]);          // [{transcript, score}]
+  const [bestAttempt, setBestAttempt] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+
+### Scoring function — replace the current one with this:
+
+function scoreAttempt(heard, targetWord) {
+  if (!heard || heard.trim() === '') return { score: 0, quality: 'no-speech' };
+  
+  const h = heard.toLowerCase().trim();
+  
+  // Check against ALL 3 language versions of the word
+  const targets = [
+    (targetWord.word_amharic || '').toLowerCase(),
+    (targetWord.word_oromo || '').toLowerCase(),
+    (targetWord.word_english || '').toLowerCase(),
+    (targetWord.romanization || '').toLowerCase(),
+  ].filter(Boolean);
+  
+  let bestScore = 0;
+  
+  for (const t of targets) {
+    if (!t) continue;
+    
+    // Exact match
+    if (h === t) { bestScore = Math.max(bestScore, 95); continue; }
+    
+    // Starts with (common for Amharic — SpeechRecognition often cuts off)
+    if (h.startsWith(t.substring(0, Math.floor(t.length * 0.7)))) {
+      bestScore = Math.max(bestScore, 82);
+      continue;
+    }
+    
+    // Levenshtein distance for close matches
+    const dist = levenshtein(h, t);
+    const maxLen = Math.max(h.length, t.length);
+    if (maxLen === 0) continue;
+    
+    const similarity = 1 - (dist / maxLen);
+    const score = Math.round(similarity * 100);
+    bestScore = Math.max(bestScore, score);
+  }
+  
+  // Classify quality
+  let quality;
+  if (bestScore >= 85) quality = 'perfect';
+  else if (bestScore >= 70) quality = 'great';
+  else if (bestScore >= 45) quality = 'good';
+  else if (bestScore >= 20) quality = 'try-again';
+  else quality = 'no-match';
+  
+  return { score: bestScore, quality };
+}
+
+// Simple Levenshtein distance function
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, (_, i) =>
+    Array.from({ length: n + 1 }, (_, j) => i === 0 ? j : j === 0 ? i : 0)
+  );
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = a[i-1] === b[j-1]
+        ? dp[i-1][j-1]
+        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    }
+  }
+  return dp[m][n];
+}
+
+### Feedback messages — use these exact strings:
+
+const FEEDBACK = {
+  'perfect': {
+    title: 'Perfect! ✨',
+    message: 'Excellent pronunciation.',
+    color: '#1B6B3A',
+    advance: true,   // auto-advance after 1.5s
+  },
+  'great': {
+    title: 'Great! 👏',
+    message: 'Very close — tiny difference at the end.',
+    color: '#2D9A54',
+    advance: false,
+  },
+  'good': {
+    title: 'Getting there 👍',
+    message: (heard, target) => `We heard "${heard}" — try saying "${target}" more slowly.`,
+    color: '#E67E22',
+    advance: false,
+  },
+  'try-again': {
+    title: 'Not quite yet',
+    message: 'Listen to the word again, then copy exactly what you hear.',
+    color: '#C0392B',
+    advance: false,
+    autoPlayAudio: true,  // automatically replay native audio
+  },
+  'no-match': {
+    title: 'Let's try together',
+    message: 'Tap "Hear it first" — then repeat after it.',
+    color: '#C0392B',
+    advance: false,
+    autoPlayAudio: true,
+  },
+  'no-speech': {
+    title: 'Nothing heard',
+    message: 'We didn't catch that. Make sure your microphone is on and speak clearly.',
+    color: '#888',
+    advance: false,
+  },
+};
+
+### 3 attempts UI:
+
+Show attempt dots below the mic button:
+  3 small circles: filled = used, outline = remaining
+  "Attempt 1 of 3" text above mic
+
+After attempt 1 or 2 (not perfect):
+  Show the feedback message
+  Show "Try again" button (if attempts remaining)
+  Show "Hear it first" button (replays audio)
+  Show "We heard: [transcript]" in small gray italic
+
+After attempt 3 or after a perfect score:
+  Show FINAL result card:
+  - Best score achieved (large number)
+  - Best transcript
+  - The correct word displayed large
+  - If score < 70: auto-play the correct word audio once
+  - Two buttons: "Try again from scratch" | "Next word →"
+
+If SpeechRecognition is not supported (rare on Android Chrome):
+  Show self-rate buttons instead of mic:
+  "Still learning 😓" (30) | "Getting there 🙂" (65) | "Nailed it! 🎉" (92)
+  Add note: "Voice scoring works best in Chrome on Android"
+
+---
+
+## 2. AI HOMEWORK EXPLANATION (Claude API)
+
+This is the most important feature. Connect the Anthropic Claude API to the Homework Helper
+so parents get a real explanation, not just a word list.
+
+### Setup:
+Add to .env:
+  EXPO_PUBLIC_CLAUDE_API_KEY=your_key_here
+  (Get a free key at console.anthropic.com)
+
+### Create src/lib/claude.ts:
+
+const CLAUDE_URL = 'https://api.anthropic.com/v1/messages';
+
+export async function explainHomework(
+  text: string,
+  childName: string,
+  gradeLevel: number,
+  language: 'amharic' | 'oromo' | 'english'
+): Promise<string> {
+  const langLabel = language === 'amharic' ? 'Amharic (አማርኛ)' : language === 'oromo' ? 'Afaan Oromo' : 'English';
+  
+  const systemPrompt = `You are Yeqal, a helpful Ethiopian education assistant. 
+You help Ethiopian parents understand their children's homework.
+ALWAYS respond in ${langLabel}.
+Keep explanations simple — pitched at Grade ${gradeLevel} level.
+Maximum 3 sentences. Be warm and encouraging.
+Never use complex academic language.`;
+
+  const userPrompt = `${childName} is in Grade ${gradeLevel}.
+Their homework says: "${text}"
+Please explain in simple ${langLabel}: what is this homework asking, and what does the student need to do?`;
+
+  try {
+    const response = await fetch(CLAUDE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.EXPO_PUBLIC_CLAUDE_API_KEY || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        messages: [{ role: 'user', content: userPrompt }],
+        system: systemPrompt,
+      }),
+    });
+
+    if (!response.ok) throw new Error('API error');
+    const data = await response.json();
+    return data.content[0].text;
+  } catch (error) {
+    // Graceful fallback — never crash
+    return language === 'amharic'
+      ? 'ይቅርታ፣ አሁን ማስረዳት አልቻልኩም። ቃሉን ፍለጋ ውስጥ ይፈልጉ።'
+      : language === 'oromo'
+      ? 'Dhiifama, amma ibsuu hin dandeenye. Jecla barbaadi.'
+      : 'Sorry, I could not explain this right now. Try searching for the words.';
+  }
+}
+
+### Update homework.tsx:
+
+1. Import explainHomework from lib/claude
+2. When "Explain this" is tapped:
+   - Show loading: "ያቃላል... Asking Yeqal AI..."
+   - Call explainHomework(inputText, activeChild.name, activeChild.grade, activeChild.language)
+   - Display result in a GREEN CARD above the word table:
+     
+     [Green card with 🤖 icon]
+     "Yeqal AI says:"
+     [Claude's explanation text — 2-3 sentences]
+     [Small text: "Powered by Claude AI"]
+
+3. Keep the existing word-by-word table BELOW the AI explanation
+4. Keep the curriculum badge if a topic is detected
+
+If no Claude API key:
+  Show: "Type individual words above to look them up in all 3 languages."
+  (Do not crash, do not show raw error)
+
+---
+
+## 3. SHARE BUTTON — PARENT-TO-PARENT VIRAL LOOP
+
+Add a share button that makes it easy for parents to send the app to other parents.
+
+### Add to the Profile screen, near the top:
+
+A card with:
+  [Green gradient background]
+  "Share Yeqal with other parents 🇪🇹"
+  [Share button]
+
+Share button action:
+  const shareMessage = `ሰላም! ያቃል (Yeqal) የሚባል መተግበሪያ አገኘሁ — ልጆቻቸው የቤት ሥራቸውን ለማስረዳት ለሚቸገሩ ወላጆች ጠቃሚ ነው። ሦስት ቋንቋ ያቀርባል — አማርኛ፣ ኦሮምኛ፣ ኢንግሊዝኛ።
+
+Hi! I found an app called Yeqal — it helps Ethiopian parents with their children's homework in Amharic, Oromo, and English.
+
+Try it here: https://yeqal.app`;
+
+  if (navigator.share) {
+    navigator.share({ title: 'Yeqal — ያቃል', text: shareMessage });
+  } else {
+    navigator.clipboard.writeText(shareMessage);
+    // Show toast: "Message copied — paste it in your WhatsApp group"
+  }
+
+Also add: a WhatsApp direct share button:
+  window.open('https://wa.me/?text=' + encodeURIComponent(shareMessage));
+
+### Add "Share Yeqal" to the bottom of the Home screen too:
+  Small card at the very bottom: "Know a parent who needs this? Share Yeqal →"
+  Tapping it runs the same share action.
+
+---
+
+## 4. DAILY WORD PUSH NOTIFICATION
+
+Add Web Push notifications so users get a daily word reminder.
+
+### Implementation:
+
+1. In public/sw.js (service worker), add notification handler:
+   self.addEventListener('push', event => {
+     const data = event.data?.json() || {};
+     event.waitUntil(
+       self.registration.showNotification(data.title || 'Yeqal — ያቃል', {
+         body: data.body || 'Open Yeqal to practice today's word',
+         icon: '/icon-192.png',
+         badge: '/icon-96.png',
+         tag: 'daily-word',
+         renotify: false,
+         data: { url: '/' },
+       })
+     );
+   });
+   
+   self.addEventListener('notificationclick', event => {
+     event.notification.close();
+     event.waitUntil(clients.openWindow(event.notification.data?.url || '/'));
+   });
+
+2. In the app, add notification permission request in Profile screen:
+   A card: "Get a daily word reminder 🔔"
+   Button: "Turn on reminders"
+   
+   async function enableNotifications() {
+     if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+       alert('Notifications not supported in this browser.');
+       return;
+     }
+     const permission = await Notification.requestPermission();
+     if (permission === 'granted') {
+       // Show success state: "✓ You'll get a daily word at 8:00 AM"
+       // Store preference in localStorage: notificationsEnabled = true
+     } else {
+       // Show: "You can turn this on later in Settings"
+     }
+   }
+
+3. For now: local scheduled notification using setTimeout (no server needed):
+   On app open, if notifications are enabled and last notification was >20 hours ago:
+   Schedule a notification for 8:00 AM tomorrow:
+   
+   function scheduleLocalNotification(word) {
+     const now = new Date();
+     const tomorrow8am = new Date(now);
+     tomorrow8am.setDate(tomorrow8am.getDate() + 1);
+     tomorrow8am.setHours(8, 0, 0, 0);
+     const delay = tomorrow8am.getTime() - now.getTime();
+     
+     setTimeout(() => {
+       if (Notification.permission === 'granted') {
+         new Notification('Yeqal — ያቃል', {
+           body: `Today's word: ${word.word_amharic} = ${word.word_english} (${word.word_oromo})`,
+           icon: '/icon-192.png',
+         });
+         localStorage.setItem('lastNotification', Date.now().toString());
+       }
+     }, delay);
+   }
+
+---
+
+## DO NOT CHANGE
+
+These are working correctly — do not touch them:
+- Word detail page (pronunciation buttons, example sentences, related words)
+- Search with 163+ words and filters
+- Home screen layout (streak, child card, word of day, quick actions)
+- Onboarding flow (language selection, role selection)
+- WhatsApp progress share from Profile
+- Homework helper word table
+- Live translator two-zone layout
+- Camera overlay (it opens — bug was fixed last session)
+- Bottom navigation
+
+---
+
+## AFTER BUILDING
+
+Test this exact sequence on your actual Android phone:
+1. Speak tab → say the word → verify "We heard: [something]" shows → verify score changes based on what you say
+2. Homework → type "ቤት ምንድን ነው?" → verify AI explanation card appears above word table
+3. Profile → tap "Share Yeqal" → verify WhatsApp opens with pre-written Amharic message
+4. Profile → tap "Turn on reminders" → verify browser permission prompt appears
+
+Screenshot each of these 4 things and show me.

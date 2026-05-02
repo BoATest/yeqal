@@ -18,24 +18,30 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { AppProvider } from "@/context/AppContext";
+import { supabase } from "@/lib/supabase";
 
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 
-function RootLayoutNav({ onboarded }: { onboarded: boolean }) {
+type AuthState = "loading" | "onboarding" | "auth" | "setup" | "app";
+
+function RootLayoutNav({ authState }: { authState: AuthState }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!onboarded) {
-      router.replace("/onboarding");
-    }
-  }, []);
+    if (authState === "loading") return;
+    if (authState === "onboarding") router.replace("/onboarding");
+    else if (authState === "auth") router.replace("/auth");
+    else if (authState === "setup") router.replace("/setup");
+    else if (authState === "app") router.replace("/(tabs)");
+  }, [authState]);
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+      <Stack.Screen name="auth" options={{ headerShown: false }} />
       <Stack.Screen name="setup" options={{ headerShown: false }} />
       <Stack.Screen
         name="word/[id]"
@@ -57,15 +63,42 @@ export default function RootLayout() {
     Inter_700Bold,
   });
 
-  const [onboarded, setOnboarded] = useState<boolean | null>(null);
+  const [authState, setAuthState] = useState<AuthState>("loading");
 
   useEffect(() => {
-    AsyncStorage.getItem("yeqal_onboarded").then((val) => {
-      setOnboarded(!!val);
-    });
+    async function determineAuthState() {
+      try {
+        const [onboarded, skipped] = await Promise.all([
+          AsyncStorage.getItem("yeqal_onboarded"),
+          AsyncStorage.getItem("yeqal_auth_skipped"),
+        ]);
+
+        if (!onboarded) {
+          setAuthState("onboarding");
+          return;
+        }
+
+        if (skipped) {
+          setAuthState("app");
+          return;
+        }
+
+        if (supabase) {
+          const { data } = await supabase.auth.getSession();
+          if (data?.session?.user) {
+            setAuthState("app");
+            return;
+          }
+        }
+
+        setAuthState("auth");
+      } catch {
+        setAuthState("auth");
+      }
+    }
+    determineAuthState();
   }, []);
 
-  // Inject Noto Sans Ethiopic for web — critical for Ge'ez script rendering
   useEffect(() => {
     if (Platform.OS !== "web" || typeof document === "undefined") return;
     if (document.getElementById("yeqal-ethiopic-font")) return;
@@ -81,7 +114,6 @@ export default function RootLayout() {
     linkActual.rel = "stylesheet";
     linkActual.href = link.href;
     document.head.appendChild(linkActual);
-    // Fallback font-face for Ethiopic codepoints only — does not override Inter
     const style = document.createElement("style");
     style.id = "yeqal-ethiopic-style";
     style.textContent = `
@@ -94,7 +126,7 @@ export default function RootLayout() {
     document.head.appendChild(style);
   }, []);
 
-  const isReady = (fontsLoaded || !!fontError) && onboarded !== null;
+  const isReady = (fontsLoaded || !!fontError) && authState !== "loading";
 
   useEffect(() => {
     if (isReady) SplashScreen.hideAsync();
@@ -110,7 +142,7 @@ export default function RootLayout() {
             <GestureHandlerRootView style={{ flex: 1 }}>
               <OfflineBanner />
               <KeyboardProvider>
-                <RootLayoutNav onboarded={onboarded ?? false} />
+                <RootLayoutNav authState={authState} />
               </KeyboardProvider>
             </GestureHandlerRootView>
           </QueryClientProvider>

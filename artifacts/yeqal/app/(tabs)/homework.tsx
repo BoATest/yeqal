@@ -57,6 +57,8 @@ export default function HomeworkScreen() {
   const [showCamera, setShowCamera] = useState(false);
   const [curriculumTopic, setCurriculumTopic] = useState<CurriculumTopic | null>(null);
   const [emptyPrompt, setEmptyPrompt] = useState(false);
+  const [aiExplanation, setAiExplanation] = useState<string | null>(null);
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   const handleAnalyze = async () => {
     if (!text.trim()) {
@@ -71,6 +73,7 @@ export default function HomeworkScreen() {
     setCurriculumTopic(null);
     setError(null);
     try {
+      fetchAiExplanation(text);
       await new Promise((r) => setTimeout(r, 1400));
       const found = findWordsInText(text);
       setResults(found);
@@ -120,6 +123,30 @@ export default function HomeworkScreen() {
     setSavedWords(new Set());
     setError(null);
     setCurriculumTopic(null);
+    setAiExplanation(null);
+  };
+
+  const fetchAiExplanation = async (inputText: string) => {
+    setIsAiLoading(true);
+    setAiExplanation(null);
+    try {
+      const base = typeof window !== "undefined" ? window.location.origin : "";
+      const resp = await fetch(`${base}/api/homework/explain`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: inputText,
+          childName: activeChild?.name ?? "Student",
+          gradeLevel: activeChild?.gradeLevel ?? 4,
+          language: activeChild?.learningLanguage ?? "amharic",
+        }),
+      });
+      if (resp.ok) {
+        const data = await resp.json() as { explanation?: string };
+        setAiExplanation(data.explanation ?? null);
+      }
+    } catch { /* silently skip — word table still shows */ }
+    finally { setIsAiLoading(false); }
   };
 
   const detectedScript = /[\u1200-\u137F]/.test(text)
@@ -293,6 +320,33 @@ export default function HomeworkScreen() {
         </Pressable>
 
         {/* Results */}
+        {/* Yeqal AI explanation card */}
+        {(isAiLoading || aiExplanation) && (
+          <View style={[styles.aiCard, { backgroundColor: colors.greenBg, borderColor: colors.primary + "30" }]}>
+            <View style={styles.aiCardHeader}>
+              <View style={[styles.aiIconBox, { backgroundColor: colors.primary }]}>
+                <Text style={styles.aiIconText}>AI</Text>
+              </View>
+              <Text style={[styles.aiCardTitle, { color: colors.primary }]}>Yeqal AI says:</Text>
+            </View>
+            {isAiLoading ? (
+              <View style={styles.aiLoadingRow}>
+                <ActivityIndicator size="small" color={colors.primary} />
+                <Text style={[styles.aiLoadingText, { color: colors.mutedForeground }]}>ያቃላል... asking Yeqal AI...</Text>
+              </View>
+            ) : (
+              <>
+                <Text style={[styles.aiExplanationText, { color: colors.text }]}>
+                  {aiExplanation}
+                </Text>
+                <Text style={[styles.aiPoweredBy, { color: colors.mutedForeground }]}>
+                  Powered by Gemini AI (free)
+                </Text>
+              </>
+            )}
+          </View>
+        )}
+
         {results !== null && (
           <View style={styles.results}>
             {results.length === 0 ? (
@@ -721,6 +775,56 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   emptyPromptText: { flex: 1, fontSize: 13, fontFamily: "Inter_400Regular", lineHeight: 18 },
+  aiCard: {
+    borderRadius: 16,
+    borderWidth: 1,
+    padding: 14,
+    marginBottom: 16,
+    gap: 8,
+  },
+  aiCardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  aiIconBox: {
+    width: 28,
+    height: 28,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  aiIconText: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#fff",
+    fontFamily: "Inter_700Bold",
+  },
+  aiCardTitle: {
+    fontSize: 13,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+  },
+  aiLoadingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  aiLoadingText: {
+    fontSize: 13,
+    fontFamily: "Inter_400Regular",
+    fontStyle: "italic",
+  },
+  aiExplanationText: {
+    fontSize: 15,
+    fontFamily: "Inter_400Regular",
+    lineHeight: 22,
+  },
+  aiPoweredBy: {
+    fontSize: 11,
+    fontFamily: "Inter_400Regular",
+    marginTop: 4,
+  },
   explanationCard: {
     flexDirection: "row",
     alignItems: "flex-start",

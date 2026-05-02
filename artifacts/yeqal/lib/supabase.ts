@@ -1,7 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-// Expo EXPO_PUBLIC_ vars are inlined at bundle time via Babel transform.
-// Access them via the global constant injected by Expo's metro/babel.
 declare const process: { env: Record<string, string | undefined> };
 
 const SUPABASE_URL: string =
@@ -26,7 +25,12 @@ function getClient(): SupabaseClient | null {
   if (_client) return _client;
   try {
     _client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: { persistSession: false },
+      auth: {
+        persistSession: true,
+        storage: AsyncStorage,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+      },
     });
     return _client;
   } catch {
@@ -34,7 +38,6 @@ function getClient(): SupabaseClient | null {
   }
 }
 
-// Lazy singleton — always use this, never call createClient directly
 export const supabase: SupabaseClient | null = (() => {
   try {
     return getClient();

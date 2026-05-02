@@ -9,6 +9,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -21,93 +22,19 @@ const WEB_TOP = Platform.OS === "web" ? 67 : 0;
 const WEB_BOTTOM = Platform.OS === "web" ? 34 : 0;
 const TAB_BAR = Platform.OS === "web" ? 84 : 60;
 
-const LANG_OPTIONS: { key: AppLanguage; label: string; short: string; speechCode: string }[] = [
-  { key: "amharic", label: "አማርኛ", short: "AM", speechCode: "am-ET" },
-  { key: "oromo", label: "Oromo", short: "OM", speechCode: "om" },
-  { key: "english", label: "English", short: "EN", speechCode: "en-US" },
+const LANGS: { key: AppLanguage; label: string; native: string; speechCode: string; libreCode: string }[] = [
+  { key: "amharic", label: "Amharic", native: "አማርኛ", speechCode: "am-ET", libreCode: "am" },
+  { key: "oromo", label: "Oromo", native: "Oromoo", speechCode: "om", libreCode: "om" },
+  { key: "english", label: "English", native: "English", speechCode: "en-US", libreCode: "en" },
 ];
 
-const LIBRE_LANG: Record<AppLanguage, string> = {
-  amharic: "am",
-  oromo: "om",
-  english: "en",
-};
-
-interface SituationPhrase {
-  am: string;
-  om: string;
-  en: string;
-}
-
-const SITUATIONS: { id: string; icon: string; label: string; color: string; phrases: SituationPhrase[] }[] = [
-  {
-    id: "market", icon: "🛒", label: "Market", color: "#C05A1A",
-    phrases: [
-      { am: "ዋጋው ምን ያህል ነው?", om: "Gatiin isaa meeqa?", en: "How much does this cost?" },
-      { am: "ዋጋው ውድ ነው", om: "Gatiin isaa qaalii dha", en: "That is too expensive" },
-      { am: "ይህን መግዛት እፈልጋለሁ", om: "Kana bitachuuf barbaada", en: "I want to buy this" },
-      { am: "ዝቅ ያድርጉ", om: "Gatii gad-buusi", en: "Please reduce the price" },
-      { am: "አመሰግናለሁ", om: "Galatoomi", en: "Thank you" },
-    ],
-  },
-  {
-    id: "bus", icon: "🚌", label: "Bus Station", color: "#1A6B9A",
-    phrases: [
-      { am: "አዲስ አበባ ሚሄደው አውቶቡስ ስንት ነው?", om: "Basi Finfinnee dhaqus meeqa?", en: "How much is the bus to Addis Ababa?" },
-      { am: "መቼ ይነሳል?", om: "Yoom ka'a?", en: "When does it depart?" },
-      { am: "አንድ ቲኬት ስጠኝ", om: "Tikeetii tokko naaf kenni", en: "Give me one ticket" },
-      { am: "ቦታ አለ ወይ?", om: "Teessoon jiraa?", en: "Is there a seat available?" },
-      { am: "ስንት ሰዓት ይደርሳል?", om: "Daqiiqaa meeqatti gaha?", en: "What time does it arrive?" },
-    ],
-  },
-  {
-    id: "health", icon: "🏥", label: "Health Center", color: "#C0392B",
-    phrases: [
-      { am: "ሆዴ ያሠኛል", om: "Garaan koo na'a", en: "My stomach hurts" },
-      { am: "ሐኪም ማየት እፈልጋለሁ", om: "Dokitara arguuf barbaada", en: "I want to see a doctor" },
-      { am: "ሁኔታዬ ምን ያህል ከፋ?", om: "Haalli koo meeqa cimaa?", en: "How serious is my condition?" },
-      { am: "መድሃኒቱ ምንድን ነው?", om: "Dawaan isaa maal dha?", en: "What is the medicine?" },
-      { am: "ዳግም መምጣት አለብኝ?", om: "Gara deebi'uun qaba?", en: "Do I need to come back?" },
-    ],
-  },
-  {
-    id: "elders", icon: "🙏", label: "Meeting Elders", color: "#6B2D9A",
-    phrases: [
-      { am: "ሰላም ዋሉ", om: "Akkam bultan?", en: "Good afternoon (to elders)" },
-      { am: "ጤና ይስጥልኝ", om: "Nagaa jirtuu?", en: "God give you health" },
-      { am: "እርስዎ ሁኔታ ምን ይመስላል?", om: "Haalli keessan akkam?", en: "How are you doing?" },
-      { am: "ፈቃዶን ይስጡኝ", om: "Hayyama naaf kenni", en: "Please give me your blessing" },
-      { am: "አምስ ምን ያህሉ ሰዓት?", om: "Sa'aatii meeqa?", en: "What time is it?" },
-    ],
-  },
-  {
-    id: "school", icon: "🏫", label: "School Meeting", color: "#1B6B3A",
-    phrases: [
-      { am: "ልጄ እንዴት ነው?", om: "Ilmi koo akkam?", en: "How is my child doing?" },
-      { am: "ቤት ሥራ ምን ያህል ጊዜ ይወስዳል?", om: "Hojiin mana meeqa sa'aatii fudhata?", en: "How long does homework take?" },
-      { am: "ምን ጉዳዮች አሉ?", om: "Rakkoolee maal jiru?", en: "What subjects are there?" },
-      { am: "ሚቀጥለው ፈተና መቼ ነው?", om: "Qormaatni itti aanuu yoom?", en: "When is the next exam?" },
-      { am: "እኔ ልጄን እንዴት ልረዳ?", om: "Ilma koo akkamittin gargaaruu danda'a?", en: "How can I help my child?" },
-    ],
-  },
-  {
-    id: "coffee", icon: "☕", label: "Coffee Ceremony", color: "#D4A017",
-    phrases: [
-      { am: "ቡና ትጠጣለህ?", om: "Bunaa dhugdaa?", en: "Will you drink coffee?" },
-      { am: "ቡናው ጥሩ ነው", om: "Bunaan gaarii dha", en: "The coffee is good" },
-      { am: "ስኳር ትፈልጋለህ?", om: "Sukkaara barbaaddaa?", en: "Do you want sugar?" },
-      { am: "ጤናዎ ለሰላም", om: "Fayyaan nagaaf", en: "To your health and peace" },
-      { am: "ደስ ይበልህ", om: "Gammadi", en: "Enjoy yourself" },
-    ],
-  },
-];
-
-function getLangCode(lang: AppLanguage): string {
-  return LIBRE_LANG[lang] ?? "en";
-}
-
-function getSpeechCode(lang: AppLanguage): string {
-  return LANG_OPTIONS.find((l) => l.key === lang)?.speechCode ?? "en-US";
+interface ChatBubble {
+  id: string;
+  speaker: "from" | "to";
+  original: string;
+  translation: string;
+  englishTranslation?: string;
+  timestamp: number;
 }
 
 function findLocalTranslation(
@@ -130,129 +57,113 @@ function findLocalTranslation(
   return null;
 }
 
-type TransPerson = "A" | "B";
+async function fetchTranslation(text: string, from: AppLanguage, to: AppLanguage): Promise<string> {
+  const local = findLocalTranslation(text, from, to);
+  if (local) return local;
+  const src = LANGS.find((l) => l.key === from)?.libreCode ?? "am";
+  const tgt = LANGS.find((l) => l.key === to)?.libreCode ?? "om";
+  try {
+    const res = await fetch("https://libretranslate.com/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ q: text, source: src, target: tgt, api_key: "" }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const t = data.translatedText ?? "";
+      if (t && t !== text) return t;
+    }
+  } catch { /* fall through */ }
+  return `"${text}"`;
+}
+
+function speak(text: string, lang: AppLanguage) {
+  if (Platform.OS !== "web" || typeof window === "undefined") return;
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new window.SpeechSynthesisUtterance(text);
+  utt.lang = LANGS.find((l) => l.key === lang)?.speechCode ?? "en-US";
+  utt.rate = 0.85;
+  window.speechSynthesis.speak(utt);
+}
 
 export default function TranslateScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
 
-  const [langA, setLangA] = useState<AppLanguage>("amharic");
-  const [langB, setLangB] = useState<AppLanguage>("english");
-  const [transcriptA, setTranscriptA] = useState("");
-  const [translationA, setTranslationA] = useState("");
-  const [transcriptB, setTranscriptB] = useState("");
-  const [translationB, setTranslationB] = useState("");
-  const [recordingPerson, setRecordingPerson] = useState<TransPerson | null>(null);
-  const [translatingPerson, setTranslatingPerson] = useState<TransPerson | null>(null);
-  const [noSpeechSupport, setNoSpeechSupport] = useState(false);
-  const [micError, setMicError] = useState<Partial<Record<TransPerson, string>>>({});
-  const [selectedSit, setSelectedSit] = useState<string | null>(null);
-  const [speakingPhrase, setSpeakingPhrase] = useState<string | null>(null);
+  const [langFrom, setLangFrom] = useState<AppLanguage>("amharic");
+  const [langTo, setLangTo] = useState<AppLanguage>("oromo");
+  const [showEnglish, setShowEnglish] = useState(false);
+  const [conversation, setConversation] = useState<ChatBubble[]>([]);
+  const [recording, setRecording] = useState<"from" | "to" | null>(null);
+  const [translating, setTranslating] = useState<"from" | "to" | null>(null);
+  const [noSpeech, setNoSpeech] = useState(false);
+  const [textInput, setTextInput] = useState("");
+  const [activeInput, setActiveInput] = useState<"from" | "to" | null>(null);
+  const [showTextInput, setShowTextInput] = useState(false);
 
-  const activeRec = useRef<any>(null);
-  const barAnimsA = useRef(Array.from({ length: 5 }, () => new Animated.Value(0.3))).current;
-  const barAnimsB = useRef(Array.from({ length: 5 }, () => new Animated.Value(0.3))).current;
-  const waveAnimRef = useRef<Animated.CompositeAnimation | null>(null);
+  const scrollRef = useRef<ScrollView>(null);
+  const recRef = useRef<any>(null);
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  const pulseLoop = useRef<Animated.CompositeAnimation | null>(null);
 
   useEffect(() => {
     if (Platform.OS !== "web" || typeof window === "undefined") {
-      setNoSpeechSupport(true);
+      setNoSpeech(true);
       return;
     }
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SR) setNoSpeechSupport(true);
+    if (!SR) setNoSpeech(true);
   }, []);
 
-  const startWave = (bars: Animated.Value[]) => {
-    stopWave();
-    const anim = Animated.loop(
-      Animated.stagger(
-        80,
-        bars.map((b) =>
-          Animated.sequence([
-            Animated.timing(b, { toValue: 0.9, duration: 300, useNativeDriver: false }),
-            Animated.timing(b, { toValue: 0.3, duration: 300, useNativeDriver: false }),
-          ])
-        )
-      )
+  const startPulse = () => {
+    pulseLoop.current?.stop();
+    pulseLoop.current = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.2, duration: 600, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 600, useNativeDriver: true }),
+      ])
     );
-    anim.start();
-    waveAnimRef.current = anim;
+    pulseLoop.current.start();
   };
 
-  const stopWave = () => {
-    if (waveAnimRef.current) waveAnimRef.current.stop();
-    [...barAnimsA, ...barAnimsB].forEach((b) =>
-      Animated.timing(b, { toValue: 0.3, duration: 200, useNativeDriver: false }).start()
-    );
+  const stopPulse = () => {
+    pulseLoop.current?.stop();
+    Animated.timing(pulseAnim, { toValue: 1, duration: 200, useNativeDriver: true }).start();
   };
 
-  const speakText = (text: string, lang: AppLanguage, phraseKey?: string) => {
-    if (Platform.OS !== "web" || typeof window === "undefined") return;
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    if (phraseKey) setSpeakingPhrase(phraseKey);
-    const utt = new window.SpeechSynthesisUtterance(text);
-    utt.lang = getSpeechCode(lang);
-    utt.pitch = 1;
-    utt.rate = 0.85;
-    utt.onend = () => setSpeakingPhrase(null);
-    window.speechSynthesis.speak(utt);
-  };
+  const addBubble = async (original: string, speaker: "from" | "to") => {
+    const srcLang = speaker === "from" ? langFrom : langTo;
+    const tgtLang = speaker === "from" ? langTo : langFrom;
 
-  const translateText = async (text: string, from: TransPerson) => {
-    const srcLang = from === "A" ? langA : langB;
-    const tgtLang = from === "A" ? langB : langA;
-    setTranslatingPerson(from);
+    setTranslating(speaker);
+    const translation = await fetchTranslation(original, srcLang, tgtLang);
 
-    // Step 1: local word lookup
-    const local = findLocalTranslation(text, srcLang, tgtLang);
-    if (local) {
-      if (from === "A") setTranslationA(local);
-      else setTranslationB(local);
-      speakText(local, tgtLang);
-      setTranslatingPerson(null);
-      return;
+    let englishTranslation: string | undefined;
+    if (showEnglish && srcLang !== "english" && tgtLang !== "english") {
+      const localEn = findLocalTranslation(original, srcLang, "english");
+      englishTranslation = localEn ?? undefined;
     }
 
-    // Step 2: LibreTranslate
-    try {
-      const res = await fetch("https://libretranslate.com/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          q: text,
-          source: getLangCode(srcLang),
-          target: getLangCode(tgtLang),
-          api_key: "",
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        const translated = data.translatedText ?? "";
-        if (translated && translated !== text) {
-          if (from === "A") setTranslationA(translated);
-          else setTranslationB(translated);
-          speakText(translated, tgtLang);
-          setTranslatingPerson(null);
-          return;
-        }
-      }
-    } catch {
-      // fall through
-    }
+    const bubble: ChatBubble = {
+      id: Date.now().toString(),
+      speaker,
+      original,
+      translation,
+      englishTranslation,
+      timestamp: Date.now(),
+    };
 
-    // Fallback
-    const fallback = `"${text}" — Full translation coming soon`;
-    if (from === "A") setTranslationA(fallback);
-    else setTranslationB(fallback);
-    setTranslatingPerson(null);
+    setConversation((prev) => [...prev, bubble]);
+    setTranslating(null);
+    speak(translation, tgtLang);
+
+    setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100);
   };
 
-  const startRecording = (person: TransPerson) => {
-    if (noSpeechSupport) return;
-    setMicError((prev) => ({ ...prev, [person]: undefined }));
-    if (recordingPerson) {
+  const startRecording = (speaker: "from" | "to") => {
+    if (noSpeech) return;
+    if (recording) {
       stopRecording();
       return;
     }
@@ -261,383 +172,389 @@ export default function TranslateScreen() {
     if (!SR) return;
 
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    const lang = person === "A" ? langA : langB;
+    const lang = speaker === "from" ? langFrom : langTo;
     const rec = new SR();
-    rec.lang = getSpeechCode(lang);
+    rec.lang = LANGS.find((l) => l.key === lang)?.speechCode ?? "en-US";
     rec.continuous = false;
-    rec.interimResults = true;
+    rec.interimResults = false;
 
-    rec.onstart = () => {
-      setRecordingPerson(person);
-      startWave(person === "A" ? barAnimsA : barAnimsB);
-    };
+    rec.onstart = () => { setRecording(speaker); startPulse(); };
 
-    rec.onresult = (e: any) => {
+    rec.onresult = async (e: any) => {
       const transcript = Array.from(e.results as any[])
         .map((r: any) => r[0].transcript)
-        .join("");
-      if (person === "A") setTranscriptA(transcript);
-      else setTranscriptB(transcript);
-
-      if (e.results[e.results.length - 1].isFinal) {
-        translateText(transcript, person);
-      }
+        .join("")
+        .trim();
+      if (transcript) await addBubble(transcript, speaker);
     };
 
-    rec.onend = () => {
-      setRecordingPerson(null);
-      stopWave();
-    };
+    rec.onerror = () => { setRecording(null); stopPulse(); };
+    rec.onend = () => { setRecording(null); stopPulse(); };
 
-    rec.onerror = (e: any) => {
-      setRecordingPerson(null);
-      stopWave();
-      const errCode = e?.error ?? "";
-      const msg =
-        errCode === "not-allowed"
-          ? "Microphone access denied — tap to enable in browser settings"
-          : errCode === "no-speech"
-          ? "No speech detected — tap to try again"
-          : errCode === "network"
-          ? "Network error — check your connection and tap to retry"
-          : "Microphone not working — tap here to try again";
-      setMicError((prev) => ({ ...prev, [person]: msg }));
-    };
-
-    activeRec.current = rec;
-    try {
-      rec.start();
-    } catch {
-      setRecordingPerson(null);
-    }
+    recRef.current = rec;
+    rec.start();
   };
 
   const stopRecording = () => {
-    if (activeRec.current) {
-      try { activeRec.current.stop(); } catch { /* ignore */ }
-      activeRec.current = null;
+    if (recRef.current) {
+      try { recRef.current.stop(); } catch { /* ignore */ }
+      recRef.current = null;
     }
-    setRecordingPerson(null);
-    stopWave();
+    setRecording(null);
+    stopPulse();
   };
 
-  const swapLanguages = () => {
+  const handleSwap = () => {
+    setLangFrom(langTo);
+    setLangTo(langFrom);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    const tmp = langA;
-    setLangA(langB);
-    setLangB(tmp);
-    setTranscriptA("");
-    setTranslationA("");
-    setTranscriptB("");
-    setTranslationB("");
   };
 
-  const clearAll = () => {
-    setTranscriptA("");
-    setTranslationA("");
-    setTranscriptB("");
-    setTranslationB("");
-    setSelectedSit(null);
+  const handleTextSubmit = async () => {
+    if (!textInput.trim() || !activeInput) return;
+    await addBubble(textInput.trim(), activeInput);
+    setTextInput("");
+    setShowTextInput(false);
+    setActiveInput(null);
   };
 
-  const activeSituation = SITUATIONS.find((s) => s.id === selectedSit);
-
-  const renderPerson = (person: TransPerson) => {
-    const lang = person === "A" ? langA : langB;
-    const setLang = person === "A" ? setLangA : setLangB;
-    const transcript = person === "A" ? transcriptA : transcriptB;
-    const translation = person === "A" ? translationA : translationB;
-    const bars = person === "A" ? barAnimsA : barAnimsB;
-    const isRec = recordingPerson === person;
-    const isTrans = translatingPerson === person;
-    const bgColor = person === "A" ? colors.greenBg : colors.blueBg;
-    const accentColor = person === "A" ? colors.primary : colors.blue;
-    const roleLabel = person === "A" ? "You speak:" : "They hear:";
-    const roleLabelColor = person === "A" ? colors.primary : colors.blue;
-
-    return (
-      <View style={[styles.panel, { backgroundColor: bgColor }]}>
-        {/* Role label */}
-        <Text style={[styles.roleLabel, { color: roleLabelColor }]}>{roleLabel}</Text>
-
-        {/* Lang pills */}
-        <View style={styles.langPills}>
-          {LANG_OPTIONS.map((opt) => (
-            <Pressable
-              key={opt.key}
-              onPress={() => setLang(opt.key)}
-              style={[
-                styles.langPill,
-                {
-                  backgroundColor:
-                    lang === opt.key ? accentColor : colors.card,
-                  borderColor: lang === opt.key ? accentColor : colors.border,
-                },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.langPillText,
-                  { color: lang === opt.key ? "#fff" : colors.text },
-                ]}
-              >
-                {opt.label}
-              </Text>
-            </Pressable>
-          ))}
-        </View>
-
-        {/* Transcript & translation */}
-        <View style={styles.textArea}>
-          {transcript ? (
-            <Text style={[styles.transcriptText, { color: colors.mutedForeground }]} numberOfLines={2}>
-              {transcript}
-            </Text>
-          ) : (
-            <Text style={[styles.placeholderText, { color: colors.mutedForeground }]}>
-              {isRec ? "Listening..." : "Tap the mic to speak"}
-            </Text>
-          )}
-          {isTrans && (
-            <Text style={[styles.translatingText, { color: accentColor }]}>
-              Translating...
-            </Text>
-          )}
-          {translation && !isTrans && (
-            <Text style={[styles.translationText, { color: colors.text }]}>
-              {translation}
-            </Text>
-          )}
-        </View>
-
-        {/* Mic error banner — tap to retry */}
-        {micError[person] && (
-          <Pressable
-            onPress={() => startRecording(person)}
-            style={styles.micErrorBanner}
-          >
-            <Feather name="alert-circle" size={14} color="#DC2626" />
-            <Text style={styles.micErrorText}>{micError[person]}</Text>
-          </Pressable>
-        )}
-
-        {/* Waveform + mic button */}
-        <View style={styles.micRow}>
-          {isRec && (
-            <View style={styles.waveform}>
-              {bars.map((b, i) => (
-                <Animated.View
-                  key={i}
-                  style={[
-                    styles.waveBar,
-                    {
-                      backgroundColor: accentColor,
-                      transform: [{ scaleY: b }],
-                    },
-                  ]}
-                />
-              ))}
-            </View>
-          )}
-          <Pressable
-            onPress={() => startRecording(person)}
-            style={[
-              styles.micBtn,
-              {
-                backgroundColor: isRec ? colors.destructive : accentColor,
-                shadowColor: isRec ? colors.destructive : "transparent",
-                shadowOpacity: isRec ? 0.5 : 0,
-                shadowRadius: isRec ? 10 : 0,
-                shadowOffset: { width: 0, height: 0 },
-                elevation: isRec ? 6 : 0,
-              },
-            ]}
-          >
-            <Feather
-              name={isRec ? "square" : "mic"}
-              size={26}
-              color="#fff"
-            />
-          </Pressable>
-          {translation ? (
-            <Pressable
-              onPress={() => speakText(translation, person === "A" ? langB : langA)}
-              style={[styles.speakBtn, { backgroundColor: colors.card, borderColor: colors.border }]}
-            >
-              <Feather name="volume-2" size={18} color={accentColor} />
-            </Pressable>
-          ) : null}
-        </View>
-      </View>
-    );
-  };
+  const fromLang = LANGS.find((l) => l.key === langFrom)!;
+  const toLang = LANGS.find((l) => l.key === langTo)!;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingTop: insets.top + WEB_TOP + 16,
-          paddingBottom: insets.bottom + WEB_BOTTOM + TAB_BAR + 32,
-        }}
+      {/* Header */}
+      <View
+        style={[
+          styles.header,
+          {
+            paddingTop: insets.top + WEB_TOP + 12,
+            backgroundColor: colors.card,
+            borderBottomColor: colors.border,
+          },
+        ]}
       >
-        {/* Header */}
-        <View style={styles.header}>
-          <View>
-            <Text style={[styles.title, { color: colors.text }]}>Live Translator</Text>
-            <Text style={[styles.subtitle, { color: colors.mutedForeground }]}>
-              Speak any language — hear it in another
-            </Text>
-          </View>
-          {(transcriptA || transcriptB) && (
-            <Pressable onPress={clearAll} style={[styles.clearBtn, { backgroundColor: colors.muted }]}>
-              <Feather name="x" size={16} color={colors.mutedForeground} />
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Translate</Text>
+
+        {/* Language pills */}
+        <View style={styles.langRow}>
+          {/* FROM language pill */}
+          <Pressable
+            onPress={() => {
+              const others: AppLanguage[] = ["amharic", "oromo", "english"];
+              const idx = others.indexOf(langFrom);
+              const next = others[(idx + 1) % others.length];
+              if (next !== langTo) setLangFrom(next);
+            }}
+            style={[styles.langPill, { backgroundColor: colors.primary }]}
+          >
+            <Text style={styles.langPillNative}>{fromLang.native}</Text>
+            <Text style={styles.langPillLabel}>{fromLang.label}</Text>
+          </Pressable>
+
+          {/* Swap button */}
+          <Pressable onPress={handleSwap} style={[styles.swapBtn, { backgroundColor: colors.muted }]}>
+            <Feather name="repeat" size={16} color={colors.primary} />
+          </Pressable>
+
+          {/* TO language pill */}
+          <Pressable
+            onPress={() => {
+              const others: AppLanguage[] = ["amharic", "oromo", "english"];
+              const idx = others.indexOf(langTo);
+              const next = others[(idx + 1) % others.length];
+              if (next !== langFrom) setLangTo(next);
+            }}
+            style={[styles.langPill, { backgroundColor: colors.greenBg, borderWidth: 1.5, borderColor: colors.primary }]}
+          >
+            <Text style={[styles.langPillNative, { color: colors.primary }]}>{toLang.native}</Text>
+            <Text style={[styles.langPillLabel, { color: colors.primary }]}>{toLang.label}</Text>
+          </Pressable>
+
+          {/* English toggle */}
+          {langFrom !== "english" && langTo !== "english" && (
+            <Pressable
+              onPress={() => setShowEnglish((v) => !v)}
+              style={[
+                styles.engToggle,
+                {
+                  backgroundColor: showEnglish ? "#1A6B9A22" : colors.muted,
+                  borderColor: showEnglish ? "#1A6B9A" : colors.border,
+                  borderWidth: 1.5,
+                },
+              ]}
+            >
+              <Text style={[styles.engToggleText, { color: showEnglish ? "#1A6B9A" : colors.mutedForeground }]}>
+                {showEnglish ? "EN ✓" : "+ EN"}
+              </Text>
             </Pressable>
           )}
         </View>
 
-        {/* No speech support */}
-        {noSpeechSupport && (
-          <View style={[styles.noSupport, { backgroundColor: colors.goldBg, borderColor: colors.gold + "40" }]}>
-            <Feather name="alert-circle" size={18} color={colors.gold} />
-            <View style={{ flex: 1 }}>
-              <Text style={[styles.noSupportTitle, { color: colors.text }]}>
-                Voice recognition not available
+        {/* Text input toggle */}
+        <View style={styles.inputToggleRow}>
+          <Pressable
+            onPress={() => { setShowTextInput((v) => !v); setActiveInput("from"); setTextInput(""); }}
+            style={styles.typeBtn}
+          >
+            <Feather name="type" size={12} color={colors.mutedForeground} />
+            <Text style={[styles.typeBtnText, { color: colors.mutedForeground }]}>Type instead</Text>
+          </Pressable>
+          {conversation.length > 0 && (
+            <Pressable onPress={() => setConversation([])} style={styles.clearBtn}>
+              <Text style={[styles.typeBtnText, { color: colors.mutedForeground }]}>Clear</Text>
+            </Pressable>
+          )}
+        </View>
+      </View>
+
+      {/* Text input area */}
+      {showTextInput && (
+        <View style={[styles.textInputArea, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+          <View style={styles.textInputSpeakerRow}>
+            <Pressable
+              onPress={() => setActiveInput("from")}
+              style={[styles.speakerChip, activeInput === "from" && { backgroundColor: colors.primary }]}
+            >
+              <Text style={[styles.speakerChipText, { color: activeInput === "from" ? "#fff" : colors.mutedForeground }]}>
+                {fromLang.native}
               </Text>
-              <Text style={[styles.noSupportDesc, { color: colors.mutedForeground }]}>
-                Use Chrome or Edge browser for voice features. You can still use the phrase cards below.
+            </Pressable>
+            <Pressable
+              onPress={() => setActiveInput("to")}
+              style={[styles.speakerChip, activeInput === "to" && { backgroundColor: colors.primary }]}
+            >
+              <Text style={[styles.speakerChipText, { color: activeInput === "to" ? "#fff" : colors.mutedForeground }]}>
+                {toLang.native}
+              </Text>
+            </Pressable>
+          </View>
+          <View style={styles.textInputRow}>
+            <TextInput
+              value={textInput}
+              onChangeText={setTextInput}
+              placeholder={`Type in ${activeInput === "from" ? fromLang.label : toLang.label}...`}
+              placeholderTextColor={colors.mutedForeground}
+              style={[styles.textField, { color: colors.text, borderColor: colors.border }]}
+              multiline
+              returnKeyType="send"
+              onSubmitEditing={handleTextSubmit}
+            />
+            <Pressable
+              onPress={handleTextSubmit}
+              style={[styles.sendBtn, { backgroundColor: colors.primary }]}
+            >
+              <Feather name="send" size={16} color="#fff" />
+            </Pressable>
+          </View>
+        </View>
+      )}
+
+      {/* Conversation */}
+      <ScrollView
+        ref={scrollRef}
+        style={{ flex: 1 }}
+        contentContainerStyle={[
+          styles.chatArea,
+          {
+            paddingBottom: insets.bottom + WEB_BOTTOM + TAB_BAR + 100,
+          },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
+        {conversation.length === 0 && (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyIcon}>🎙️</Text>
+            <Text style={[styles.emptyTitle, { color: colors.text }]}>
+              Tap a mic button to start
+            </Text>
+            <Text style={[styles.emptySubtitle, { color: colors.mutedForeground }]}>
+              Tap YOU to speak {fromLang.label},{"\n"}tap THEM to speak {toLang.label}
+            </Text>
+            <View style={[styles.tipsCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+              <Text style={[styles.tipsTitle, { color: colors.text }]}>Common uses</Text>
+              <Text style={[styles.tipsItem, { color: colors.mutedForeground }]}>
+                🏥 Health center — talk to staff
+              </Text>
+              <Text style={[styles.tipsItem, { color: colors.mutedForeground }]}>
+                🏫 School — parent-teacher meeting
+              </Text>
+              <Text style={[styles.tipsItem, { color: colors.mutedForeground }]}>
+                🛒 Market — buying and selling
+              </Text>
+              <Text style={[styles.tipsItem, { color: colors.mutedForeground }]}>
+                🙏 Elders — respectful greetings
               </Text>
             </View>
           </View>
         )}
 
-        {/* Two-panel translator */}
-        <View style={styles.panels}>
-          {renderPerson("A")}
-
-          {/* Divider with swap */}
-          <View style={styles.divider}>
-            <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
-            <Pressable
-              onPress={swapLanguages}
-              style={[styles.swapBtn, { backgroundColor: colors.card, borderColor: colors.border }]}
+        {conversation.map((bubble) => {
+          const isFrom = bubble.speaker === "from";
+          const originalLang = isFrom ? langFrom : langTo;
+          const translatedLang = isFrom ? langTo : langFrom;
+          return (
+            <View
+              key={bubble.id}
+              style={[styles.bubbleWrapper, isFrom ? styles.bubbleRight : styles.bubbleLeft]}
             >
-              <Feather name="refresh-cw" size={20} color={colors.primary} />
-            </Pressable>
-            <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
-          </View>
-
-          {renderPerson("B")}
-        </View>
-
-        {/* Situation cards */}
-        <View style={[styles.situationsSection, { paddingHorizontal: 20 }]}>
-          <Text style={[styles.sitLabel, { color: colors.mutedForeground }]}>
-            COMMON SITUATIONS
-          </Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.sitScroll}>
-            {SITUATIONS.map((sit) => (
+              {/* Original */}
               <Pressable
-                key={sit.id}
-                onPress={() => {
-                  setSelectedSit(selectedSit === sit.id ? null : sit.id);
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                }}
+                onPress={() => speak(bubble.original, originalLang)}
                 style={[
-                  styles.sitChip,
+                  styles.bubble,
+                  isFrom
+                    ? [styles.bubbleFromStyle, { backgroundColor: colors.primary }]
+                    : [styles.bubbleToStyle, { backgroundColor: colors.card, borderColor: colors.border, borderWidth: 1 }],
+                ]}
+              >
+                <Text style={[styles.bubbleText, { color: isFrom ? "#fff" : colors.text }]}>
+                  {bubble.original}
+                </Text>
+                <Feather
+                  name="volume-2"
+                  size={10}
+                  color={isFrom ? "rgba(255,255,255,0.6)" : colors.mutedForeground}
+                  style={{ alignSelf: "flex-end", marginTop: 4 }}
+                />
+              </Pressable>
+
+              {/* Translation */}
+              <Pressable
+                onPress={() => speak(bubble.translation, translatedLang)}
+                style={[
+                  styles.bubble,
+                  styles.translationBubble,
                   {
-                    backgroundColor:
-                      selectedSit === sit.id ? colors.primary : colors.card,
-                    borderColor:
-                      selectedSit === sit.id ? colors.primary : colors.border,
+                    backgroundColor: isFrom ? colors.greenBg : colors.muted,
+                    borderColor: isFrom ? colors.primary + "44" : colors.border,
+                    borderWidth: 1,
                   },
                 ]}
               >
-                <Text style={styles.sitChipIcon}>{sit.icon}</Text>
-                <Text
+                <Text style={[styles.translationLangLabel, { color: colors.mutedForeground }]}>
+                  {translatedLang === "amharic" ? "አማርኛ" : translatedLang === "oromo" ? "Oromoo" : "English"}
+                </Text>
+                <Text style={[styles.translationText, { color: colors.text }]}>
+                  {bubble.translation}
+                </Text>
+                <Feather
+                  name="volume-1"
+                  size={10}
+                  color={colors.mutedForeground}
+                  style={{ alignSelf: "flex-end", marginTop: 2 }}
+                />
+              </Pressable>
+
+              {/* English (when toggled on) */}
+              {showEnglish && bubble.englishTranslation && (
+                <View
                   style={[
-                    styles.sitChipLabel,
-                    { color: selectedSit === sit.id ? "#fff" : colors.text },
+                    styles.bubble,
+                    styles.englishBubble,
+                    { backgroundColor: "#1A6B9A11", borderColor: "#1A6B9A33", borderWidth: 1 },
                   ]}
                 >
-                  {sit.label}
-                </Text>
-              </Pressable>
-            ))}
-          </ScrollView>
+                  <Text style={[styles.translationLangLabel, { color: "#1A6B9A" }]}>English</Text>
+                  <Text style={[styles.translationText, { color: colors.text }]}>
+                    {bubble.englishTranslation}
+                  </Text>
+                </View>
+              )}
+            </View>
+          );
+        })}
 
-          {/* Phrase list */}
-          {activeSituation && (
-            <View
+        {translating && (
+          <View style={[styles.bubbleWrapper, translating === "from" ? styles.bubbleRight : styles.bubbleLeft]}>
+            <View style={[styles.bubble, styles.typingBubble, { backgroundColor: colors.muted }]}>
+              <Text style={[styles.typingText, { color: colors.mutedForeground }]}>Translating...</Text>
+            </View>
+          </View>
+        )}
+      </ScrollView>
+
+      {/* Mic buttons */}
+      <View
+        style={[
+          styles.micBar,
+          {
+            paddingBottom: insets.bottom + WEB_BOTTOM + TAB_BAR + 8,
+            backgroundColor: colors.card,
+            borderTopColor: colors.border,
+          },
+        ]}
+      >
+        {/* YOU button */}
+        <View style={styles.micSide}>
+          <Animated.View
+            style={{
+              transform: [{ scale: recording === "from" ? pulseAnim : 1 }],
+            }}
+          >
+            <Pressable
+              onPress={() => startRecording("from")}
               style={[
-                styles.phraseList,
-                { backgroundColor: colors.card, borderColor: colors.border },
+                styles.micBtn,
+                recording === "from"
+                  ? { backgroundColor: "#E74C3C", shadowColor: "#E74C3C", shadowOpacity: 0.5, shadowRadius: 16, shadowOffset: { width: 0, height: 4 } }
+                  : { backgroundColor: colors.primary },
               ]}
             >
-              <Text style={[styles.phraseListTitle, { color: colors.text }]}>
-                {activeSituation.icon} {activeSituation.label} phrases
-              </Text>
-              {activeSituation.phrases.map((phrase, idx) => {
-                const phraseText =
-                  langA === "amharic"
-                    ? phrase.am
-                    : langA === "oromo"
-                    ? phrase.om
-                    : phrase.en;
-                const key = `${activeSituation.id}-${idx}`;
-                return (
-                  <View
-                    key={idx}
-                    style={[
-                      styles.phraseRow,
-                      {
-                        borderTopColor: colors.border,
-                        borderTopWidth: idx > 0 ? 1 : 0,
-                      },
-                    ]}
-                  >
-                    <View style={{ flex: 1 }}>
-                      <Text style={[styles.phraseAm, { color: colors.text }]}>
-                        {phrase.am}
-                      </Text>
-                      <Text style={[styles.phraseEn, { color: colors.mutedForeground }]}>
-                        {phrase.en}
-                      </Text>
-                      {phrase.om && (
-                        <Text style={[styles.phraseOm, { color: colors.mutedForeground }]}>
-                          {phrase.om}
-                        </Text>
-                      )}
-                    </View>
-                    <Pressable
-                      onPress={() => speakText(phraseText, langA, key)}
-                      style={[
-                        styles.phraseSpeakBtn,
-                        {
-                          backgroundColor:
-                            speakingPhrase === key
-                              ? colors.primary
-                              : colors.greenBg,
-                        },
-                      ]}
-                    >
-                      <Feather
-                        name={speakingPhrase === key ? "volume-2" : "play"}
-                        size={16}
-                        color={
-                          speakingPhrase === key
-                            ? "#fff"
-                            : colors.primary
-                        }
-                      />
-                    </Pressable>
-                  </View>
-                );
-              })}
-            </View>
-          )}
+              <Feather
+                name={recording === "from" ? "stop-circle" : "mic"}
+                size={24}
+                color="#fff"
+              />
+            </Pressable>
+          </Animated.View>
+          <Text style={[styles.micLabel, { color: colors.text }]}>
+            {recording === "from" ? "● Listening..." : "YOU"}
+          </Text>
+          <Text style={[styles.micLangLabel, { color: colors.mutedForeground }]}>
+            {fromLang.native}
+          </Text>
         </View>
-      </ScrollView>
+
+        {/* Center divider with swap hint */}
+        <View style={styles.micCenter}>
+          <Pressable onPress={handleSwap} style={[styles.swapCenterBtn, { backgroundColor: colors.muted }]}>
+            <Feather name="repeat" size={14} color={colors.mutedForeground} />
+          </Pressable>
+          <Text style={[styles.micCenterLabel, { color: colors.mutedForeground }]}>swap</Text>
+        </View>
+
+        {/* THEM button */}
+        <View style={styles.micSide}>
+          <Animated.View
+            style={{
+              transform: [{ scale: recording === "to" ? pulseAnim : 1 }],
+            }}
+          >
+            <Pressable
+              onPress={() => startRecording("to")}
+              style={[
+                styles.micBtn,
+                recording === "to"
+                  ? { backgroundColor: "#E74C3C", shadowColor: "#E74C3C", shadowOpacity: 0.5, shadowRadius: 16, shadowOffset: { width: 0, height: 4 } }
+                  : [styles.micBtnSecondary, { backgroundColor: colors.card, borderColor: colors.primary, borderWidth: 2 }],
+              ]}
+            >
+              <Feather
+                name={recording === "to" ? "stop-circle" : "mic"}
+                size={24}
+                color={recording === "to" ? "#fff" : colors.primary}
+              />
+            </Pressable>
+          </Animated.View>
+          <Text style={[styles.micLabel, { color: colors.text }]}>
+            {recording === "to" ? "● Listening..." : "THEM"}
+          </Text>
+          <Text style={[styles.micLangLabel, { color: colors.mutedForeground }]}>
+            {toLang.native}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -645,78 +562,206 @@ export default function TranslateScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
     paddingHorizontal: 20,
-    marginBottom: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
   },
-  title: { fontSize: 24, fontWeight: "700", fontFamily: "Inter_700Bold" },
-  subtitle: { fontSize: 13, fontFamily: "Inter_400Regular", marginTop: 2 },
-  clearBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 10,
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+    marginBottom: 12,
+  },
+  langRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    flexWrap: "wrap",
+  },
+  langPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 50,
+  },
+  langPillNative: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#fff",
+    fontFamily: "Inter_700Bold",
+  },
+  langPillLabel: {
+    fontSize: 11,
+    color: "rgba(255,255,255,0.8)",
+    fontFamily: "Inter_400Regular",
+  },
+  swapBtn: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
     alignItems: "center",
     justifyContent: "center",
   },
-  noSupport: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-    borderRadius: 14,
-    borderWidth: 1,
-    padding: 14,
-    marginHorizontal: 20,
-    marginBottom: 16,
+  engToggle: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 50,
   },
-  noSupportTitle: { fontSize: 14, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
-  noSupportDesc: { fontSize: 12, fontFamily: "Inter_400Regular", marginTop: 3, lineHeight: 16 },
-  panels: { gap: 0 },
-  panel: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    gap: 12,
-    minHeight: 160,
-  },
-  langPills: { flexDirection: "row", gap: 8 },
-  langPill: {
-    borderRadius: 20,
-    borderWidth: 1.5,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-  },
-  langPillText: { fontSize: 13, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
-  textArea: {
-    flex: 1,
-    minHeight: 60,
-    gap: 6,
-  },
-  placeholderText: { fontSize: 14, fontFamily: "Inter_400Regular", fontStyle: "italic" },
-  transcriptText: { fontSize: 13, fontFamily: "Inter_400Regular", lineHeight: 19 },
-  translatingText: { fontSize: 13, fontFamily: "Inter_400Regular", fontStyle: "italic" },
-  translationText: {
-    fontSize: 18,
-    fontWeight: "700",
-    fontFamily: "Inter_700Bold",
-    lineHeight: 25,
-  },
-  micRow: { flexDirection: "row", alignItems: "center", gap: 12 },
-  waveform: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 3,
-    flex: 1,
-    height: 40,
-  },
-  waveBar: { width: 4, height: 32, borderRadius: 2 },
-  roleLabel: {
+  engToggleText: {
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Inter_700Bold",
-    letterSpacing: 0.4,
-    textTransform: "uppercase",
-    marginBottom: -4,
+  },
+  inputToggleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  typeBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  typeBtnText: { fontSize: 12, fontFamily: "Inter_400Regular" },
+  clearBtn: { paddingHorizontal: 4 },
+  textInputArea: {
+    padding: 12,
+    borderBottomWidth: 1,
+    gap: 8,
+  },
+  textInputSpeakerRow: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  speakerChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 20,
+    backgroundColor: "rgba(0,0,0,0.06)",
+  },
+  speakerChipText: { fontSize: 13, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
+  textInputRow: {
+    flexDirection: "row",
+    gap: 8,
+    alignItems: "flex-end",
+  },
+  textField: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 10,
+    fontSize: 15,
+    maxHeight: 80,
+    fontFamily: "Inter_400Regular",
+  },
+  sendBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chatArea: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    gap: 20,
+  },
+  emptyState: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 32,
+    gap: 8,
+  },
+  emptyIcon: { fontSize: 48, marginBottom: 8 },
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+    textAlign: "center",
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    textAlign: "center",
+    lineHeight: 20,
+    fontFamily: "Inter_400Regular",
+    marginBottom: 16,
+  },
+  tipsCard: {
+    width: "100%",
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    gap: 6,
+  },
+  tipsTitle: {
+    fontSize: 13,
+    fontWeight: "700",
+    fontFamily: "Inter_700Bold",
+    marginBottom: 4,
+  },
+  tipsItem: { fontSize: 13, fontFamily: "Inter_400Regular" },
+  bubbleWrapper: {
+    maxWidth: "85%",
+    gap: 4,
+  },
+  bubbleRight: { alignSelf: "flex-end", alignItems: "flex-end" },
+  bubbleLeft: { alignSelf: "flex-start", alignItems: "flex-start" },
+  bubble: {
+    borderRadius: 16,
+    padding: 12,
+    maxWidth: "100%",
+  },
+  bubbleFromStyle: {
+    borderBottomRightRadius: 4,
+  },
+  bubbleToStyle: {
+    borderBottomLeftRadius: 4,
+  },
+  bubbleText: {
+    fontSize: 16,
+    fontFamily: "Inter_400Regular",
+    lineHeight: 22,
+  },
+  translationBubble: {
+    borderRadius: 12,
+  },
+  translationLangLabel: {
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 0.5,
+    marginBottom: 3,
+    fontFamily: "Inter_700Bold",
+  },
+  translationText: {
+    fontSize: 15,
+    fontFamily: "Inter_400Regular",
+    lineHeight: 21,
+  },
+  englishBubble: {
+    borderRadius: 10,
+  },
+  typingBubble: {
+    borderRadius: 12,
+  },
+  typingText: {
+    fontSize: 13,
+    fontStyle: "italic",
+    fontFamily: "Inter_400Regular",
+  },
+  micBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    borderTopWidth: 1,
+  },
+  micSide: {
+    alignItems: "center",
+    gap: 6,
   },
   micBtn: {
     width: 64,
@@ -724,92 +769,33 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     alignItems: "center",
     justifyContent: "center",
+    elevation: 4,
   },
-  speakBtn: {
-    width: 42,
-    height: 42,
-    borderRadius: 12,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  divider: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    gap: 12,
-  },
-  dividerLine: { flex: 1, height: 1 },
-  swapBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  situationsSection: { marginTop: 20 },
-  sitLabel: {
-    fontSize: 10,
+  micBtnSecondary: {},
+  micLabel: {
+    fontSize: 11,
     fontWeight: "700",
-    fontFamily: "Inter_700Bold",
     letterSpacing: 1,
-    marginBottom: 10,
-  },
-  sitScroll: { marginBottom: 14 },
-  sitChip: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    borderRadius: 20,
-    borderWidth: 1,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginRight: 8,
-  },
-  sitChipIcon: { fontSize: 16 },
-  sitChipLabel: { fontSize: 13, fontWeight: "600", fontFamily: "Inter_600SemiBold" },
-  phraseList: {
-    borderRadius: 16,
-    borderWidth: 1,
-    overflow: "hidden",
-  },
-  phraseListTitle: {
-    fontSize: 14,
-    fontWeight: "700",
     fontFamily: "Inter_700Bold",
-    padding: 14,
   },
-  phraseRow: {
-    flexDirection: "row",
+  micLangLabel: {
+    fontSize: 12,
+    fontFamily: "Inter_400Regular",
+  },
+  micCenter: {
     alignItems: "center",
-    padding: 14,
-    gap: 12,
+    gap: 4,
   },
-  phraseAm: { fontSize: 16, fontWeight: "600", lineHeight: 22 },
-  phraseEn: { fontSize: 12, fontFamily: "Inter_400Regular", marginTop: 2 },
-  phraseOm: { fontSize: 11, fontFamily: "Inter_400Regular", marginTop: 1, fontStyle: "italic" },
-  phraseSpeakBtn: {
+  swapCenterBtn: {
     width: 36,
     height: 36,
-    borderRadius: 10,
+    borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
   },
-  micErrorBanner: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    backgroundColor: "#FEE2E2",
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-  },
-  micErrorText: {
-    flex: 1,
-    fontSize: 12,
-    color: "#DC2626",
-    fontFamily: "Inter_600SemiBold",
-    lineHeight: 17,
+  micCenterLabel: {
+    fontSize: 9,
+    letterSpacing: 0.5,
+    fontFamily: "Inter_400Regular",
   },
 });
