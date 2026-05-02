@@ -215,8 +215,27 @@ export function CameraOverlay({ onClose, onResult }: Props) {
           </View>
         )}
 
+        {/* No Vision API key — clear fallback */}
+        {noApiKey && (
+          <View style={[styles.stateCard, { backgroundColor: "#00000099" }]}>
+            <Feather name="eye-off" size={28} color="#F59E0B" />
+            <Text style={styles.stateTitle}>
+              Object recognition needs a Google Vision API key
+            </Text>
+            <Text style={styles.stateDesc}>
+              For now, type the word you see — or ask your teacher to write it down.
+            </Text>
+            <Pressable
+              onPress={() => { setNoApiKey(false); onClose(); }}
+              style={styles.retryBtn}
+            >
+              <Text style={styles.retryBtnText}>Close camera & type instead</Text>
+            </Pressable>
+          </View>
+        )}
+
         {/* Capture button */}
-        {!permissionDenied && !error && (
+        {!permissionDenied && !error && !noApiKey && (
           <View style={styles.captureRow}>
             {isCapturing ? (
               <View style={styles.capturingState}>
@@ -238,7 +257,7 @@ export function CameraOverlay({ onClose, onResult }: Props) {
         )}
 
         {/* Guide text */}
-        {!error && !permissionDenied && !isCapturing && (
+        {!error && !permissionDenied && !noApiKey && !isCapturing && (
           <Text style={styles.guideText}>
             {mode === "object"
               ? "Point at an object and tap the button"

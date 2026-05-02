@@ -3,7 +3,7 @@ import { ALL_WORDS } from "@/data/allWords";
 import { supabase, isSupabaseConfigured } from "./supabase";
 
 export async function fetchWords(): Promise<Word[]> {
-  if (!isSupabaseConfigured) return ALL_WORDS;
+  if (!isSupabaseConfigured || !supabase) return ALL_WORDS;
   try {
     const { data, error } = await supabase
       .from("words")
@@ -36,7 +36,7 @@ export async function saveSession(params: {
   inputText: string;
   wordIds: string[];
 }): Promise<void> {
-  if (!isSupabaseConfigured) return;
+  if (!isSupabaseConfigured || !supabase) return;
   try {
     await supabase.from("sessions").insert({
       device_id: params.deviceId,
@@ -63,28 +63,31 @@ export async function upsertProfile(params: {
   favorites: string[];
   learnedWords: string[];
 }): Promise<void> {
-  if (!isSupabaseConfigured) return;
+  if (!isSupabaseConfigured || !supabase) return;
   try {
-    await supabase.from("profiles").upsert({
-      device_id: params.deviceId,
-      name: params.name,
-      role: params.role,
-      ui_language: params.uiLanguage,
-      learning_language: params.learningLanguage,
-      is_premium: params.isPremium,
-      streak: params.streak,
-      xp: params.xp,
-      favorites: params.favorites,
-      learned_words: params.learnedWords,
-      updated_at: new Date().toISOString(),
-    }, { onConflict: "device_id" });
+    await supabase.from("profiles").upsert(
+      {
+        device_id: params.deviceId,
+        name: params.name,
+        role: params.role,
+        ui_language: params.uiLanguage,
+        learning_language: params.learningLanguage,
+        is_premium: params.isPremium,
+        streak: params.streak,
+        xp: params.xp,
+        favorites: params.favorites,
+        learned_words: params.learnedWords,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "device_id" }
+    );
   } catch {
     // silent
   }
 }
 
 export async function upsertChildren(deviceId: string, children: any[]): Promise<void> {
-  if (!isSupabaseConfigured) return;
+  if (!isSupabaseConfigured || !supabase) return;
   try {
     const rows = children.map((c) => ({
       id: c.id,
